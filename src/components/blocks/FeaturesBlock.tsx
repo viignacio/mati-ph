@@ -47,7 +47,7 @@ export function FeaturesBlock({ data }: FeaturesBlockProps) {
   const isLeft = imagePosition === 'left'
 
   return (
-    <BlockContainer design={design} className="relative overflow-hidden">
+    <BlockContainer design={design} className="relative overflow-hidden max-h-[90dvh] overflow-y-auto">
       {/* Decorative Wave Motif (Translating the stitch graphic abstractly) */}
       <div className="absolute -right-20 top-0 opacity-5 pointer-events-none">
         <svg width="400" height="400" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
