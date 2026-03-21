@@ -1,10 +1,54 @@
+# Mati, Davao Oriental - Tourism Website 🌴
+
+A vibrant and intuitive tourism website for Mati City, Davao Oriental, Philippines. It serves as a one-stop destination guide showcasing beaches, islands, surfing, cultural heritage, festivals, food, and travel logistics. The site feels tropical, warm, and inviting, reflecting Mati's turquoise waters, white sand beaches, lush greenery, and colorful Mandaya culture.
+
 > **Note for Contributors**: Please refer to `DESIGN.md` as the single source of truth for the project's design system, UI components, typography, and styling rules.
+> Our design system, **"The Tropical Curator"**, treats digital real estate like a high-end editorial travel magazine.
 
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+## Tech Stack 🛠
 
-## Getting Started
+This project is built with a modern, performant stack:
 
-First, run the development server:
+- **Framework**: [Next.js 16.2](https://nextjs.org) (App Router, Turbopack)
+- **CMS / Data**: [Sanity](https://www.sanity.io)
+- **Styling**: [Tailwind CSS v4](https://tailwindcss.com) & CSS Variables
+- **Language**: [TypeScript](https://www.typescriptlang.org)
+- **Animations**: [Motion](https://motion.dev)
+- **Utilities**: `clsx`, `tailwind-merge`
+- **Icons**: Lucide React & Sanity Icons
+- **Typography**: Noto Serif & Plus Jakarta Sans
+
+## Developing Locally 💻
+
+### Prerequisites
+
+Ensure you have [Node.js](https://nodejs.org/) (v20+) installed.
+
+### Getting Started
+
+1. Clone the repository and install dependencies:
+
+```bash
+npm install
+# or
+yarn install
+# or
+pnpm install
+# or
+bun install
+```
+
+2. Set up your Sanity environment variables. Create a `.env.local` file in the root directory:
+
+```env
+SANITY_PROJECT_ID=your_sanity_project_id
+SANITY_DATASET=production
+SANITY_API_READ_TOKEN=your_sanity_api_read_token
+```
+
+> **Note:** You can initialize your Sanity project settings by running `npx sanity@latest init --env`.
+
+3. Run the development server (configured to use Turbopack):
 
 ```bash
 npm run dev
@@ -16,23 +60,24 @@ pnpm dev
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+4. Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+5. The Sanity Content Studio is embedded and available at [http://localhost:3000/studio](http://localhost:3000/studio).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Project Structure 📁
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- `src/app/` - Next.js App Router pages and layouts (e.g., destinations, activities, culture).
+- `src/components/` - Reusable React components split into `ui/`, `sections/`, and `layout/`.
+- `src/sanity/` - Sanity CMS configuration, including document and object schemas, and GROQ queries.
 
-## Learn More
+## Design Rules & Contributing 🎨
 
-To learn more about Next.js, take a look at the following resources:
+If you are contributing UI components, you **must** adhere strictly to the guidelines detailed in `DESIGN.md`. Key principles include:
+- **The "No-Line" Rule**: Avoid 1px solid borders. Use background tonal shifts (`surface` to `surface-container-low`) to group content.
+- **Organic Layering**: Favor asymmetrical compositions and overlapping elements to mimic the island's landscape.
+- **Glass & Gradient**: Use glassmorphism and subtle gradients instead of flat, heavy colors for primary CTAs and floating elements. 
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Deploy on Vercel 🚀
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new).
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Check out the [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details. Don't forget to configure your Vercel project environment variables and set up the Sanity webhook for on-demand revalidation.

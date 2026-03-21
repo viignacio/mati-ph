@@ -1,26 +1,91 @@
 @import "tailwindcss";
 
+@theme {
+  /* ─── Color Palette: The Tropical Curator ─── */
+
+  /* Surface layers — stacked sheets of fine, handmade paper */
+  --color-surface: #fefee5;
+  --color-surface-dim: #e3e5c3;
+  --color-surface-low: #fbfbe0;
+  --color-surface-container: #f5f5d5;
+  --color-surface-high: #f0f0ca;
+  --color-surface-highest: #e9eaca;
+  --color-surface-variant: #e9eaca;
+
+  /* On-surface text & shadow tint (never pure black) */
+  --color-on-surface: #373928;
+  --color-on-surface-variant: #5c5e48;
+
+  /* Primary — teal/ocean (buttons, links, nav highlights) */
+  --color-primary: #007168;
+  --color-primary-container: #56f1e0;
+  --color-on-primary: #ffffff;
+
+  /* Secondary — water/ocean activities */
+  --color-secondary: #0068a8;
+  --color-secondary-container: #cce5f8;
+  --color-on-secondary: #ffffff;
+
+  /* Tertiary — sunset/land/cultural (sub-headers, CTAs) */
+  --color-tertiary: #bc3000;
+  --color-tertiary-container: #ffdacf;
+  --color-on-tertiary: #ffffff;
+
+  /* Outline — ghost borders (only at 15% opacity if needed) */
+  --color-outline: #8a8b76;
+  --color-outline-variant: #babba4;
+
+  /* ─── Typography ─── */
+  --font-serif: var(--font-noto-serif);
+  --font-sans: var(--font-plus-jakarta);
+}
+
+/* Light mode only — no dark mode */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  color-scheme: light;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: theme(--color-surface);
+  color: theme(--color-on-surface);
+  font-family: var(--font-plus-jakarta), ui-sans-serif, system-ui, sans-serif;
+}
+
+/* ─── Signature Gradient Utilities ─── */
+@utility cta-gradient {
+  background-image: linear-gradient(135deg, #007168, #56f1e0);
+}
+
+@utility cta-gradient-hover {
+  background-image: linear-gradient(135deg, #005a52, #3dd4c4);
+}
+
+/* Glassmorphism — floating navigation */
+@utility glass-nav {
+  background-color: color-mix(in srgb, #e9eaca 60%, transparent);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+/* Ambient shadow — using on-surface tint, never pure black */
+@utility shadow-ambient {
+  box-shadow: 0 20px 40px rgba(55, 57, 40, 0.06);
+}
+
+@utility shadow-ambient-md {
+  box-shadow: 0 8px 24px rgba(55, 57, 40, 0.08);
+}
+
+/* Ghost border fallback — felt, not seen */
+@utility border-ghost {
+  border: 1px solid color-mix(in srgb, #babba4 15%, transparent);
+}
+
+/* Section spacing — white space as luxury */
+@utility section-gap {
+  padding-block: 7rem;
+}
+
+@utility section-gap-lg {
+  padding-block: 8.5rem;
 }
