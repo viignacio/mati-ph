@@ -18,7 +18,7 @@ export function Navbar({ data }: { data?: any }) {
   return (
     <>
       <header className="fixed top-0 left-0 w-full z-50 px-6 py-4 transition-all duration-300">
-        <div className="max-w-screen-2xl mx-auto flex items-center justify-between bg-surface/90 backdrop-blur-xl border border-outline-variant/20 px-8 py-4 rounded-full shadow-lg shadow-on-background/5">
+        <div className="max-w-screen-2xl mx-auto flex items-center justify-between bg-surface/70 backdrop-blur-xl border border-outline-variant/20 px-8 py-5 rounded-full shadow-lg shadow-on-background/5">
 
           {/* Left cluster: Logo + Nav */}
           <div className="flex items-center gap-10">
