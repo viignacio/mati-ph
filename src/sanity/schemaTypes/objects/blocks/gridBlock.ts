@@ -97,16 +97,30 @@ export const gridBlock = defineType({
                   initialValue: 'square',
                 }),
                 defineField({
-                  name: 'badge',
-                  title: 'Badge Label Override',
+                  name: 'ctaType',
+                  title: 'CTA Stylization',
                   type: 'string',
-                  description: 'e.g. "Iconic Coast"',
+                  options: {
+                    list: [
+                      { title: 'Arrow Icon (Hover)', value: 'arrow' },
+                      { title: 'Text Button', value: 'button' },
+                      { title: 'None', value: 'none' }
+                    ],
+                  },
+                  initialValue: 'arrow',
                 }),
                 defineField({
                   name: 'ctaText',
-                  title: 'CTA Text Override',
+                  title: 'CTA Text',
                   type: 'string',
-                  description: 'e.g. "Explore Beach"',
+                  description: 'Used only if CTA Stylization is "Text Button". e.g. "Explore Beach"',
+                  hidden: ({ parent }) => parent?.ctaType !== 'button',
+                }),
+                defineField({
+                  name: 'ctaLink',
+                  title: 'CTA Link Override',
+                  type: 'string',
+                  description: 'Optional URL override. If blank, it links directly to the content page.',
                 }),
               ],
             }),

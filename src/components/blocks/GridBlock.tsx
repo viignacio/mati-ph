@@ -19,8 +19,9 @@ interface GridBlockProps {
       itemSettings?: {
         colSpan?: number
         aspectRatio?: 'square' | 'portrait' | 'landscape' | 'wide'
-        badge?: string
+        ctaType?: 'arrow' | 'button' | 'none'
         ctaText?: string
+        ctaLink?: string
       }
     }>
     cta?: {
@@ -84,8 +85,36 @@ export function GridBlock({ data }: GridBlockProps) {
           const aspectRatio = settings.aspectRatio || 'square'
           
           const title = doc.name || doc.title
-          const excerpt = doc.tagline || (typeof doc.description === 'string' ? doc.description : '') // Handle string or PT
+          const badgeText = doc.tagline 
+          
+          let excerpt = ''
+          if (typeof doc.description === 'string') {
+            excerpt = doc.description
+          } else if (Array.isArray(doc.description)) {
+            // Simplify portable text to plain string for the card excerpt
+            excerpt = doc.description
+              .map((block: any) => block._type === 'block' && block.children 
+                ? block.children.map((child: any) => child.text).join('') 
+                : '')
+              .join(' ')
+          }
+
           const imgUrl = doc.mainImage ? urlFor(doc.mainImage).url() : ''
+          
+          // Compute default hyperlink from doc type if link not explicitly overridden
+          let docHref = '#'
+          if (doc._type && doc.slug) {
+            const prefixMap: Record<string, string> = {
+              'destination': '/destinations',
+              'activity': '/activities',
+              'festival': '/festivals',
+              'foodSpot': '/food-spots',
+              'travelGuide': '/travel-guide'
+            }
+            const prefix = prefixMap[doc._type] || ''
+            docHref = `${prefix}/${doc.slug}`
+          }
+          const finalHref = settings.ctaLink || docHref
           
           // CSS Mappings
           const spanClass = isMasonry 
@@ -102,10 +131,11 @@ export function GridBlock({ data }: GridBlockProps) {
           const isElevated = cardStyle === 'elevated'
 
           return (
-            <div 
+            <Link 
+              href={finalHref}
               key={item._key || index} 
               className={cn(
-                "group relative overflow-hidden rounded-lg",
+                "group relative overflow-hidden rounded-lg block focus:outline-none focus-visible:ring-4 focus-visible:ring-primary",
                 spanClass,
                 aspectClass,
                 isElevated ? "shadow-sm bg-surface-container-lowest" : ""
@@ -119,7 +149,7 @@ export function GridBlock({ data }: GridBlockProps) {
                     alt={title} 
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-90"></div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-90 transition-opacity duration-300 group-hover:opacity-100"></div>
                 </>
               )}
 
@@ -129,11 +159,11 @@ export function GridBlock({ data }: GridBlockProps) {
               )}
 
               {/* Foreground Content */}
-              <div className="absolute bottom-10 left-10 right-10 text-white flex flex-col items-start">
+              <div className="absolute bottom-6 md:bottom-10 left-6 md:left-10 right-6 md:right-10 text-white flex flex-col items-start z-30 pointer-events-none">
                 
-                {settings.badge && (
+                {badgeText && (
                   <span className="text-primary-container text-xs font-bold uppercase tracking-widest mb-2 block">
-                    {settings.badge}
+                    {badgeText}
                   </span>
                 )}
                 
@@ -142,23 +172,25 @@ export function GridBlock({ data }: GridBlockProps) {
                 </h3>
                 
                 {excerpt && (
-                  <p className="text-white/80 text-sm md:text-base max-w-md line-clamp-2 mb-6">
+                  <p className="text-white/80 text-sm md:text-base max-w-md line-clamp-2 md:line-clamp-3 mb-6 transition-opacity duration-300">
                     {excerpt}
                   </p>
                 )}
                 
                 {/* Variant Call To Action */}
-                {settings.ctaText ? (
-                  <button className="bg-white/10 backdrop-blur-md border border-white/20 px-6 py-2 rounded-full font-bold text-sm hover:bg-white hover:text-primary transition-all">
+                {settings.ctaType === 'button' && settings.ctaText && (
+                  <span className="bg-white/10 backdrop-blur-md border border-white/20 px-6 py-2 rounded-full font-bold text-sm text-white transition-all group-hover:bg-white group-hover:text-primary mt-auto pointer-events-auto">
                     {settings.ctaText}
-                  </button>
-                ) : (
-                  <span className="material-symbols-outlined mt-auto opacity-0 group-hover:opacity-100 transition-opacity transform translate-y-2 group-hover:translate-y-0">
+                  </span>
+                )}
+                
+                {(!settings.ctaType || settings.ctaType === 'arrow') && (
+                  <span className="material-symbols-outlined mt-auto opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 text-white pointer-events-auto">
                     arrow_outward
                   </span>
                 )}
               </div>
-            </div>
+            </Link>
           )
         })}
       </div>
