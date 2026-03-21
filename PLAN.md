@@ -70,7 +70,7 @@ mati-ph/
 
 ---
 
-## Phase 2: Design System & Base Components
+## Phase 2: Design System & Base Components ✅
 
 **Skills:** `ui-ux-pro-max`, `frontend-design`, `vercel-composition-patterns`
 
@@ -104,7 +104,7 @@ Configure Noto Serif and Plus Jakarta Sans in `src/app/layout.tsx` via `next/fon
 
 ---
 
-## Phase 3: Sanity CMS Schema & Data Layer
+## Phase 3: Sanity CMS Schema & Data Layer ✅
 
 **Skills:** `sanity-best-practices`, `content-modeling-best-practices`
 
