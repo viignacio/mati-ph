@@ -3,6 +3,7 @@ import { urlFor } from '@/sanity/lib/image'
 import Link from 'next/link'
 import { BlockContainer, type BlockDesign } from './BlockContainer'
 import { cn } from '@/lib/utils'
+import { PortableText } from '@/components/portable-text'
 
 interface TextWithImageBlockProps {
   data: {
@@ -31,6 +32,7 @@ export function TextWithImageBlock({ data }: TextWithImageBlockProps) {
     tagline, 
     heading, 
     preamble, 
+    content,
     date, 
     cta, 
     images, 
@@ -78,6 +80,12 @@ export function TextWithImageBlock({ data }: TextWithImageBlockProps) {
             <p className="text-lg text-on-surface-variant mb-8 leading-relaxed">
               {preamble}
             </p>
+          )}
+
+          {content && (
+            <div className="mb-8">
+              <PortableText value={content} />
+            </div>
           )}
 
           {/* Special Date Block */}
