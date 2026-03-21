@@ -8,6 +8,7 @@ import { richText } from './objects/richText'
 import { navigationItem } from './objects/navigationItem'
 
 // Blocks
+import { blockDesign } from './objects/blocks/blockDesign'
 import { heroBlock } from './objects/blocks/heroBlock'
 import { textWithImageBlock } from './objects/blocks/textWithImageBlock'
 import { carouselBlock } from './objects/blocks/carouselBlock'
@@ -40,6 +41,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     navigationItem,
     
     // Blocks
+    blockDesign,
     heroBlock,
     textWithImageBlock,
     carouselBlock,
