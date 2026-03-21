@@ -21,6 +21,7 @@ interface FeaturesBlockProps {
     heading?: string
     description?: string
     mainImage?: any
+    imageTag?: string
     imagePosition?: 'left' | 'right'
     features?: Feature[]
     cta?: {
@@ -37,6 +38,7 @@ export function FeaturesBlock({ data }: FeaturesBlockProps) {
     tagline, 
     heading, 
     mainImage, 
+    imageTag,
     imagePosition = 'left', 
     features, 
     cta 
@@ -65,6 +67,11 @@ export function FeaturesBlock({ data }: FeaturesBlockProps) {
           <div className={cn("relative", isLeft ? "order-2 lg:order-1" : "order-2 lg:order-2")}>
             <div className="aspect-[4/5] rounded-3xl overflow-hidden relative shadow-2xl z-10 bg-surface-container-low">
               <img src={imgUrl} alt={heading || 'Feature image'} className="w-full h-full object-cover" />
+              {imageTag && (
+                <div className="absolute top-6 left-6 bg-secondary text-white px-6 py-2 rounded-full font-bold text-xs uppercase tracking-widest z-10">
+                  {imageTag}
+                </div>
+              )}
             </div>
             {/* Structural Accent Square */}
             <div className="absolute -bottom-8 -right-8 w-64 h-64 bg-primary-container rounded-3xl -z-10 opacity-10 bg-[repeating-linear-gradient(45deg,transparent,transparent_5px,rgba(188,48,0,0.2)_5px,rgba(188,48,0,0.2)_10px)]"></div>

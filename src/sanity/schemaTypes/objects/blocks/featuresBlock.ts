@@ -44,7 +44,17 @@ export const featuresBlock = defineType({
       title: 'Main Image',
       type: 'image',
       description: 'Anchor image used for the feature-list-with-image layout.',
-      options: { hotspot: true },
+      options: { 
+        hotspot: true,
+        metadata: ['lqip', 'palette']
+      },
+      hidden: ({ parent }) => parent?.layoutVariant !== 'feature-list-with-image',
+    }),
+    defineField({
+      name: 'imageTag',
+      title: 'Image Tag',
+      type: 'string',
+      description: 'Short label overlaid on the image, e.g. "Adrenaline" or "Family-Friendly".',
       hidden: ({ parent }) => parent?.layoutVariant !== 'feature-list-with-image',
     }),
     defineField({
