@@ -1,11 +1,12 @@
 import React from 'react'
-import { HeroBlockUI } from './blocks/HeroBlockUI'
-import { TextWithImageBlockUI } from './blocks/TextWithImageBlockUI'
+import { HeroBlock } from './blocks/HeroBlock'
+import { TextWithImageBlock } from './blocks/TextWithImageBlock'
 import { CarouselBlockUI } from './blocks/CarouselBlockUI'
-import { GridBlockUI } from './blocks/GridBlockUI'
+import { GridBlock } from './blocks/GridBlock'
 import { CallToActionBlockUI } from './blocks/CallToActionBlockUI'
-import { FeaturesBlockUI } from './blocks/FeaturesBlockUI'
+import { FeaturesBlock } from './blocks/FeaturesBlock'
 import { TestimonialsBlockUI } from './blocks/TestimonialsBlockUI'
+// Old UI imports dropped
 
 type PageBuilderProps = {
   blocks: any[]
@@ -24,17 +25,17 @@ export function PageBuilder({ blocks, dictionary }: PageBuilderProps) {
         
         switch (block._type) {
           case 'heroBlock':
-            return <HeroBlockUI key={key} data={block} dictionary={dictionary} />
+            return <HeroBlock key={key} data={block} />
           case 'textWithImageBlock':
-            return <TextWithImageBlockUI key={key} data={block} dictionary={dictionary} />
+            return <TextWithImageBlock key={key} data={block} />
           case 'carouselBlock':
             return <CarouselBlockUI key={key} data={block} dictionary={dictionary} />
           case 'gridBlock':
-            return <GridBlockUI key={key} data={block} dictionary={dictionary} />
+            return <GridBlock key={key} data={block} />
           case 'callToActionBlock':
             return <CallToActionBlockUI key={key} data={block} dictionary={dictionary} />
           case 'featuresBlock':
-            return <FeaturesBlockUI key={key} data={block} dictionary={dictionary} />
+            return <FeaturesBlock key={key} data={block} />
           case 'testimonialsBlock':
             return <TestimonialsBlockUI key={key} data={block} dictionary={dictionary} />
           default:
