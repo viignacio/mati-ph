@@ -108,13 +108,13 @@ export function HeroBlock({ data }: HeroBlockProps) {
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             {cta?.text && cta?.link && (
-              <Link href={cta.link} className="w-full sm:w-auto px-10 py-4 rounded-xl bg-gradient-to-r from-primary to-primary-container text-on-primary font-bold text-lg shadow-xl shadow-primary/20 hover:scale-105 transition-all">
+              <Link href={cta.link} className="w-full sm:w-auto px-10 py-4 rounded-full bg-gradient-to-r from-primary to-primary-container text-on-primary font-bold text-lg shadow-xl shadow-primary/20 hover:scale-105 transition-all">
                 {cta.text}
               </Link>
             )}
             
             {secondaryCta?.text && secondaryCta?.link && (
-              <Link href={secondaryCta.link} className="w-full sm:w-auto px-10 py-4 rounded-xl bg-white/60 backdrop-blur-md text-on-background font-bold text-lg hover:bg-surface-container-highest transition-all border border-outline-variant/20">
+              <Link href={secondaryCta.link} className="w-full sm:w-auto px-10 py-4 rounded-full bg-white/60 backdrop-blur-md text-on-background font-bold text-lg hover:bg-surface-container-highest transition-all border border-outline-variant/20">
                 {secondaryCta.text}
               </Link>
             )}

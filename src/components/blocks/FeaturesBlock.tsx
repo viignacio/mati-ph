@@ -114,7 +114,7 @@ export function FeaturesBlock({ data }: FeaturesBlockProps) {
               <div className="pt-6">
                 <Link 
                   href={cta.link} 
-                  className="inline-block bg-secondary text-on-secondary px-10 py-4 rounded-xl font-bold text-lg shadow-xl shadow-secondary/20 hover:-translate-y-1 transition-all"
+                  className="inline-block bg-secondary text-on-secondary px-10 py-4 rounded-full font-bold text-lg shadow-xl shadow-secondary/20 hover:-translate-y-1 transition-all"
                 >
                   {cta.text}
                 </Link>
