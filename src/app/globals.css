@@ -95,9 +95,9 @@ body {
 
 /* Glassmorphism — floating navigation */
 @utility glass-nav {
-  background: rgba(254, 254, 229, 0.6);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  background: rgba(254, 254, 229, 0.82);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
 }
 
 /* Ambient shadow — using on-surface tint, never pure black */
