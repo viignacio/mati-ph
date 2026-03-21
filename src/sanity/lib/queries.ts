@@ -319,6 +319,21 @@ export const PAGE_BY_SLUG_QUERY = defineQuery(/* groq */ `
           month,
           mainImage{${imageFields}}
         }
+      },
+      _type == "gridBlock" => {
+        ...,
+        manualItems[]{
+          ...,
+          reference->{
+            _id,
+            name,
+            title,
+            tagline,
+            description,
+            "slug": slug.current,
+            mainImage{${imageFields}}
+          }
+        }
       }
     }
   }

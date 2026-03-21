@@ -72,7 +72,7 @@ export function HeroBlock({ data }: HeroBlockProps) {
   // We diverge from standard BlockContainer slightly if full-screen to allow edge-to-edge absolute images
   if (layoutVariant === 'full-screen') {
     return (
-      <section className="relative h-[921px] w-full overflow-hidden flex items-center justify-center">
+      <section className="relative h-[100dvh] min-h-[600px] w-full overflow-hidden flex items-center justify-center">
         {/* Background Image / Video wrapper */}
         <div className="absolute inset-0 z-0">
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent z-10"></div>
