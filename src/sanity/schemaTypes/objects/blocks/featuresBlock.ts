@@ -6,6 +6,29 @@ export const featuresBlock = defineType({
   type: 'object',
   fields: [
     defineField({
+      name: 'design',
+      title: 'Design Options',
+      type: 'blockDesign',
+    }),
+    defineField({
+      name: 'layoutVariant',
+      title: 'Layout Variant',
+      type: 'string',
+      options: {
+        list: [
+          { title: 'Standard Icon List', value: 'icon-list' },
+          { title: 'Feature List with Image', value: 'feature-list-with-image' },
+        ],
+      },
+      initialValue: 'icon-list',
+    }),
+    defineField({
+      name: 'tagline',
+      title: 'Tagline',
+      type: 'string',
+      description: 'Optional kicker text above the heading, e.g. "Water Sports"',
+    }),
+    defineField({
       name: 'heading',
       title: 'Heading',
       type: 'string',
@@ -15,6 +38,28 @@ export const featuresBlock = defineType({
       title: 'Description',
       type: 'text',
       rows: 3,
+    }),
+    defineField({
+      name: 'mainImage',
+      title: 'Main Image',
+      type: 'image',
+      description: 'Anchor image used for the feature-list-with-image layout.',
+      options: { hotspot: true },
+      hidden: ({ parent }) => parent?.layoutVariant !== 'feature-list-with-image',
+    }),
+    defineField({
+      name: 'imagePosition',
+      title: 'Image Position',
+      type: 'string',
+      options: {
+        list: [
+          { title: 'Left', value: 'left' },
+          { title: 'Right', value: 'right' },
+        ],
+        layout: 'radio',
+      },
+      initialValue: 'left',
+      hidden: ({ parent }) => parent?.layoutVariant !== 'feature-list-with-image',
     }),
     defineField({
       name: 'features',
@@ -39,10 +84,29 @@ export const featuresBlock = defineType({
             }),
             defineField({
               name: 'icon',
-              title: 'Icon (Optional string identifier)',
+              title: 'Icon (String Identifier)',
               type: 'string',
+              description: 'We use Lucide or Material Symbols (e.g., "surfing").'
             }),
           ],
+        }),
+      ],
+    }),
+    defineField({
+      name: 'cta',
+      title: 'Block Call to Action',
+      type: 'object',
+      description: 'Optional block level primary button, e.g. "Find a Coach".',
+      fields: [
+        defineField({
+          name: 'text',
+          title: 'Button Text',
+          type: 'string',
+        }),
+        defineField({
+          name: 'link',
+          title: 'Button Link',
+          type: 'string',
         }),
       ],
     }),
