@@ -1,0 +1,138 @@
+import React from 'react'
+import { urlFor } from '@/sanity/lib/image'
+import Link from 'next/link'
+import { BlockContainer, type BlockDesign } from './BlockContainer'
+import { cn } from '@/lib/utils'
+
+interface TextWithImageBlockProps {
+  data: {
+    _key: string
+    _type: 'textWithImageBlock'
+    design?: BlockDesign
+    layoutVariant?: 'standard-split' | 'split-container'
+    tagline?: string
+    heading?: string
+    preamble?: string
+    content?: any // RichText portable text
+    date?: string
+    cta?: {
+      text?: string
+      link?: string
+    }
+    images?: any[]
+    imagePosition?: 'left' | 'right'
+  }
+}
+
+export function TextWithImageBlock({ data }: TextWithImageBlockProps) {
+  const { 
+    design, 
+    layoutVariant = 'split-container', 
+    tagline, 
+    heading, 
+    preamble, 
+    date, 
+    cta, 
+    images, 
+    imagePosition = 'right' 
+  } = data
+
+  const isLeft = imagePosition === 'left'
+
+  // Attempt to nicely format date if it matches "MON YYYY" pattern
+  const dateParts = date ? date.split(' ') : []
+  const hasFormattedDate = dateParts.length === 2
+
+  return (
+    <BlockContainer design={design} className="relative overflow-hidden">
+      
+      {/* Decorative accent for split-container specifically */}
+      {layoutVariant === 'split-container' && (
+        <div className="absolute top-0 right-0 w-1/2 h-full bg-[repeating-linear-gradient(45deg,transparent,transparent_5px,rgba(188,48,0,0.5)_5px,rgba(188,48,0,0.5)_10px)] opacity-10 pointer-events-none"></div>
+      )}
+
+      {/* Main Container */}
+      <div className={cn(
+        "relative z-10 flex flex-col items-center gap-12",
+        "md:flex-row"
+      )}>
+        
+        {/* Text Content */}
+        <div className={cn(
+          "w-full md:w-1/2 space-y-6",
+          isLeft ? "order-2 md:order-2" : "order-2 md:order-1"
+        )}>
+          {tagline && (
+            <span className="text-tertiary font-bold uppercase tracking-[0.2em] mb-4 block">
+              {tagline}
+            </span>
+          )}
+          
+          {heading && (
+            <h2 className="text-4xl md:text-5xl font-headline font-black mb-6 text-on-background">
+              {heading}
+            </h2>
+          )}
+          
+          {preamble && (
+            <p className="text-lg text-on-surface-variant mb-8 leading-relaxed">
+              {preamble}
+            </p>
+          )}
+
+          {/* Special Date Block */}
+          {date && (
+            <div className="flex items-center gap-6 mb-10">
+              {hasFormattedDate ? (
+                <>
+                  <div className="text-center">
+                    <div className="text-3xl font-black text-tertiary">{dateParts[0]}</div>
+                    <div className="text-sm font-bold opacity-60">Month</div>
+                  </div>
+                  <div className="h-10 w-px bg-outline-variant/30"></div>
+                  <div className="text-center">
+                    <div className="text-3xl font-black text-tertiary">{dateParts[1]}</div>
+                    <div className="text-sm font-bold opacity-60">Year</div>
+                  </div>
+                </>
+              ) : (
+                <div className="text-xl font-black text-tertiary uppercase tracking-widest">{date}</div>
+              )}
+            </div>
+          )}
+
+          {cta?.text && cta?.link && (
+            <Link 
+              href={cta.link} 
+              className="inline-block text-on-tertiary bg-tertiary px-8 py-3 rounded-full font-bold shadow-lg shadow-tertiary/20 hover:scale-105 transition-transform"
+            >
+              {cta.text}
+            </Link>
+          )}
+        </div>
+
+        {/* Image Grid */}
+        {images && images.length > 0 && (
+          <div className={cn(
+            "w-full md:w-1/2 grid gap-4",
+            isLeft ? "order-1 md:order-1" : "order-1 md:order-2",
+            images.length === 2 ? "grid-cols-2" : (images.length === 3 ? "grid-cols-3" : "grid-cols-1")
+          )}>
+            {images.map((img, i) => (
+              <img 
+                key={i}
+                src={urlFor(img).url()} 
+                alt={heading ? `${heading} image ${i+1}` : `Content image ${i+1}`}
+                className={cn(
+                  "w-full aspect-[3/4] object-cover rounded-lg shadow-xl",
+                  images.length > 1 && i % 2 === 0 ? "translate-y-8" : "" // Stagger effect
+                )}
+              />
+            ))}
+          </div>
+        )}
+      </div>
+
+    </BlockContainer>
+  )
+}
