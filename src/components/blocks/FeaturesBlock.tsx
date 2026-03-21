@@ -47,7 +47,7 @@ export function FeaturesBlock({ data }: FeaturesBlockProps) {
   const isLeft = imagePosition === 'left'
 
   return (
-    <BlockContainer design={design} className="relative overflow-hidden max-h-[90dvh] overflow-y-auto">
+    <BlockContainer design={design} className="relative overflow-hidden max-h-[90dvh]">
       {/* Decorative Wave Motif (Translating the stitch graphic abstractly) */}
       <div className="absolute -right-20 top-0 opacity-5 pointer-events-none">
         <svg width="400" height="400" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -56,14 +56,14 @@ export function FeaturesBlock({ data }: FeaturesBlockProps) {
       </div>
 
       <div className={cn(
-        "grid gap-16 items-center",
+        "grid gap-10 items-center h-full",
         isWithImage ? "grid-cols-1 lg:grid-cols-2" : "grid-cols-1"
       )}>
         
         {/* Optional Image Column */}
         {isWithImage && (
-          <div className={cn("relative", isLeft ? "order-2 lg:order-1" : "order-2 lg:order-2")}>
-            <div className="aspect-[4/5] rounded-3xl overflow-hidden relative shadow-2xl z-10 bg-surface-container-low">
+          <div className={cn("relative min-h-0", isLeft ? "order-2 lg:order-1" : "order-2 lg:order-2")}>
+            <div className="w-full h-full max-h-[65dvh] rounded-3xl overflow-hidden relative shadow-2xl z-10 bg-surface-container-low">
               <img src={imgUrl} alt={heading || 'Feature image'} className="w-full h-full object-cover" />
             </div>
             {/* Structural Accent Square */}
