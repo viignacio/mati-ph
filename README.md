@@ -1,3 +1,5 @@
+> **Note for Contributors**: Please refer to `DESIGN.md` as the single source of truth for the project's design system, UI components, typography, and styling rules.
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started

@@ -59,28 +59,14 @@ Every page exports `generateMetadata` pulling from Sanity's SEO object with `coa
 
 ## Design System
 
-### Colors (Tailwind tokens)
+> **CRITICAL**: Do NOT use the legacy design tokens or rules previously listed here.
+> For all UI components, colors, typography, styling, and visual rules, **ALWAYS refer to `DESIGN.md` as the single source of truth**.
 
-| Token | Hex | Usage |
-|-------|-----|-------|
-| `ocean` | `#0D9488` | Primary — buttons, links, nav highlights |
-| `tropical` | `#059669` | Secondary — badges, accents |
-| `sunset` | `#EA580C` | CTA buttons, attention elements |
-| `sand` | `#FFFBF5` | Page background |
-| `deep` | `#0F172A` | Body text |
-
-### Typography
-
-- **Playfair Display** (`font-serif`) — headings only
-- **Inter** (`font-sans`) — body text, UI elements
-- **Caveat** (`font-accent`) — decorative labels, handwritten accents
-
-Fonts loaded via `next/font/google` with CSS variables in `src/app/layout.tsx`.
-
-### Visual Rules
-
-- Light mode only (no dark mode)
-- Animations: 150-300ms, respect `prefers-reduced-motion`
-- Use SVG icons (Lucide), never emojis as icons
-- Hero images get `priority={true}`, all others lazy-loaded
-- Use `cn()` from `src/lib/utils.ts` for conditional Tailwind classes
+- **Theme Strategy**: "The Tropical Curator" (editorial travel magazine feel)
+- **Palette**: Follow exact tokens from `DESIGN.md` (e.g., `surface`, `primary`, `secondary`, `tertiary`). Do NOT use `ocean`, `tropical`, `sunset`, `sand`, `deep`.
+- **Typography**: Noto Serif (Headlines/Display), Plus Jakarta Sans (Body/UI). Do NOT use Playfair Display or Inter.
+- **Implementation Rules**:
+  - Always strictly adhere to the visual rules in `DESIGN.md` (The "No-Line" Rule, Glassmorphism gradients, specific spacing classes, etc.).
+  - Light mode only (no dark mode).
+  - Use SVG icons (Lucide), never emojis.
+  - Use `cn()` from `src/lib/utils.ts` for conditional Tailwind classes.

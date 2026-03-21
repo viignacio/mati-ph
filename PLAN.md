@@ -16,40 +16,19 @@ Build a tourism website for Mati City, Davao Oriental, Philippines — a one-sto
 
 ## Design System
 
-### Color Palette (Custom Tropical)
+> **CRITICAL**: For all UI components, colors, typography, styling, and visual rules, **ALWAYS refer to `DESIGN.md` as the single source of truth**.
 
-| Role | Hex | Tailwind Token | Inspiration |
-|------|-----|----------------|-------------|
-| Primary (Ocean) | `#0D9488` | `ocean` | Turquoise waters of Pujada Bay |
-| Secondary (Tropical) | `#059669` | `tropical` | Lush island greenery |
-| Accent/CTA (Sunset) | `#EA580C` | `sunset` | Warm sunsets, vibrant culture |
-| Background (Sand) | `#FFFBF5` | `sand` | White sand beaches |
-| Text (Deep) | `#0F172A` | `deep` | High-contrast readability |
-| Card | `#FFFFFF` | `card` | Clean content surface |
-| Muted | `#F0FDFA` | `muted` | Subtle teal tint |
-| Border | `#99F6E4` | `border` | Light teal accent |
-
-### Typography
-
-| Role | Font | CSS Variable | Style |
-|------|------|-------------|-------|
-| Headings | **Playfair Display** | `--font-playfair` | Serif — editorial travel magazine feel |
-| Body | **Inter** | `--font-inter` | Sans — clean, highly readable |
-| Accent | **Caveat** | `--font-caveat` | Handwritten — for labels, quotes, decorative text |
-
-All loaded via `next/font/google` with CSS variables.
-
-### Visual Style
-
-- **Aurora UI + Nature Distilled hybrid** — flowing gradients for hero/accents + warm organic textures
-- Scroll-triggered storytelling layout on homepage
-- Subtle parallax on hero imagery
-- Large photography with gradient overlays
-- Motion animations with `motion` library (150-300ms micro-interactions)
+- **Theme Strategy**: "The Tropical Curator" (editorial travel magazine feel)
+- **Palette**: `surface`, `primary`, `secondary`, `tertiary` (from `DESIGN.md`). Do NOT use legacy colors.
+- **Typography**: Noto Serif, Plus Jakarta Sans. Do NOT use Playfair Display or Inter.
+- **Visual Style**:
+  - The "No-Line" Rule and Glassmorphism
+  - Asymmetrical Compositions and Organic Layering
+  - Adhere strictly to the design aesthetic detailed in `DESIGN.md`.
 
 ---
 
-## Phase 1: Project Initialization
+## Phase 1: Project Initialization ✅
 
 **Skills:** `next-best-practices`, `sanity-best-practices`
 
@@ -96,15 +75,13 @@ mati-ph/
 **Skills:** `ui-ux-pro-max`, `frontend-design`, `vercel-composition-patterns`
 
 ### Tailwind Config
-Extend `tailwind.config.ts` with custom color tokens (`ocean`, `tropical`, `sunset`, `sand`, `deep`) and font families via CSS variables.
+Extend `tailwind.config.ts` with custom color tokens from `DESIGN.md` (`surface`, `primary`, `secondary`, `tertiary`, etc.) and font families via CSS variables.
 
 ### Font Setup
-Configure Playfair Display, Inter, and Caveat in `src/app/layout.tsx` via `next/font/google`. Apply CSS variable classes to `<html>`.
+Configure Noto Serif and Plus Jakarta Sans in `src/app/layout.tsx` via `next/font/google`. Apply CSS variable classes to `<html>`.
 
 ### Global CSS
-- Sand background, gradient utilities (`.gradient-ocean`, `.gradient-sunset`)
-- Subtle noise texture for organic warmth
-- Scroll animation keyframes
+- `surface` background, custom gradient utilities as per `DESIGN.md`.
 
 ### Base UI Components (`src/components/ui/`)
 
