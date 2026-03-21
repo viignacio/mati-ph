@@ -124,7 +124,7 @@ export function TextWithImageBlock({ data }: TextWithImageBlockProps) {
                 src={urlFor(img).url()} 
                 alt={heading ? `${heading} image ${i+1}` : `Content image ${i+1}`}
                 className={cn(
-                  "w-full aspect-[3/4] object-cover rounded-lg shadow-xl",
+                  "w-full aspect-[3/4] object-cover rounded-3xl shadow-xl",
                   images.length > 1 && i % 2 === 0 ? "translate-y-8" : "" // Stagger effect
                 )}
               />

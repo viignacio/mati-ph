@@ -134,7 +134,7 @@ export function GridBlock({ data }: GridBlockProps) {
             <div 
               key={item._key || index} 
               className={cn(
-                "group relative overflow-hidden rounded-lg block",
+                "group relative overflow-hidden rounded-3xl block",
                 spanClass,
                 aspectClass,
                 isElevated ? "shadow-sm bg-surface-container-lowest" : ""

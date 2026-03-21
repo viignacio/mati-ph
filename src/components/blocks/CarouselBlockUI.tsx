@@ -20,7 +20,7 @@ export function CarouselBlockUI({ data, dictionary }: CarouselBlockProps) {
         
         <div className="flex gap-6 overflow-x-auto pb-8 snap-x">
           {data.items?.map((item: any, i: number) => (
-            <div key={item._id || i} className="min-w-[300px] bg-white shadow-lg rounded-2xl overflow-hidden snap-center flex-shrink-0 text-left">
+            <div key={item._id || i} className="min-w-[300px] bg-white shadow-lg rounded-3xl overflow-hidden snap-center flex-shrink-0 text-left">
               <div className="h-48 bg-gray-200" />
               <div className="p-6">
                 <h3 className="font-bold text-xl mb-2">{item.name || item.title || 'Untitled'}</h3>

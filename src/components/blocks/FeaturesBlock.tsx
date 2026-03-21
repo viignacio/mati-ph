@@ -63,11 +63,11 @@ export function FeaturesBlock({ data }: FeaturesBlockProps) {
         {/* Optional Image Column */}
         {isWithImage && (
           <div className={cn("relative", isLeft ? "order-2 lg:order-1" : "order-2 lg:order-2")}>
-            <div className="aspect-[4/5] rounded-lg overflow-hidden relative shadow-2xl z-10 bg-surface-container-low">
+            <div className="aspect-[4/5] rounded-3xl overflow-hidden relative shadow-2xl z-10 bg-surface-container-low">
               <img src={imgUrl} alt={heading || 'Feature image'} className="w-full h-full object-cover" />
             </div>
             {/* Structural Accent Square */}
-            <div className="absolute -bottom-8 -right-8 w-64 h-64 bg-primary-container rounded-lg -z-10 opacity-20 bg-[repeating-linear-gradient(45deg,transparent,transparent_5px,rgba(188,48,0,0.5)_5px,rgba(188,48,0,0.5)_10px)]"></div>
+            <div className="absolute -bottom-8 -right-8 w-64 h-64 bg-primary-container rounded-3xl -z-10 opacity-20 bg-[repeating-linear-gradient(45deg,transparent,transparent_5px,rgba(188,48,0,0.5)_5px,rgba(188,48,0,0.5)_10px)]"></div>
           </div>
         )}
 
