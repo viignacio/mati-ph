@@ -215,8 +215,8 @@ export const SITE_SETTINGS_QUERY = defineQuery(/* groq */ `
 // ─── Global Header ────────────────────────────────────────────────────────────
 
 export const HEADER_QUERY = defineQuery(/* groq */ `
-  *[_type == "header" && _id == "global-header"][0] {
-    "logo": *[_type == "siteSettings"][0].logo{${imageFields}},
+  *[_type == "header"] | order(_updatedAt desc)[0] {
+    "logo": *[_type == "siteSettings"] | order(_updatedAt desc)[0].logo{${imageFields}},
     navigation[]{
       _key,
       text,
@@ -233,8 +233,8 @@ export const HEADER_QUERY = defineQuery(/* groq */ `
 // ─── Global Footer ────────────────────────────────────────────────────────────
 
 export const FOOTER_QUERY = defineQuery(/* groq */ `
-  *[_type == "footer" && _id == "global-footer"][0] {
-    "logo": *[_type == "siteSettings"][0].logo{${imageFields}},
+  *[_type == "footer"] | order(_updatedAt desc)[0] {
+    "logo": *[_type == "siteSettings"] | order(_updatedAt desc)[0].logo{${imageFields}},
     headline,
     subheading,
     socialLinks[]{
