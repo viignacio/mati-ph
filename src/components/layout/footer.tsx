@@ -1,5 +1,13 @@
 import Link from "next/link";
 import { Container } from "@/components/ui/container";
+import { 
+  Facebook, 
+  Instagram, 
+  Twitter, 
+  Youtube, 
+  Music, 
+  Link as LinkIcon 
+} from "lucide-react";
 
 export function Footer({ data }: { data?: any }) {
   const headline = data?.headline || "";
@@ -21,12 +29,12 @@ export function Footer({ data }: { data?: any }) {
 
   const renderSocialIcon = (platform: string) => {
     switch (platform?.toLowerCase()) {
-      case 'facebook': return <span className="material-symbols-outlined text-sm">thumb_up</span>;
-      case 'instagram': return <span className="material-symbols-outlined text-sm">photo_camera</span>;
-      case 'x': return <span className="material-symbols-outlined text-sm">tag</span>;
-      case 'youtube': return <span className="material-symbols-outlined text-sm">play_circle</span>;
-      case 'tiktok': return <span className="material-symbols-outlined text-sm">music_note</span>;
-      default: return <span className="material-symbols-outlined text-sm">link</span>;
+      case 'facebook': return <Facebook size={18} />;
+      case 'instagram': return <Instagram size={18} />;
+      case 'x': return <Twitter size={18} />;
+      case 'youtube': return <Youtube size={18} />;
+      case 'tiktok': return <Music size={18} />;
+      default: return <LinkIcon size={18} />;
     }
   };
 
