@@ -109,7 +109,7 @@ export function Footer({ data }: { data?: any }) {
       </div>
 
       <div className="px-8 lg:px-20 py-10 border-t border-stone-200 bg-stone-50/50">
-        <div className="max-w-[1440px] mx-auto flex flex-col md:flex-row justify-between items-center gap-6 font-sans text-xs font-bold text-on-surface-variant/60 uppercase tracking-widest">
+        <div className="max-w-[1440px] mx-auto flex flex-col items-center gap-4 font-sans text-xs font-bold text-on-surface-variant/60 uppercase tracking-widest text-center">
           <p>{copyrightText}</p>
           <div className="flex gap-8">
             {privacyPolicyUrl && (
