@@ -178,13 +178,13 @@ export function GridBlock({ data }: GridBlockProps) {
                 
                 {/* Variant Call To Action */}
                 {settings.ctaType === 'button' && settings.ctaText && (
-                  <Link href={finalHref} className="bg-white/10 backdrop-blur-md border border-white/20 px-6 py-2 rounded-full font-bold text-sm text-white transition-all group-hover:bg-white group-hover:text-primary mt-auto pointer-events-auto inline-block">
+                  <Link href={finalHref} className="bg-white/10 backdrop-blur-md border border-white/20 px-6 py-2 rounded-full font-bold text-sm text-white transition-all hover:bg-white hover:text-primary mt-auto pointer-events-auto inline-block">
                     {settings.ctaText}
                   </Link>
                 )}
                 
                 {(!settings.ctaType || settings.ctaType === 'arrow') && (
-                  <Link href={finalHref} className="material-symbols-outlined mt-auto transition-transform duration-300 transform group-hover:-translate-y-1 group-hover:translate-x-1 text-white pointer-events-auto inline-block">
+                  <Link href={finalHref} className="material-symbols-outlined mt-auto transition-transform duration-300 transform hover:-translate-y-1 hover:translate-x-1 text-white pointer-events-auto inline-block">
                     arrow_outward
                   </Link>
                 )}
