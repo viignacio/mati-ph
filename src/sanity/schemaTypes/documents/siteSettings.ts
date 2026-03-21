@@ -26,8 +26,9 @@ export const siteSettings = defineType({
     }),
     defineField({
       name: 'logo',
-      title: 'Logo',
+      title: 'Global Logo',
       type: 'image',
+      description: 'Used in the Navbar and Footer. If empty, the site fallback "Mati PH" is used.',
     }),
     defineField({
       name: 'contactEmail',

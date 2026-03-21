@@ -15,12 +15,7 @@ export const header = defineType({
       readOnly: true,
       hidden: true,
     }),
-    defineField({
-      name: 'logo',
-      title: 'Logo',
-      type: 'image',
-      description: 'If left blank, "Mati City Tourism" text will be shown.',
-    }),
+
     defineField({
       name: 'navigation',
       title: 'Navigation Links',
