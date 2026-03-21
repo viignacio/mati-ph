@@ -55,7 +55,7 @@ export default async function ComposablePage({ params }: { params: Promise<{ slu
   }, {})
 
   return (
-    <div className="min-h-dvh flex flex-col pt-24 bg-surface">
+    <div className="min-h-dvh flex flex-col bg-surface">
       <PageBuilder blocks={page.content ?? []} dictionary={dictionary} />
     </div>
   )
