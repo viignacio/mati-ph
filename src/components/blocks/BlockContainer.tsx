@@ -12,6 +12,7 @@ interface BlockContainerProps {
   design?: BlockDesign
   id?: string
   className?: string
+  containerWidth?: string // Override the default 90% inner width e.g. '75%'
   children: React.ReactNode
 }
 
@@ -19,7 +20,7 @@ interface BlockContainerProps {
  * Global wrapper for Composable Blocks.
  * Automatically resolves Sanity blockDesign fields into Tailwind classes based on "The Tropical Curator" rules.
  */
-export function BlockContainer({ design, id, className, children }: BlockContainerProps) {
+export function BlockContainer({ design, id, className, containerWidth = '90%', children }: BlockContainerProps) {
   // Resolve Background Color (Layering Rule)
   const bgClasses = {
     'surface': 'bg-surface',
@@ -52,7 +53,7 @@ export function BlockContainer({ design, id, className, children }: BlockContain
   if (isRounded) {
     return (
       <section id={id} className={cn("w-full py-0", ptClasses, pbClasses)}>
-        <div className={cn("w-[90%] mx-auto rounded-3xl overflow-hidden p-8 md:p-16 lg:p-24", bgClasses, className)}>
+        <div className={cn("mx-auto rounded-3xl overflow-hidden p-8 md:p-16 lg:p-24", bgClasses, className)} style={{ width: containerWidth }}>
           {children}
         </div>
       </section>
@@ -71,7 +72,7 @@ export function BlockContainer({ design, id, className, children }: BlockContain
         className
       )}
     >
-      <div className="w-[90%] mx-auto">
+      <div className="mx-auto" style={{ width: containerWidth }}>
         {children}
       </div>
     </section>
