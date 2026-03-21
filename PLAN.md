@@ -18,6 +18,7 @@ Build a tourism website for Mati City, Davao Oriental, Philippines — a one-sto
 
 > **CRITICAL**: For all UI components, colors, typography, styling, and visual rules, **ALWAYS refer to `DESIGN.md` as the single source of truth**.
 
+- **Content Strategy (No Hardcoded Content)**: ALL data must be CMS-driven. Do not manually hardcode labels, paragraphs, buttons, or images into React components. Build components assuming all data flows from Sanity.
 - **Theme Strategy**: "The Tropical Curator" (editorial travel magazine feel)
 - **Palette**: `surface`, `primary`, `secondary`, `tertiary` (from `DESIGN.md`). Do NOT use legacy colors.
 - **Typography**: Noto Serif, Plus Jakarta Sans. Do NOT use Playfair Display or Inter.

@@ -9,24 +9,24 @@ The visual language rejects rigid, boxy layouts in favor of **Organic Layering**
 This palette is a technical translation of a Mati sunset meeting the turquoise shoreline.
 
 ### The "No-Line" Rule
-**Strict Mandate:** Prohibit the use of 1px solid borders for sectioning or card definition. Boundaries must be defined solely through background color shifts. To separate a testimonial section from a gallery, transition from `surface` (#fefee5) to `surface-container-low` (#fbfbe0). This creates a seamless, high-end feel that mimics natural light transitions.
+**Strict Mandate:** Prohibit the use of 1px solid borders for sectioning or card definition. Boundaries must be defined solely through background color shifts. To separate a testimonial section from a gallery, transition from `surface` (#F5F5DC) to `surface-container-low` (#fbfbe0). This creates a seamless, high-end feel that mimics natural light transitions.
 
 ### Surface Hierarchy & Nesting
 Treat the UI as a series of physical layers—like stacked sheets of fine, handmade paper.
-- **Base Layer:** `surface` (#fefee5)
+- **Base Layer:** `surface` (#F5F5DC)
 - **Nested Content:** Use `surface-container` tiers (Lowest to Highest) to define importance. A primary booking widget should sit on `surface-container-highest` (#e9eaca) to naturally draw the eye without the "noise" of a stroke.
 
 ### The "Glass & Gradient" Rule
 To capture the "Sun-Drenched" feel, use **Glassmorphism** for floating navigation and weather widgets.
 - Use `surface-variant` (#e9eaca) at 60% opacity with a `backdrop-blur` of 16px.
-- **Signature Gradients:** For primary CTAs, do not use flat colors. Apply a subtle linear gradient from `primary` (#007168) to `primary-container` (#56f1e0) at a 135-degree angle to give the UI "soul" and a shimmering, aquatic energy.
+- **Signature Gradients:** For primary CTAs, do not use flat colors. Apply a subtle linear gradient from `primary` (#40E0D0) to `primary-container` (#56f1e0) at a 135-degree angle to give the UI "soul" and a shimmering, aquatic energy.
 
 ## 3. Typography: Editorial Sophistication
 The contrast between the elegant Serif and the modern Sans-Serif is the heartbeat of this system.
 
 - **Display & Headlines (Noto Serif):** These are your "Signature" elements. Use `display-lg` (3.5rem) for hero sections with tight letter-spacing (-0.02em). This font choice reflects the premium, cultural heritage of the Mandaya people.
 - **Body & Labels (Plus Jakarta Sans):** Chosen for its friendly, open apertures. It maintains readability even against vibrant backgrounds.
-- **Hierarchy as Identity:** Use `title-lg` in `tertiary` (#bc3000) for sub-headers to inject the "Sunset Orange" energy into text-heavy sections, ensuring the brand’s warmth is felt in every paragraph.
+- **Hierarchy as Identity:** Use `title-lg` in `tertiary` (#FF4500) for sub-headers to inject the "Sunset Orange" energy into text-heavy sections, ensuring the brand’s warmth is felt in every paragraph.
 
 ## 4. Elevation & Depth
 We achieve hierarchy through **Tonal Layering** rather than traditional shadows or lines.
@@ -40,7 +40,7 @@ We achieve hierarchy through **Tonal Layering** rather than traditional shadows 
 ### Buttons
 - **Primary:** Gradient fill (`primary` to `primary-container`), `xl` (3rem) roundness. No border. Text in `on-primary`.
 - **Secondary:** `surface-container-highest` fill with `primary` text. This creates a "soft-touch" interaction.
-- **Tertiary:** Pure text with a 2px underline in `tertiary` (#bc3000), suggesting a "hand-drawn" cultural accent.
+- **Tertiary:** Pure text with a 2px underline in `tertiary` (#FF4500), suggesting a "hand-drawn" cultural accent.
 
 ### Cards & Discovery Tiles
 - **The Divider Ban:** Strictly forbid divider lines in lists or cards. Use `spacing-8` (2.75rem) to create clear groupings.
@@ -57,9 +57,9 @@ We achieve hierarchy through **Tonal Layering** rather than traditional shadows 
 ### Do:
 - **Use White Space as Luxury:** Utilize the `20` (7rem) and `24` (8.5rem) spacing tokens between major sections to let the photography breathe.
 - **Asymmetrical Compositions:** Offset text blocks from center-aligned images to create a dynamic, editorial flow.
-- **Color-Logic Alignment:** Use `secondary` (#0068a8) for all water-related activities and `tertiary` (#bc3000) for land-based cultural experiences.
+- **Color-Logic Alignment:** Use `secondary` (#0077BE) for all water-related activities and `tertiary` (#FF4500) for land-based cultural experiences.
 
 ### Don’t:
 - **No Sharp Corners:** Never use `none` or `sm` roundness. The island is organic; the UI must be too.
 - **No Heavy Shadows:** Avoid standard "Material Design" shadows. If it looks like a "software app," it has failed the "Tropical Curator" test.
-- **No Stark White:** Avoid using pure `#ffffff` for large backgrounds. Use `surface` (#fefee5) to maintain the "White Sand" warmth and reduce eye strain under "sunny" design conditions.
+- **No Stark White:** Avoid using pure `#ffffff` for large backgrounds. Use `surface` (#F5F5DC) to maintain the "White Sand" warmth and reduce eye strain under "sunny" design conditions.

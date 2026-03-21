@@ -212,6 +212,57 @@ export const SITE_SETTINGS_QUERY = defineQuery(/* groq */ `
   }
 `)
 
+// ─── Global Header ────────────────────────────────────────────────────────────
+
+export const HEADER_QUERY = defineQuery(/* groq */ `
+  *[_type == "header" && _id == "global-header"][0] {
+    logo{${imageFields}},
+    navigation[]{
+      _key,
+      text,
+      url
+    },
+    searchEnabled,
+    cta{
+      text,
+      url
+    }
+  }
+`)
+
+// ─── Global Footer ────────────────────────────────────────────────────────────
+
+export const FOOTER_QUERY = defineQuery(/* groq */ `
+  *[_type == "footer" && _id == "global-footer"][0] {
+    headline,
+    subheading,
+    socialLinks[]{
+      _key,
+      platform,
+      url
+    },
+    explore{
+      headline,
+      links[]{
+        _key,
+        text,
+        url
+      }
+    },
+    connect{
+      headline,
+      phone,
+      email,
+      location
+    },
+    copyright{
+      text,
+      privacyPolicyUrl,
+      termsOfUseUrl
+    }
+  }
+`)
+
 // ─── Static Params ────────────────────────────────────────────────────────────
 
 export const DESTINATION_SLUGS_QUERY = defineQuery(/* groq */ `
@@ -224,4 +275,63 @@ export const ACTIVITY_SLUGS_QUERY = defineQuery(/* groq */ `
 
 export const TRAVEL_GUIDE_SLUGS_QUERY = defineQuery(/* groq */ `
   *[_type == "travelGuide" && defined(slug.current)]{ "slug": slug.current }
+`)
+
+// ─── Pages ────────────────────────────────────────────────────────────────────
+
+export const PAGE_BY_SLUG_QUERY = defineQuery(/* groq */ `
+  *[_type == "page" && slug.current == $slug][0] {
+    _id,
+    title,
+    "slug": slug.current,
+    seo{
+      title,
+      description,
+      image{${imageFields}},
+      noIndex
+    },
+    content[] {
+      ...,
+      _type == "heroBlock" => {
+        ...,
+        heroType == "slides" => {
+          "slides": *[_type == "heroSlide"] | order(order asc) {
+            _id,
+            title,
+            subtitle,
+            ctaText,
+            ctaLink,
+            order,
+            image{${imageFields}}
+          }
+        }
+      },
+      _type == "carouselBlock" => {
+        ...,
+        items[]-> {
+          _id,
+          name,
+          title,
+          "slug": slug.current,
+          tagline,
+          category,
+          month,
+          mainImage{${imageFields}}
+        }
+      }
+    }
+  }
+`)
+
+export const PAGE_SLUGS_QUERY = defineQuery(/* groq */ `
+  *[_type == "page" && defined(slug.current)]{ "slug": slug.current }
+`)
+
+// ─── Dictionary ───────────────────────────────────────────────────────────────
+
+export const DICTIONARY_QUERY = defineQuery(/* groq */ `
+  *[_type == "dictionaryEntry"] {
+    key,
+    value
+  }
 `)

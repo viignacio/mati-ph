@@ -72,6 +72,7 @@ bun dev
 ## Design Rules & Contributing 🎨
 
 If you are contributing UI components, you **must** adhere strictly to the guidelines detailed in `DESIGN.md`. Key principles include:
+- **No Hardcoded Content**: ALL text, labels, images, arrays, and links must be sourced dynamically from the Sanity CMS. Absolutely no hardcoded content strings in React components.
 - **The "No-Line" Rule**: Avoid 1px solid borders. Use background tonal shifts (`surface` to `surface-container-low`) to group content.
 - **Organic Layering**: Favor asymmetrical compositions and overlapping elements to mimic the island's landscape.
 - **Glass & Gradient**: Use glassmorphism and subtle gradients instead of flat, heavy colors for primary CTAs and floating elements. 

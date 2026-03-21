@@ -1,0 +1,14 @@
+{"_id": "page_home", "_type": "page", "title": "Home", "slug": {"_type": "slug", "current": "index"}}
+{"_id": "page_about", "_type": "page", "title": "About", "slug": {"_type": "slug", "current": "about"}}
+{"_id": "page_culture", "_type": "page", "title": "Culture & Heritage", "slug": {"_type": "slug", "current": "culture"}}
+{"_id": "page_destinations", "_type": "page", "title": "Destinations", "slug": {"_type": "slug", "current": "destinations"}}
+{"_id": "page_activities", "_type": "page", "title": "Activities", "slug": {"_type": "slug", "current": "activities"}}
+{"_id": "page_food", "_type": "page", "title": "Food & Dining", "slug": {"_type": "slug", "current": "food"}}
+{"_id": "page_travel_guide", "_type": "page", "title": "Travel Guide", "slug": {"_type": "slug", "current": "travel-guide"}}
+
+{"_id": "dict_readMoreBtn", "_type": "dictionaryEntry", "title": "Read More Button Label", "key": "readMoreBtn", "value": "Read More"}
+{"_id": "dict_viewAllBtn", "_type": "dictionaryEntry", "title": "View All Button Label", "key": "viewAllBtn", "value": "View All"}
+{"_id": "dict_searchPlaceholder", "_type": "dictionaryEntry", "title": "Search Placeholder Text", "key": "searchPlaceholder", "value": "Search destinations..."}
+{"_id": "dict_relatedActivitiesHeading", "_type": "dictionaryEntry", "title": "Related Activities Heading", "key": "relatedActivitiesHeading", "value": "Related Activities"}
+{"_id": "dict_howToGetThereHeading", "_type": "dictionaryEntry", "title": "How to get there Heading", "key": "howToGetThereHeading", "value": "How to get there"}
+{"_id": "dict_bestTimeToVisitHeading", "_type": "dictionaryEntry", "title": "Best time to visit Heading", "key": "bestTimeToVisitHeading", "value": "Best time to visit"}
