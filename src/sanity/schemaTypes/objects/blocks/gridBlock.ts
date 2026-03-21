@@ -102,7 +102,7 @@ export const gridBlock = defineType({
                   type: 'string',
                   options: {
                     list: [
-                      { title: 'Arrow Icon (Hover)', value: 'arrow' },
+                      { title: 'Arrow Icon', value: 'arrow' },
                       { title: 'Text Button', value: 'button' },
                       { title: 'None', value: 'none' }
                     ],

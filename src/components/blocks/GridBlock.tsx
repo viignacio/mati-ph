@@ -131,11 +131,10 @@ export function GridBlock({ data }: GridBlockProps) {
           const isElevated = cardStyle === 'elevated'
 
           return (
-            <Link 
-              href={finalHref}
+            <div 
               key={item._key || index} 
               className={cn(
-                "group relative overflow-hidden rounded-lg block focus:outline-none focus-visible:ring-4 focus-visible:ring-primary",
+                "group relative overflow-hidden rounded-lg block",
                 spanClass,
                 aspectClass,
                 isElevated ? "shadow-sm bg-surface-container-lowest" : ""
@@ -179,18 +178,18 @@ export function GridBlock({ data }: GridBlockProps) {
                 
                 {/* Variant Call To Action */}
                 {settings.ctaType === 'button' && settings.ctaText && (
-                  <span className="bg-white/10 backdrop-blur-md border border-white/20 px-6 py-2 rounded-full font-bold text-sm text-white transition-all group-hover:bg-white group-hover:text-primary mt-auto pointer-events-auto">
+                  <Link href={finalHref} className="bg-white/10 backdrop-blur-md border border-white/20 px-6 py-2 rounded-full font-bold text-sm text-white transition-all group-hover:bg-white group-hover:text-primary mt-auto pointer-events-auto inline-block">
                     {settings.ctaText}
-                  </span>
+                  </Link>
                 )}
                 
                 {(!settings.ctaType || settings.ctaType === 'arrow') && (
-                  <span className="material-symbols-outlined mt-auto opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 text-white pointer-events-auto">
+                  <Link href={finalHref} className="material-symbols-outlined mt-auto transition-transform duration-300 transform group-hover:-translate-y-1 group-hover:translate-x-1 text-white pointer-events-auto inline-block">
                     arrow_outward
-                  </span>
+                  </Link>
                 )}
               </div>
-            </Link>
+            </div>
           )
         })}
       </div>
