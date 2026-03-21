@@ -51,8 +51,8 @@ export function BlockContainer({ design, id, className, children }: BlockContain
   
   if (isRounded) {
     return (
-      <section id={id} className={cn("w-full px-6 lg:px-20", ptClasses, pbClasses)}>
-        <div className={cn("max-w-[1440px] mx-auto rounded-3xl overflow-hidden p-8 md:p-16 lg:p-24", bgClasses, className)}>
+      <section id={id} className={cn("w-full py-0", ptClasses, pbClasses)}>
+        <div className={cn("w-[80%] mx-auto rounded-3xl overflow-hidden p-8 md:p-16 lg:p-24", bgClasses, className)}>
           {children}
         </div>
       </section>
@@ -71,7 +71,7 @@ export function BlockContainer({ design, id, className, children }: BlockContain
         className
       )}
     >
-      <div className={cn("max-w-[1440px] mx-auto px-6 lg:px-20", className)}>
+      <div className="w-[80%] mx-auto">
         {children}
       </div>
     </section>
