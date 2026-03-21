@@ -6,6 +6,36 @@ export const gridBlock = defineType({
   type: 'object',
   fields: [
     defineField({
+      name: 'design',
+      title: 'Design Options',
+      type: 'blockDesign',
+    }),
+    defineField({
+      name: 'layoutVariant',
+      title: 'Layout Variant',
+      type: 'string',
+      options: {
+        list: [
+          { title: 'Standard Grid', value: 'standard-grid' },
+          { title: 'Asymmetric Masonry', value: 'asymmetric-masonry' },
+          { title: 'Bento Grid', value: 'bento-grid' },
+        ],
+      },
+      initialValue: 'standard-grid',
+    }),
+    defineField({
+      name: 'cardStyle',
+      title: 'Card Style',
+      type: 'string',
+      options: {
+        list: [
+          { title: 'Elevated (Layered)', value: 'elevated' },
+          { title: 'Flat (No background)', value: 'flat' },
+        ],
+      },
+      initialValue: 'elevated',
+    }),
+    defineField({
       name: 'heading',
       title: 'Heading',
       type: 'string',
@@ -17,23 +47,83 @@ export const gridBlock = defineType({
       rows: 3,
     }),
     defineField({
-      name: 'contentType',
-      title: 'Content Type',
-      type: 'string',
-      description: 'Which type of content should this grid display?',
-      options: {
-        list: [
-          { title: 'Destinations', value: 'destination' },
-          { title: 'Activities', value: 'activity' },
-          { title: 'Food & Dining Spots', value: 'foodSpot' },
-          { title: 'Travel Guides', value: 'travelGuide' },
-        ],
-      },
-      validation: (Rule) => Rule.required(),
+      name: 'manualItems',
+      title: 'Manual Items',
+      type: 'array',
+      description: 'Select specific items to display in this grid, with optional layout overrides per item.',
+      of: [
+        defineField({
+          name: 'gridItem',
+          type: 'object',
+          fields: [
+            defineField({
+              name: 'reference',
+              title: 'Content Reference',
+              type: 'reference',
+              to: [
+                { type: 'destination' },
+                { type: 'activity' },
+                { type: 'foodSpot' },
+                { type: 'travelGuide' },
+              ],
+              validation: (Rule) => Rule.required(),
+            }),
+            defineField({
+              name: 'itemSettings',
+              title: 'Layout & Design Overrides',
+              type: 'object',
+              fields: [
+                defineField({
+                  name: 'colSpan',
+                  title: 'Column Span',
+                  type: 'number',
+                  options: {
+                    list: [1, 2],
+                  },
+                  initialValue: 1,
+                }),
+                defineField({
+                  name: 'aspectRatio',
+                  title: 'Aspect Ratio',
+                  type: 'string',
+                  options: {
+                    list: [
+                      { title: 'Square (1:1)', value: 'square' },
+                      { title: 'Portrait', value: 'portrait' },
+                      { title: 'Landscape', value: 'landscape' },
+                      { title: 'Ultra Wide', value: 'wide' },
+                    ],
+                  },
+                  initialValue: 'square',
+                }),
+                defineField({
+                  name: 'badge',
+                  title: 'Badge Label Override',
+                  type: 'string',
+                  description: 'e.g. "Iconic Coast"',
+                }),
+                defineField({
+                  name: 'ctaText',
+                  title: 'CTA Text Override',
+                  type: 'string',
+                  description: 'e.g. "Explore Beach"',
+                }),
+              ],
+            }),
+          ],
+          preview: {
+            select: {
+              title: 'reference.name',
+              subtitle: 'itemSettings.aspectRatio',
+              media: 'reference.mainImage',
+            },
+          },
+        }),
+      ],
     }),
     defineField({
       name: 'cta',
-      title: 'Call to Action (Optional)',
+      title: 'Block Call to Action (Optional)',
       type: 'object',
       description: 'Optional link to View All content',
       fields: [
