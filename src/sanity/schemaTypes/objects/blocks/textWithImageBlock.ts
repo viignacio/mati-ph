@@ -72,13 +72,13 @@ export const textWithImageBlock = defineType({
       type: 'array',
       description: 'Add up to 3 images to create a side-by-side gallery next to the text.',
       of: [
-        defineField({
-          name: 'image',
+        {
           type: 'image',
           options: {
             hotspot: true,
+            metadata: ['lqip', 'palette']
           },
-        })
+        }
       ],
       validation: (Rule) => Rule.max(3),
     }),

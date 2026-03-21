@@ -25,9 +25,9 @@ interface Destination {
   slug: string
   tagline?: string | null
   category?: string | null
-  mainImage: {
+  mainImage?: {
     asset: { _id: string; url: string; metadata: { lqip: string; dimensions: { width: number; height: number } } }
-    alt: string
+    alt?: string
   }
   location?: { address?: string | null } | null
 }
@@ -83,19 +83,25 @@ export function DestinationFilter({ destinations }: DestinationFilterProps) {
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {filtered.map((dest) => {
-            const imgSrc = urlFor(dest.mainImage).width(600).height(450).auto('format').url()
+            const imgSrc = dest.mainImage
+              ? urlFor(dest.mainImage).width(600).height(450).auto('format').url()
+              : null
             return (
               <Card.Root key={dest._id} href={`/destinations/${dest.slug}`} elevated>
-                <Card.Image aspectRatio="landscape">
-                  <Image
-                    src={imgSrc}
-                    alt={dest.mainImage.alt}
-                    fill
-                    className="object-cover transition-transform duration-500 group-hover:scale-105"
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                    placeholder={dest.mainImage.asset.metadata?.lqip ? 'blur' : 'empty'}
-                    blurDataURL={dest.mainImage.asset.metadata?.lqip}
-                  />
+                <Card.Image aspectRatio="landscape" className="bg-surface-high">
+                  {dest.mainImage && imgSrc ? (
+                    <Image
+                      src={imgSrc}
+                      alt={dest.mainImage.alt || dest.name}
+                      fill
+                      className="object-cover transition-transform duration-500 group-hover:scale-105"
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      placeholder={dest.mainImage.asset?.metadata?.lqip ? 'blur' : 'empty'}
+                      blurDataURL={dest.mainImage.asset?.metadata?.lqip}
+                    />
+                  ) : (
+                    <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-secondary/10" />
+                  )}
                 </Card.Image>
                 <Card.Body>
                   {dest.category && <Badge variant="primary">{dest.category}</Badge>}

@@ -1,6 +1,6 @@
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
-import { sanityFetch } from "@/sanity/lib/live";
+import { sanityFetch, SanityLive } from "@/sanity/lib/live";
 import { HEADER_QUERY, FOOTER_QUERY } from "@/sanity/lib/queries";
 
 export default async function SiteLayout({
@@ -21,6 +21,7 @@ export default async function SiteLayout({
       <Navbar data={headerData} />
       <main className="flex-1 flex flex-col">{children}</main>
       <Footer data={footerData} />
+      <SanityLive />
     </>
   );
 }

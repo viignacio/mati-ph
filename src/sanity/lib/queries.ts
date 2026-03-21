@@ -326,6 +326,7 @@ export const PAGE_BY_SLUG_QUERY = defineQuery(/* groq */ `
           ...,
           reference->{
             _id,
+            _type,
             name,
             title,
             tagline,

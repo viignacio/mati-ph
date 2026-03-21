@@ -74,8 +74,9 @@ export const heroBlock = defineType({
       type: 'image',
       options: {
         hotspot: true,
+        metadata: ['lqip', 'palette']
       },
-      hidden: ({ parent }) => parent?.heroType !== 'image' && parent?.heroType !== undefined, // undefined might be the case for existing docs
+      hidden: ({ parent }) => parent?.heroType !== 'image' && parent?.heroType !== undefined, 
     }),
     defineField({
       name: 'backgroundVideo',

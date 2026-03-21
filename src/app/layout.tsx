@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Noto_Serif, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
-import { SanityLive } from "@/sanity/lib/live";
+
 
 const notoSerif = Noto_Serif({
   variable: "--font-noto-serif",
@@ -47,7 +47,6 @@ export default function RootLayout({
       </head>
       <body className="min-h-full flex flex-col bg-surface text-on-surface">
         {children}
-        <SanityLive />
       </body>
     </html>
   );

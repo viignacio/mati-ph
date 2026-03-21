@@ -14,9 +14,9 @@ interface Destination {
   slug: string
   tagline?: string | null
   category?: string | null
-  mainImage: {
+  mainImage?: {
     asset: { _id: string; url: string; metadata: { lqip: string; dimensions: { width: number; height: number } } }
-    alt: string
+    alt?: string
     hotspot?: unknown
     crop?: unknown
   }
@@ -48,11 +48,13 @@ export function FeaturedDestinations({ destinations }: FeaturedDestinationsProps
           <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-6">
             {items.map((dest, i) => {
               const isFirst = i === 0
-              const imgSrc = urlFor(dest.mainImage)
-                .width(isFirst ? 1200 : 600)
-                .height(isFirst ? 800 : 450)
-                .auto('format')
-                .url()
+              const imgSrc = dest.mainImage
+                ? urlFor(dest.mainImage)
+                    .width(isFirst ? 1200 : 800)
+                    .height(isFirst ? 800 : 600)
+                    .auto('format')
+                    .url()
+                : null
 
               return (
                 <ScrollReveal
@@ -61,16 +63,20 @@ export function FeaturedDestinations({ destinations }: FeaturedDestinationsProps
                   className={isFirst ? 'md:col-span-2' : ''}
                 >
                   <Card.Root href={`/destinations/${dest.slug}`} elevated className="h-full">
-                    <Card.Image aspectRatio={isFirst ? 'landscape' : 'portrait'}>
-                      <Image
-                        src={imgSrc}
-                        alt={dest.mainImage.alt}
-                        fill
-                        className="object-cover transition-transform duration-500 group-hover:scale-105"
-                        sizes={isFirst ? '(max-width: 768px) 100vw, 66vw' : '(max-width: 768px) 100vw, 33vw'}
-                        placeholder={dest.mainImage.asset.metadata?.lqip ? 'blur' : 'empty'}
-                        blurDataURL={dest.mainImage.asset.metadata?.lqip}
-                      />
+                    <Card.Image aspectRatio={isFirst ? 'landscape' : 'portrait'} className="bg-surface-high">
+                      {dest.mainImage && imgSrc ? (
+                        <Image
+                          src={imgSrc}
+                          alt={dest.mainImage.alt || dest.name}
+                          fill
+                          className="object-cover transition-transform duration-500 group-hover:scale-105"
+                          sizes={isFirst ? '(max-width: 768px) 100vw, 66vw' : '(max-width: 768px) 100vw, 33vw'}
+                          placeholder={dest.mainImage.asset?.metadata?.lqip ? 'blur' : 'empty'}
+                          blurDataURL={dest.mainImage.asset?.metadata?.lqip}
+                        />
+                      ) : (
+                        <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-secondary/10" />
+                      )}
                     </Card.Image>
                     <Card.Body>
                       {dest.category && (

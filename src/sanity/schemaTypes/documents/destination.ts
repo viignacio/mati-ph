@@ -49,16 +49,17 @@ export const destination = defineType({
       name: 'mainImage',
       title: 'Main Image',
       type: 'image',
-      options: { hotspot: true },
+      options: { 
+        hotspot: true,
+        metadata: ['lqip', 'palette'],
+      },
       fields: [
-        defineField({
+        {
           name: 'alt',
           title: 'Alt text',
           type: 'string',
-          validation: (rule) => rule.required(),
-        }),
+        },
       ],
-      validation: (rule) => rule.required(),
     }),
     defineField({
       name: 'gallery',

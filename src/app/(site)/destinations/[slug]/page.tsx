@@ -52,7 +52,9 @@ export default async function DestinationPage({
 
   if (!data) notFound()
 
-  const heroSrc = urlFor(data.mainImage).width(1600).height(900).auto('format').url()
+  const heroSrc = data.mainImage
+    ? urlFor(data.mainImage).width(1600).height(900).auto('format').url()
+    : null
 
   const jsonLd = {
     '@context': 'https://schema.org',
@@ -70,17 +72,21 @@ export default async function DestinationPage({
       <JsonLd data={jsonLd} />
 
       {/* Hero */}
-      <div className="relative h-[60vh] min-h-[400px] overflow-hidden">
-        <Image
-          src={heroSrc}
-          alt={data.mainImage.alt}
-          fill
-          priority
-          className="object-cover"
-          sizes="100vw"
-          placeholder={data.mainImage.asset.metadata?.lqip ? 'blur' : 'empty'}
-          blurDataURL={data.mainImage.asset.metadata?.lqip}
-        />
+      <div className="relative h-[60vh] min-h-[400px] overflow-hidden bg-surface-high">
+        {data.mainImage ? (
+          <Image
+            src={heroSrc!}
+            alt={data.mainImage.alt || data.name}
+            fill
+            priority
+            className="object-cover"
+            sizes="100vw"
+            placeholder={data.mainImage.asset?.metadata?.lqip ? 'blur' : 'empty'}
+            blurDataURL={data.mainImage.asset?.metadata?.lqip}
+          />
+        ) : (
+          <div className="absolute inset-0 bg-gradient-to-br from-primary/30 via-secondary/10 to-surface-high" />
+        )}
         <div className="absolute inset-0 bg-gradient-to-t from-on-surface/70 via-on-surface/20 to-transparent" />
         <div className="absolute bottom-0 left-0 right-0 p-8 md:p-16 max-w-5xl">
           {data.category && (
