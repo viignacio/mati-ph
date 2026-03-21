@@ -53,9 +53,9 @@ export function Navbar({ data }: { data?: any }) {
           {/* Right Action + Hamburger */}
           <div className="flex items-center gap-6">
             {searchEnabled && (
-              <div className="hidden md:flex items-center bg-surface-container rounded-full px-4 py-1.5 border border-outline-variant/15">
+              <div className="hidden md:flex items-center bg-surface-container rounded-full px-4 py-3 border border-outline-variant/15">
                 <span className="material-symbols-outlined text-outline" style={{ fontSize: 18 }}>search</span>
-                <input className="bg-transparent border-none focus:ring-0 text-sm outline-none placeholder:text-on-surface-variant/60 w-32 lg:w-40 text-on-surface p-0 m-0 h-5 leading-none" placeholder="Search..." />
+                <input className="bg-transparent border-none focus:ring-0 text-sm outline-none placeholder:text-on-surface-variant/60 w-32 lg:w-40 text-on-surface p-0 m-0 ml-2 h-5 leading-none" placeholder="Search..." />
               </div>
             )}
 
