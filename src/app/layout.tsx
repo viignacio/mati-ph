@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import { Noto_Serif, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
-import { Navbar } from "@/components/layout/navbar";
-import { Footer } from "@/components/layout/footer";
 import { SanityLive } from "@/sanity/lib/live";
 
 const notoSerif = Noto_Serif({
@@ -45,9 +43,7 @@ export default function RootLayout({
       className={`${notoSerif.variable} ${plusJakarta.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-surface text-on-surface">
-        <Navbar />
-        <main className="flex-1 flex flex-col">{children}</main>
-        <Footer />
+        {children}
         <SanityLive />
       </body>
     </html>
