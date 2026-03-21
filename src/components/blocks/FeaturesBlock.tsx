@@ -67,7 +67,7 @@ export function FeaturesBlock({ data }: FeaturesBlockProps) {
               <img src={imgUrl} alt={heading || 'Feature image'} className="w-full h-full object-cover" />
             </div>
             {/* Structural Accent Square */}
-            <div className="absolute -bottom-8 -right-8 w-64 h-64 bg-primary-container rounded-3xl -z-10 opacity-20 bg-[repeating-linear-gradient(45deg,transparent,transparent_5px,rgba(188,48,0,0.5)_5px,rgba(188,48,0,0.5)_10px)]"></div>
+            <div className="absolute -bottom-8 -right-8 w-64 h-64 bg-primary-container rounded-3xl -z-10 opacity-10 bg-[repeating-linear-gradient(45deg,transparent,transparent_5px,rgba(188,48,0,0.2)_5px,rgba(188,48,0,0.2)_10px)]"></div>
           </div>
         )}
 

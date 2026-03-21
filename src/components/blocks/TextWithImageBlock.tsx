@@ -50,7 +50,7 @@ export function TextWithImageBlock({ data }: TextWithImageBlockProps) {
       
       {/* Decorative accent for split-container specifically */}
       {layoutVariant === 'split-container' && (
-        <div className="absolute top-0 right-0 w-1/2 h-full bg-[repeating-linear-gradient(45deg,transparent,transparent_5px,rgba(188,48,0,0.5)_5px,rgba(188,48,0,0.5)_10px)] opacity-10 pointer-events-none"></div>
+        <div className="absolute top-0 right-0 w-1/2 h-full bg-[repeating-linear-gradient(45deg,transparent,transparent_5px,rgba(188,48,0,0.2)_5px,rgba(188,48,0,0.2)_10px)] opacity-10 pointer-events-none"></div>
       )}
 
       {/* Main Container */}

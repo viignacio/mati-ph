@@ -154,7 +154,7 @@ export function GridBlock({ data }: GridBlockProps) {
 
               {/* Decorative Mandaya Accent for Wide Cards */}
               {aspectRatio === 'wide' && (
-                <div className="absolute top-0 left-0 w-full h-1 bg-[repeating-linear-gradient(45deg,transparent,transparent_5px,rgba(188,48,0,0.5)_5px,rgba(188,48,0,0.5)_10px)] z-20"></div>
+                <div className="absolute top-0 left-0 w-full h-1 bg-[repeating-linear-gradient(45deg,transparent,transparent_5px,rgba(188,48,0,0.2)_5px,rgba(188,48,0,0.2)_10px)] opacity-10 z-20"></div>
               )}
 
               {/* Foreground Content */}
