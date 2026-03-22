@@ -172,8 +172,8 @@ export function GridBlock({ data }: GridBlockProps) {
           const aspectClass = {
             'square': 'aspect-square md:aspect-auto',
             'portrait': 'aspect-[4/5] md:aspect-auto md:h-[400px] lg:h-[550px]',
-            'landscape': 'aspect-[16/10] md:aspect-auto md:h-[400px] lg:h-[550px]',
-            'wide': 'aspect-[16/7]',
+            'landscape': 'aspect-[4/5] md:aspect-[16/10] md:aspect-auto md:h-[400px] lg:h-[550px]',
+            'wide': 'aspect-square md:aspect-[16/7]',
           }[aspectRatio]
 
           const isElevated = cardStyle === 'elevated'

@@ -17,8 +17,8 @@ export function Navbar({ data }: { data?: any }) {
 
   return (
     <>
-      <header className="fixed top-0 left-0 w-full z-50 px-6 py-4 transition-all duration-300">
-        <div className="max-w-screen-2xl mx-auto flex items-center justify-between bg-amber-50/85 backdrop-blur-2xl border border-amber-200/50 px-8 py-3 rounded-full shadow-lg shadow-amber-900/5">
+      <header className="fixed top-0 left-0 w-full z-50 px-6 py-4 transition-all duration-300 pointer-events-none">
+        <div className="max-w-screen-2xl mx-auto flex items-center justify-between bg-amber-50/85 backdrop-blur-2xl border border-amber-200/50 px-8 py-3 rounded-full shadow-lg shadow-amber-900/5 pointer-events-auto hidden xl:flex">
 
           {/* Left cluster: Logo + Nav */}
           <div className="flex items-center gap-10">
@@ -36,7 +36,7 @@ export function Navbar({ data }: { data?: any }) {
             </Link>
 
             {/* Desktop nav */}
-            <nav className="hidden xl:flex items-center gap-8">
+            <nav className="flex items-center gap-8">
               {navLinks.map((link: any) => (
                 <Link
                   key={link.url}
@@ -50,7 +50,7 @@ export function Navbar({ data }: { data?: any }) {
 
           </div>
 
-          {/* Right Action + Hamburger */}
+          {/* Right Action */}
           <div className="flex items-center gap-6">
             {searchEnabled && (
               <div className="hidden md:flex items-center bg-surface-container rounded-full px-4 h-12 border border-outline-variant/15">
@@ -64,20 +64,23 @@ export function Navbar({ data }: { data?: any }) {
                 {cta.text}
               </Link>
             )}
-
-            <button
-              onClick={() => setMobileOpen(true)}
-              className="xl:hidden p-2 rounded-full transition-colors text-on-surface hover:bg-surface-highest"
-              aria-label="Open navigation menu"
-            >
-              <Menu size={24} />
-            </button>
           </div>
 
         </div>
+
+        {/* Floating Mobile Toggle */}
+        <div className={cn("xl:hidden fixed top-6 right-6 z-[60] pointer-events-auto", mobileOpen && "hidden")}>
+          <button
+            onClick={() => setMobileOpen(true)}
+            className="flex items-center justify-center w-16 h-16 rounded-full bg-surface-container-high/90 backdrop-blur-xl border border-primary/20 shadow-2xl shadow-primary/20 text-primary transition-all active:scale-90"
+            aria-label="Open navigation menu"
+          >
+            <Menu size={28} strokeWidth={2.5} />
+          </button>
+        </div>
       </header>
 
-      <MobileMenu isOpen={mobileOpen} onClose={() => setMobileOpen(false)} />
+      <MobileMenu isOpen={mobileOpen} onClose={() => setMobileOpen(false)} logoUrl={logoUrl} />
     </>
   );
 }

@@ -17,9 +17,10 @@ const NAV_LINKS = [
 interface MobileMenuProps {
   isOpen: boolean;
   onClose: () => void;
+  logoUrl?: string;
 }
 
-export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
+export function MobileMenu({ isOpen, onClose, logoUrl }: MobileMenuProps) {
   // Lock body scroll when open
   useEffect(() => {
     if (isOpen) {
@@ -66,9 +67,15 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
       >
         {/* Header */}
         <div className="flex items-center justify-between px-6 py-5 border-b border-outline-variant/15">
-          <span className="font-serif text-xl font-semibold text-on-surface">
-            Mati City
-          </span>
+          <Link href="/" onClick={onClose} className="flex items-center gap-2">
+            {logoUrl ? (
+              <img src={logoUrl} alt="Logo" className="h-8 w-auto object-contain" />
+            ) : (
+              <span className="font-serif text-xl font-semibold text-on-surface">
+                Mati City
+              </span>
+            )}
+          </Link>
           <button
             onClick={onClose}
             className="p-2 rounded-full text-on-surface-variant hover:bg-surface-highest transition-colors"
