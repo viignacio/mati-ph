@@ -20,7 +20,7 @@ interface BlockContainerProps {
  * Global wrapper for Composable Blocks.
  * Automatically resolves Sanity blockDesign fields into Tailwind classes based on "The Tropical Curator" rules.
  */
-export function BlockContainer({ design, id, className, containerWidth = '90%', children }: BlockContainerProps) {
+export function BlockContainer({ design, id, className, containerWidth = '75%', children }: BlockContainerProps) {
   // Resolve Background Color (Layering Rule)
   const bgClasses = {
     'surface': 'bg-surface',

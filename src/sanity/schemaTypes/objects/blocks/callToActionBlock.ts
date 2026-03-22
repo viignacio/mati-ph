@@ -22,6 +22,20 @@ export const callToActionBlock = defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
+      name: 'buttonStyle',
+      title: 'Button Style',
+      type: 'string',
+      options: {
+        list: [
+          { title: 'Primary (Forest Green)', value: 'primary' },
+          { title: 'Secondary (Pujada Blue)', value: 'secondary' },
+          { title: 'Tertiary (Tangerine)', value: 'tertiary' },
+          { title: 'Outline (Ghost)', value: 'outline' },
+        ],
+      },
+      initialValue: 'primary',
+    }),
+    defineField({
       name: 'buttonLink',
       title: 'Button Link',
       type: 'string',
@@ -37,4 +51,17 @@ export const callToActionBlock = defineType({
       },
     }),
   ],
+  preview: {
+    select: {
+      title: 'heading',
+      media: 'backgroundImage',
+    },
+    prepare({ title, media }) {
+      return {
+        title: title || 'Call to Action Block',
+        subtitle: 'Call to Action Block',
+        media,
+      }
+    },
+  },
 })

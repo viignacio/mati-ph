@@ -118,7 +118,34 @@ export const featuresBlock = defineType({
           title: 'Button Link',
           type: 'string',
         }),
+        defineField({
+          name: 'buttonStyle',
+          title: 'Button Style',
+          type: 'string',
+          options: {
+            list: [
+              { title: 'Primary (Forest Green)', value: 'primary' },
+              { title: 'Secondary (Pujada Blue)', value: 'secondary' },
+              { title: 'Tertiary (Tangerine)', value: 'tertiary' },
+              { title: 'Outline (Ghost)', value: 'outline' },
+            ],
+          },
+          initialValue: 'primary',
+        }),
       ],
     }),
   ],
+  preview: {
+    select: {
+      title: 'heading',
+      media: 'mainImage',
+    },
+    prepare({ title, media }) {
+      return {
+        title: title || 'Features Block',
+        subtitle: 'Features Block',
+        media,
+      }
+    },
+  },
 })

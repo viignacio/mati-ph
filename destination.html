@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-secondary-fixed-variant": "#005488",
+              "secondary-fixed-dim": "#94c8ff",
+              "primary-fixed": "#56f1e0",
+              "on-tertiary-container": "#601400",
+              "primary": "#007168",
+              "secondary-fixed": "#b0d5ff",
+              "on-primary-container": "#00574f",
+              "on-tertiary-fixed": "#350700",
+              "surface-container": "#f5f6d9",
+              "on-tertiary-fixed-variant": "#701900",
+              "tertiary-fixed-dim": "#ff7d58",
+              "on-error": "#ffffff",
+              "error-container": "#fb5151",
+              "on-primary": "#ffffff",
+              "tertiary": "#bc3000",
+              "inverse-on-surface": "#9e9e88",
+              "secondary-dim": "#005c94",
+              "on-background": "#373928",
+              "surface-container-highest": "#e9eaca",
+              "outline-variant": "#babba4",
+              "inverse-primary": "#56f1e0",
+              "outline": "#81826d",
+              "on-primary-fixed": "#00423c",
+              "on-secondary-container": "#004a79",
+              "tertiary-container": "#ff9476",
+              "surface-container-high": "#eff0d1",
+              "surface-container-lowest": "#ffffff",
+              "on-tertiary": "#ffffff",
+              "primary-fixed-dim": "#43e2d2",
+              "tertiary-fixed": "#ff9476",
+              "surface-container-low": "#fbfbe0",
+              "primary-dim": "#00645b",
+              "secondary-container": "#b0d5ff",
+              "on-surface-variant": "#646652",
+              "on-secondary-fixed": "#00375b",
+              "error-dim": "#9f0519",
+              "inverse-surface": "#0e0f03",
+              "background": "#fefee5",
+              "surface-bright": "#fefee5",
+              "primary-container": "#56f1e0",
+              "surface": "#fefee5",
+              "tertiary-dim": "#a62a00",
+              "on-surface": "#373928",
+              "error": "#c0262d",
+              "surface-dim": "#e3e5c3",
+              "on-primary-fixed-variant": "#006159",
+              "secondary": "#0068a8",
+              "on-error-container": "#570008",
+              "on-secondary": "#ffffff",
+              "surface-tint": "#007168",
+              "surface-variant": "#e9eaca"
+            },
+            fontFamily: {
+              "headline": ["Noto Serif"],
+              "body": ["Plus Jakarta Sans"],
+              "label": ["Plus Jakarta Sans"]
+            },
+            borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #fefee5; color: #373928; }
+        .font-serif { font-family: 'Noto Serif', serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .glass-nav {
+            background: rgba(254, 254, 229, 0.6);
+            backdrop-filter: blur(16px);
+        }
+        .mandaya-accent {
+            background-image: repeating-linear-gradient(45deg, transparent, transparent 5px, rgba(188, 48, 0, 0.05) 5px, rgba(188, 48, 0, 0.05) 10px);
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface antialiased overflow-x-hidden">
+<!-- Floating TopNavBar (Consistent with Design System) -->
+<header class="fixed top-0 left-0 w-full z-50 px-6 py-4">
+<div class="max-w-screen-2xl mx-auto glass-nav border border-outline-variant/20 px-8 py-3 rounded-full flex items-center justify-between shadow-lg shadow-on-background/5">
+<div class="flex items-center gap-10">
+<div class="flex items-center gap-3">
+<div class="size-8 text-primary">
+<svg fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path clip-rule="evenodd" d="M24 18.4228L42 11.475V34.3663C42 34.7796 41.7457 35.1504 41.3601 35.2992L24 42V18.4228Z" fill="currentColor" fill-rule="evenodd"></path>
+<path clip-rule="evenodd" d="M24 8.18819L33.4123 11.574L24 15.2071L14.5877 11.574L24 8.18819ZM9 15.8487L21 20.4805V37.6263L9 32.9945V15.8487ZM27 37.6263V20.4805L39 15.8487V32.9945L27 37.6263ZM25.354 2.29885C24.4788 1.98402 23.5212 1.98402 22.646 2.29885L4.98454 8.65208C3.7939 9.08038 3 10.2097 3 11.475V34.3663C3 36.0196 4.01719 37.5026 5.55962 38.098L22.9197 44.7987C23.6149 45.0671 24.3851 45.0671 25.0803 44.7987L42.4404 38.098C43.9828 37.5026 45 36.0196 45 34.3663V11.475C45 10.2097 44.2061 9.08038 43.0155 8.65208L25.354 2.29885Z" fill="currentColor" fill-rule="evenodd"></path>
+</svg>
+</div>
+<h2 class="text-on-background text-lg font-headline font-bold tracking-tight">Mati City</h2>
+</div>
+<nav class="hidden md:flex items-center gap-8 font-label">
+<a class="text-primary border-b-2 border-primary transition-colors text-sm font-bold" href="#">Destinations</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors text-sm font-semibold" href="#">Culture</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors text-sm font-semibold" href="#">Festivals</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors text-sm font-semibold" href="#">Food</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors text-sm font-semibold" href="#">Logistics</a>
+</nav>
+</div>
+<div class="flex items-center gap-6">
+<div class="hidden lg:flex items-center bg-surface-container rounded-full px-4 py-1.5 border border-outline-variant/15">
+<span class="material-symbols-outlined text-outline text-[18px]">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm placeholder:text-on-surface-variant/60 w-32" placeholder="Explore islands..." type="text"/>
+</div>
+<button class="bg-primary text-on-primary px-6 py-2 rounded-full font-bold text-sm shadow-md hover:scale-105 transition-transform">Book Now</button>
+</div>
+</div>
+</header>
+<main class="pt-0">
+<!-- Hero Section -->
+<section class="relative h-[80vh] flex items-center justify-center overflow-hidden">
+<div class="absolute inset-0 z-0">
+<img class="w-full h-full object-cover" data-alt="Aerial view of Sleeping Dinosaur peninsula in Mati" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBoZcPROLVjDj6jgujEjvIC0WyGJrvPTJOZ1Q5T_vLBwz5KCmlolBxoX9y0B9HvKn0zAXNBZefma2m-Vb1_XzyEqhL9gesS_AXSt99qU-JuVY_xxffqsknA_XH8Bcm-9MWDoC6lhrCcQc9_7p2AK1iDQeeIZf5JV_OIkIOFazinYuDbeukByrL1AuTtalu6SOPNbY9SVCcF8jhCzlu7XGBTtFnev3ohI5dkLTnm4IGDWbZ3diBIOb2tIe90s_Gw-xW-fO6XtekVl7Y"/>
+<div class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-surface/90"></div>
+</div>
+<div class="relative z-10 text-center max-w-4xl px-6">
+<h1 class="font-serif text-6xl md:text-8xl text-on-surface leading-tight tracking-tight mb-4 drop-shadow-sm">Coastal Sanctuary</h1>
+<p class="font-body text-xl md:text-2xl text-on-surface-variant max-w-2xl mx-auto font-medium">Where the Sleeping Dinosaur guards the turquoise horizon of Davao Oriental.</p>
+</div>
+</section>
+<!-- Dahican Beach: Ride the Pacific Swell Style -->
+<section class="py-24 bg-surface relative overflow-hidden">
+<div class="max-w-7xl mx-auto px-6 lg:px-20 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+<div class="relative">
+<div class="aspect-[4/5] rounded-[3rem] overflow-hidden relative shadow-2xl z-10">
+<img alt="Surfer at Dahican" class="w-full h-full object-cover" data-alt="Action shot of a surfer riding a large wave in Dahican" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC4FXjETIvdMZN_eyzocpoNXG6pjS_LES7ld8WGqHIRLEZw694t2hL23Fxlw7xxxDvoCF8jqNo4v05ejeLvL6OHdpIhwfkpQmtrqPDIDqSQMSp2Xs3hfDMuzGxFbqK9ZOdpuf_QLM0D-PuaNznLmamrwf8LjU8-19H-jvlKrvD-uK_BgKklfToSBFCR6QjD6bfStnUebVILtcE88vBux85p5dvpK8QLvcHFUkYLZ31V3p11rvux5nLIsZmxuEieuNIfoq-f4oTKd0s"/>
+<div class="absolute top-8 left-8 bg-secondary text-white px-6 py-2 rounded-full font-bold text-xs uppercase tracking-widest shadow-lg">Adrenaline</div>
+</div>
+<div class="absolute -bottom-10 -right-10 w-64 h-64 bg-primary-container/20 rounded-full -z-10 mandaya-accent"></div>
+</div>
+<div>
+<h3 class="text-tertiary font-bold uppercase tracking-[0.2em] mb-4">The Crescent Shore</h3>
+<h2 class="text-5xl md:text-7xl font-headline font-black mb-8 leading-tight">Dahican Beach</h2>
+<p class="text-lg text-on-surface-variant mb-10 leading-relaxed">A seven-kilometer crescent of pure white sand facing the raw power of the Pacific. Dahican is the beating heart of Mati's coastal soul.</p>
+<div class="space-y-10">
+<div class="flex gap-6">
+<div class="flex-shrink-0 w-14 h-14 rounded-full bg-secondary-container flex items-center justify-center text-secondary shadow-sm">
+<span class="material-symbols-outlined text-3xl">surfing</span>
+</div>
+<div>
+<h4 class="text-xl font-bold mb-2">Pro-Grade Surfing</h4>
+<p class="text-on-surface-variant leading-relaxed">Experience some of the cleanest reef and beach breaks in the Philippines, attracting enthusiasts from across the globe.</p>
+</div>
+</div>
+<div class="flex gap-6">
+<div class="flex-shrink-0 w-14 h-14 rounded-full bg-primary-container flex items-center justify-center text-primary shadow-sm">
+<span class="material-symbols-outlined text-3xl">skateboarding</span>
+</div>
+<div>
+<h4 class="text-xl font-bold mb-2">Skimboarding Capital</h4>
+<p class="text-on-surface-variant leading-relaxed">The playground of the legendary Amihan team. Learn the art of the glide on our world-class shoreline.</p>
+</div>
+</div>
+<div class="pt-6">
+<button class="bg-primary text-on-primary px-10 py-4 rounded-full font-bold text-lg shadow-xl shadow-primary/20 hover:-translate-y-1 transition-all">Explore Dahican</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Islands: Tailored Island Expeditions Style Grid -->
+<section class="bg-surface-container-low py-24">
+<div class="max-w-7xl mx-auto px-6">
+<div class="flex flex-col md:flex-row items-end justify-between mb-16 gap-8">
+<div class="max-w-2xl">
+<span class="text-tertiary font-bold tracking-widest text-sm mb-4 block">ISLAND HOPPING</span>
+<h2 class="font-serif text-5xl md:text-6xl text-on-surface leading-tight">Pujada Bay's Islands</h2>
+</div>
+<p class="text-on-surface-variant max-w-sm mb-2 font-medium">Discover a trio of distinct escapes, each offering a unique vibration of tranquility and pristine beauty.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+<!-- Pujada Island -->
+<div class="group">
+<div class="relative aspect-[3/4] rounded-[2rem] overflow-hidden mb-6 shadow-lg">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="Lush green Pujada Island surrounded by clear blue water" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDcr3jAA1Sgm4dnL8_ao3926tvVqsQwEDXqjnbCBF0r2eIWZqkP3czvdt2153vI2XHsOE4ZDEsxIDyMKNI-AnO_8tAd3Gjn_ECV9E6ykBHnj_nUgnRVLjplfebOpIpQCTOVzHdplVhl2n_oFW-TrGwtMKKSVLrgAiakRjw8zrE0Q3aobZQ8GuOmk7V1u-1NixoaNxBTUxiCDxIb_wPsHwyYNHoMMd5PxSKFrnEg4DRKxEPPuj2H6P1X2lDjAjqOQMWzphqNRDIWu04"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+<div class="absolute bottom-8 left-8 right-8">
+<span class="text-primary-fixed font-bold text-xs uppercase tracking-widest mb-2 block">The Emerald Gem</span>
+<h3 class="text-white text-3xl font-serif">Pujada Island</h3>
+</div>
+</div>
+<p class="text-on-surface-variant leading-relaxed">The largest of the sisters. An uninhabited paradise of limestone cliffs and crystalline clarity, perfect for deep-sea exploration.</p>
+</div>
+<!-- Waniban Island -->
+<div class="group md:mt-12">
+<div class="relative aspect-[3/4] rounded-[2rem] overflow-hidden mb-6 shadow-lg">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="Small white sand beach of Waniban Island" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDkYpAPAXPRBCnafU9sU5xsp9OKrDLyaRzKWVoL8gisYpRa_BAUaySQ6zNbMQKQad7PK27UJOWs5pM0zuzqaokrEm06Oal1GMEK13OrFmS945rQxEw9aK0tYxGpD2LLyTz4hjcNcfkiT5FdvWxBIVk_e3x9sQENDS7NWXUVhm-HSNV8lAtvJziyXmWdnW_vwzi68yp-aPxm_AaQODnx1py16_c5Ph9qFxQmcsKNAhM2WKhar61855jvLWpq3-mZvk230siNBgoz6So"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+<div class="absolute bottom-8 left-8 right-8">
+<span class="text-primary-fixed font-bold text-xs uppercase tracking-widest mb-2 block">The Quiet Escape</span>
+<h3 class="text-white text-3xl font-serif">Waniban Island</h3>
+</div>
+</div>
+<p class="text-on-surface-variant leading-relaxed">A quaint, pocket-sized escape known for its fine white sand and vibrant coral gardens just steps from the shore.</p>
+</div>
+<!-- Oak Island -->
+<div class="group">
+<div class="relative aspect-[3/4] rounded-[2rem] overflow-hidden mb-6 shadow-lg">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="Oak Island sandbar at low tide" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDG_yy9WFYv3m9BEBoSaP6wBSMR0yM6qsyBO4mTNpVQtL6VvAimC_Wo3Lwp4mo4qLWxhsmPbW_dGRhSRFqsnLPQNhLl4G5-tyu9EUtQNXJPhrKGiTR8PQVQxgXke41fPhHzLsNuo0lDro6wldm8mJ7ilY9GptvrkQ6YR9BKZItNnFkqM1H6L0chbOyhcK4UDq2xR0eaT7VVY-8zpz2oWU-LclYZ6SHaqgT1scbzCrBWlnp6j18xtWm3-y-YEyBqtok86PvVmvpN5nc"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+<div class="absolute bottom-8 left-8 right-8">
+<span class="text-primary-fixed font-bold text-xs uppercase tracking-widest mb-2 block">The Radiant Sandbar</span>
+<h3 class="text-white text-3xl font-serif">Oak Island</h3>
+</div>
+</div>
+<p class="text-on-surface-variant leading-relaxed">A shifting sandbar that disappears with the tide, offering an ephemeral and intimate connection with the Pacific horizon.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Plan Your Visit: Getting There Style Section -->
+<section class="py-24 px-6 bg-surface">
+<div class="max-w-7xl mx-auto">
+<div class="mb-16 text-center">
+<span class="text-primary font-bold tracking-widest uppercase text-sm mb-4 block">YOUR JOURNEY BEGINS</span>
+<h2 class="text-5xl font-serif text-on-surface">Plan Your Visit</h2>
+<div class="h-1 w-24 bg-tertiary mx-auto mt-6 rounded-full"></div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-12 gap-8">
+<!-- Bus Option -->
+<div class="md:col-span-4 bg-surface-container-low p-10 rounded-[2.5rem] flex flex-col justify-between group border border-outline-variant/10 shadow-sm hover:shadow-md transition-shadow">
+<div>
+<div class="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mb-8">
+<span class="material-symbols-outlined text-primary text-4xl">directions_bus</span>
+</div>
+<h3 class="text-3xl font-serif mb-6">Public Transport</h3>
+<p class="text-on-surface-variant mb-10 leading-relaxed">The Bachelor Express runs hourly from Davao City's Overland Transport Terminal. A reliable and local way to see the landscape unfold.</p>
+</div>
+<div class="space-y-4 pt-8 border-t border-outline-variant/20">
+<div class="flex justify-between items-center text-sm">
+<span class="text-on-surface-variant font-medium">Travel Time</span>
+<span class="font-bold text-primary">3.5 - 4.5 Hours</span>
+</div>
+<div class="flex justify-between items-center text-sm">
+<span class="text-on-surface-variant font-medium">Estimated Fare</span>
+<span class="font-bold text-primary">₱350 - ₱450</span>
+</div>
+</div>
+</div>
+<!-- Private Drive -->
+<div class="md:col-span-8 bg-on-background text-surface p-10 rounded-[2.5rem] relative overflow-hidden group shadow-xl">
+<div class="relative z-10 flex flex-col h-full">
+<div class="w-16 h-16 rounded-2xl bg-primary-container/20 flex items-center justify-center mb-8">
+<span class="material-symbols-outlined text-primary-fixed text-4xl">directions_car</span>
+</div>
+<h3 class="text-3xl font-serif mb-6">Private Drive</h3>
+<p class="text-surface-variant max-w-lg mb-12 leading-relaxed text-lg">Command your own pace along the scenic coastal highway. The route features the iconic 'zigzag' mountain pass and the must-see Sleeping Dinosaur viewpoint.</p>
+<div class="mt-auto grid grid-cols-2 sm:grid-cols-4 gap-4">
+<div class="bg-white/5 border border-white/10 p-4 rounded-2xl">
+<span class="block text-[10px] uppercase font-bold tracking-widest text-primary-fixed mb-1">Time</span>
+<span class="text-sm font-bold">3 Hours</span>
+</div>
+<div class="bg-white/5 border border-white/10 p-4 rounded-2xl">
+<span class="block text-[10px] uppercase font-bold tracking-widest text-primary-fixed mb-1">Scenic</span>
+<span class="text-sm font-bold">High</span>
+</div>
+<div class="bg-white/5 border border-white/10 p-4 rounded-2xl">
+<span class="block text-[10px] uppercase font-bold tracking-widest text-primary-fixed mb-1">Route</span>
+<span class="text-sm font-bold">Pan-Philippine</span>
+</div>
+<div class="bg-white/5 border border-white/10 p-4 rounded-2xl">
+<span class="block text-[10px] uppercase font-bold tracking-widest text-primary-fixed mb-1">Stopovers</span>
+<span class="text-sm font-bold">Countless</span>
+</div>
+</div>
+</div>
+<!-- Decorative background image -->
+<div class="absolute inset-0 opacity-20 group-hover:opacity-30 transition-opacity duration-700">
+<img class="w-full h-full object-cover grayscale" data-alt="Scenic winding road through tropical mountains" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCR0vERu_OPBieOJLbuOumYWWsfUQdO8gUHvnt6rZPGX2sAceP5b_fLEU4QTP_YhgHtUvQIUmqJgPbL7SNa8q7pmNKZPrXY7rkl0DpKvvu5WL-PBEEJsKJRKBSPtXjtFaAy_XYAv-TO8yvMhuRspi1tyHoOcaIiI4L6DSg17TRtQIGM22yDg2tmUgMrDjZvsNdDaZmtcgYOaePvNnvEKYyf6w1EHxfUlreJC8NrJbMN7C9FzGThJeweDU9v56pJXLq-7geL9Se0e5s"/>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer (Design System Style) -->
+<footer class="w-full rounded-t-[4rem] md:rounded-t-[6rem] mt-20 bg-stone-100 border-t border-stone-200 shadow-2xl">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-12 px-8 lg:px-20 py-20 max-w-[1440px] mx-auto text-center md:text-left">
+<div class="md:col-span-2 space-y-6">
+<div class="flex items-center justify-center md:justify-start gap-3">
+<div class="size-8 text-primary">
+<svg fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path clip-rule="evenodd" d="M24 18.4228L42 11.475V34.3663C42 34.7796 41.7457 35.1504 41.3601 35.2992L24 42V18.4228Z" fill="currentColor" fill-rule="evenodd"></path>
+<path clip-rule="evenodd" d="M24 8.18819L33.4123 11.574L24 15.2071L14.5877 11.574L24 8.18819ZM9 15.8487L21 20.4805V37.6263L9 32.9945V15.8487ZM27 37.6263V20.4805L39 15.8487V32.9945L27 37.6263ZM25.354 2.29885C24.4788 1.98402 23.5212 1.98402 22.646 2.29885L4.98454 8.65208C3.7939 9.08038 3 10.2097 3 11.475V34.3663C3 36.0196 4.01719 37.5026 5.55962 38.098L22.9197 44.7987C23.6149 45.0671 24.3851 45.0671 25.0803 44.7987L42.4404 38.098C43.9828 37.5026 45 36.0196 45 34.3663V11.475C45 10.2097 44.2061 9.08038 43.0155 8.65208L25.354 2.29885Z" fill="currentColor" fill-rule="evenodd"></path>
+</svg>
+</div>
+<h2 class="text-2xl font-headline font-black text-on-background tracking-tight">Mati City Tourism</h2>
+</div>
+<p class="text-on-surface-variant max-w-sm mx-auto md:mx-0 leading-relaxed italic">"Experience the Radiant Shore. A gateway to the Pacific, a home for the soul."</p>
+<div class="flex justify-center md:justify-start gap-4">
+<div class="w-10 h-10 rounded-full bg-white border border-outline-variant/30 flex items-center justify-center hover:bg-primary hover:text-white transition-all cursor-pointer shadow-sm">
+<span class="material-symbols-outlined text-sm">social_leaderboard</span>
+</div>
+<div class="w-10 h-10 rounded-full bg-white border border-outline-variant/30 flex items-center justify-center hover:bg-primary hover:text-white transition-all cursor-pointer shadow-sm">
+<span class="material-symbols-outlined text-sm">photo_camera</span>
+</div>
+<div class="w-10 h-10 rounded-full bg-white border border-outline-variant/30 flex items-center justify-center hover:bg-primary hover:text-white transition-all cursor-pointer shadow-sm">
+<span class="material-symbols-outlined text-sm">play_circle</span>
+</div>
+</div>
+</div>
+<div class="space-y-6">
+<h4 class="font-bold text-lg text-primary">Explore More</h4>
+<ul class="space-y-4 text-on-surface-variant text-sm font-medium">
+<li><a class="hover:text-primary transition-colors hover:underline decoration-primary underline-offset-4" href="#">Destinations</a></li>
+<li><a class="hover:text-primary transition-colors hover:underline decoration-primary underline-offset-4" href="#">Cultural Heritage</a></li>
+<li><a class="hover:text-primary transition-colors hover:underline decoration-primary underline-offset-4" href="#">Festivals</a></li>
+<li><a class="hover:text-primary transition-colors hover:underline decoration-primary underline-offset-4" href="#">Logistics &amp; Travel</a></li>
+</ul>
+</div>
+<div class="space-y-6">
+<h4 class="font-bold text-lg text-primary">Support</h4>
+<ul class="space-y-4 text-on-surface-variant text-sm font-medium">
+<li><a class="hover:text-primary transition-colors hover:underline decoration-primary underline-offset-4" href="#">Privacy Policy</a></li>
+<li><a class="hover:text-primary transition-colors hover:underline decoration-primary underline-offset-4" href="#">Terms of Service</a></li>
+<li><a class="hover:text-primary transition-colors hover:underline decoration-primary underline-offset-4" href="#">Contact Us</a></li>
+<li><a class="hover:text-primary transition-colors hover:underline decoration-primary underline-offset-4" href="#">Media Kit</a></li>
+</ul>
+</div>
+</div>
+<div class="px-8 lg:px-20 py-10 border-t border-stone-200 bg-stone-50/50">
+<div class="max-w-[1440px] mx-auto flex flex-col md:flex-row justify-between items-center gap-6 text-xs font-bold text-on-surface-variant/60 uppercase tracking-widest">
+<p>© 2024 Mati City Tourism. Experience the Radiant Shore.</p>
+<div class="flex gap-8">
+<a class="hover:text-primary transition-colors" href="#">Privacy Policy</a>
+<a class="hover:text-primary transition-colors" href="#">Terms of Use</a>
+</div>
+</div>
+</div>
+</footer>
+</body></html>

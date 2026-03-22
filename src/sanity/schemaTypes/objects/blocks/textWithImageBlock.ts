@@ -96,4 +96,17 @@ export const textWithImageBlock = defineType({
       initialValue: 'right',
     }),
   ],
+  preview: {
+    select: {
+      title: 'heading',
+      media: 'images.0',
+    },
+    prepare({ title, media }) {
+      return {
+        title: title || 'Text with Image Block',
+        subtitle: 'Text with Image Block',
+        media,
+      }
+    },
+  },
 })

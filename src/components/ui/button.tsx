@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
 import { type ButtonHTMLAttributes, forwardRef } from "react";
 
-type ButtonVariant = "primary" | "secondary" | "tertiary";
+type ButtonVariant = "primary" | "secondary" | "tertiary" | "outline";
 type ButtonSize = "sm" | "md" | "lg";
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -16,10 +16,13 @@ const variantClasses: Record<ButtonVariant, string> = {
     "cta-gradient text-on-primary font-semibold hover:cta-gradient-hover active:scale-[0.97] shadow-ambient-md",
   // Soft-touch — surface-highest with primary text
   secondary:
-    "bg-surface-highest text-primary font-semibold hover:bg-surface-dim active:scale-[0.97]",
+    "bg-secondary text-on-secondary font-semibold hover:bg-secondary-dim active:scale-[0.97] shadow-ambient-md",
   // Hand-drawn cultural accent — text-only with tertiary underline
   tertiary:
-    "bg-transparent text-tertiary font-medium underline underline-offset-4 decoration-2 decoration-tertiary hover:text-tertiary/80 active:scale-[0.97]",
+    "bg-tertiary text-on-tertiary font-semibold hover:bg-tertiary-dim active:scale-[0.97] shadow-ambient-md",
+  // Minimalist outline
+  outline:
+    "bg-transparent border-2 border-primary text-primary font-semibold hover:bg-primary/5 active:scale-[0.97]",
 };
 
 const sizeClasses: Record<ButtonSize, string> = {

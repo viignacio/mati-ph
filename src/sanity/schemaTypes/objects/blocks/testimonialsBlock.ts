@@ -42,4 +42,15 @@ export const testimonialsBlock = defineType({
       ],
     }),
   ],
+  preview: {
+    select: {
+      title: 'heading',
+    },
+    prepare({ title }) {
+      return {
+        title: title || 'Testimonials Block',
+        subtitle: 'Testimonials Block',
+      }
+    },
+  },
 })

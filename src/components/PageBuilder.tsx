@@ -6,6 +6,7 @@ import { GridBlock } from './blocks/GridBlock'
 import { CallToActionBlockUI } from './blocks/CallToActionBlockUI'
 import { FeaturesBlock } from './blocks/FeaturesBlock'
 import { TestimonialsBlockUI } from './blocks/TestimonialsBlockUI'
+import { LogisticsBlockUI } from './blocks/LogisticsBlockUI'
 // Old UI imports dropped
 
 type PageBuilderProps = {
@@ -38,6 +39,8 @@ export function PageBuilder({ blocks, dictionary }: PageBuilderProps) {
             return <FeaturesBlock key={key} data={block} />
           case 'testimonialsBlock':
             return <TestimonialsBlockUI key={key} data={block} dictionary={dictionary} />
+          case 'logisticsBlock':
+            return <LogisticsBlockUI key={key} data={block} />
           default:
             console.warn(`Unknown block type: ${block._type}`)
             return null

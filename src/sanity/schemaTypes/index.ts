@@ -16,6 +16,7 @@ import { gridBlock } from './objects/blocks/gridBlock'
 import { callToActionBlock } from './objects/blocks/callToActionBlock'
 import { featuresBlock } from './objects/blocks/featuresBlock'
 import { testimonialsBlock } from './objects/blocks/testimonialsBlock'
+import { logisticsBlock } from './objects/blocks/logisticsBlock'
 import { pageBuilder } from './objects/pageBuilder'
 
 // Documents
@@ -49,6 +50,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     callToActionBlock,
     featuresBlock,
     testimonialsBlock,
+    logisticsBlock,
     pageBuilder,
 
     // Documents

@@ -24,14 +24,14 @@ export const page = defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
-      name: 'seo',
-      title: 'SEO',
-      type: 'seo',
-    }),
-    defineField({
       name: 'content',
       title: 'Page Content',
       type: 'pageBuilder',
+    }),
+    defineField({
+      name: 'seo',
+      title: 'SEO',
+      type: 'seo',
     }),
   ],
 })

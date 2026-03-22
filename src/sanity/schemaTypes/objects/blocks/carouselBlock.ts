@@ -57,4 +57,15 @@ export const carouselBlock = defineType({
       ],
     }),
   ],
+  preview: {
+    select: {
+      title: 'heading',
+    },
+    prepare({ title }) {
+      return {
+        title: title || 'Carousel Block',
+        subtitle: 'Carousel Block',
+      }
+    },
+  },
 })

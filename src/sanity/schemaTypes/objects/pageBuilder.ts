@@ -12,5 +12,6 @@ export const pageBuilder = defineType({
     { type: 'callToActionBlock' },
     { type: 'featuresBlock' },
     { type: 'testimonialsBlock' },
+    { type: 'logisticsBlock' },
   ],
 })

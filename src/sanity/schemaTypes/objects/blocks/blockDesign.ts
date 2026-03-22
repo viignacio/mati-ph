@@ -40,9 +40,9 @@ export const blockDesign = defineType({
       type: 'string',
       options: {
         list: [
-          { title: 'Standard (20)', value: 'standard' },
-          { title: 'Large (24)', value: 'large' },
-          { title: 'None', value: 'none' },
+          { title: 'Standard (80px)', value: 'standard' },
+          { title: 'Large (96px)', value: 'large' },
+          { title: 'None (0px)', value: 'none' },
         ],
       },
       initialValue: 'standard',
@@ -53,12 +53,19 @@ export const blockDesign = defineType({
       type: 'string',
       options: {
         list: [
-          { title: 'Standard (20)', value: 'standard' },
-          { title: 'Large (24)', value: 'large' },
-          { title: 'None', value: 'none' },
+          { title: 'Standard (80px)', value: 'standard' },
+          { title: 'Large (96px)', value: 'large' },
+          { title: 'None (0px)', value: 'none' },
         ],
       },
       initialValue: 'standard',
+    }),
+    defineField({
+      name: 'showDecorativeAccent',
+      title: 'Show Decorative Accent',
+      type: 'boolean',
+      description: 'Show cultural motifs (Mandaya dots/circles) behind or near images.',
+      initialValue: false,
     }),
   ],
 })

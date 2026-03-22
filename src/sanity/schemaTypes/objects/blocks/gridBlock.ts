@@ -31,9 +31,17 @@ export const gridBlock = defineType({
         list: [
           { title: 'Elevated (Layered)', value: 'elevated' },
           { title: 'Flat (No background)', value: 'flat' },
+          { title: 'Overlay Content (Islands Style)', value: 'overlay-content' },
         ],
       },
       initialValue: 'elevated',
+    }),
+    defineField({
+      name: 'staggered',
+      title: 'Staggered Layout',
+      type: 'boolean',
+      description: 'Offset middle items in a 3-column grid (Islands style).',
+      initialValue: false,
     }),
     defineField({
       name: 'heading',
@@ -154,4 +162,17 @@ export const gridBlock = defineType({
       ],
     }),
   ],
+  preview: {
+    select: {
+      title: 'heading',
+      media: 'manualItems.0.reference.mainImage',
+    },
+    prepare({ title, media }) {
+      return {
+        title: title || 'Grid Block',
+        subtitle: 'Grid Block',
+        media,
+      }
+    },
+  },
 })

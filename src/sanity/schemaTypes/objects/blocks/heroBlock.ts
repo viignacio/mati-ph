@@ -104,6 +104,20 @@ export const heroBlock = defineType({
           title: 'Button Link',
           type: 'string',
         }),
+        defineField({
+          name: 'buttonStyle',
+          title: 'Button Style',
+          type: 'string',
+          options: {
+            list: [
+              { title: 'Primary (Forest Green)', value: 'primary' },
+              { title: 'Secondary (Pujada Blue)', value: 'secondary' },
+              { title: 'Tertiary (Tangerine)', value: 'tertiary' },
+              { title: 'Outline (Ghost)', value: 'outline' },
+            ],
+          },
+          initialValue: 'primary',
+        }),
       ],
     }),
     defineField({
@@ -122,7 +136,34 @@ export const heroBlock = defineType({
           title: 'Button Link',
           type: 'string',
         }),
+        defineField({
+          name: 'buttonStyle',
+          title: 'Button Style',
+          type: 'string',
+          options: {
+            list: [
+              { title: 'Primary (Forest Green)', value: 'primary' },
+              { title: 'Secondary (Pujada Blue)', value: 'secondary' },
+              { title: 'Tertiary (Tangerine)', value: 'tertiary' },
+              { title: 'Outline (Ghost)', value: 'outline' },
+            ],
+          },
+          initialValue: 'secondary',
+        }),
       ],
     }),
   ],
+  preview: {
+    select: {
+      title: 'heading',
+      media: 'backgroundImage',
+    },
+    prepare({ title, media }) {
+      return {
+        title: title || 'Hero Block',
+        subtitle: 'Hero Block',
+        media,
+      }
+    },
+  },
 })
