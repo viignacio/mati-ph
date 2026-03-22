@@ -43,18 +43,17 @@ export function GridBlock({ data }: GridBlockProps) {
       {(tagline || heading || description || cta) && (
         <div className="flex flex-col lg:flex-row items-end justify-between mb-16 gap-8">
           <div className="max-w-2xl">
-            {tagline && (
+            {tagline ? (
               <span className="text-tertiary font-bold tracking-widest text-sm mb-4 block uppercase">
                 {tagline}
               </span>
+            ) : (
+              heading && <div className="h-1 w-20 bg-tertiary mb-6"></div>
             )}
             {heading && (
-              <>
-                <div className="h-1 w-20 bg-tertiary mb-6"></div>
-                <h2 className="text-4xl md:text-6xl font-headline font-black tracking-tight mb-6">
-                  {heading}
-                </h2>
-              </>
+              <h2 className="text-4xl md:text-6xl font-headline font-black tracking-tight mb-6">
+                {heading}
+              </h2>
             )}
             {description && (
               <p className="text-lg text-on-surface-variant font-medium">
