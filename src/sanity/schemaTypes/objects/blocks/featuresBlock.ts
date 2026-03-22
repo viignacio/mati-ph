@@ -1,15 +1,11 @@
 import { defineField, defineType } from 'sanity'
+import { featureIconOptions } from '../../../lib/featureIconOptions'
 
 export const featuresBlock = defineType({
   name: 'featuresBlock',
   title: 'Features Block',
   type: 'object',
   fields: [
-    defineField({
-      name: 'design',
-      title: 'Design Options',
-      type: 'blockDesign',
-    }),
     defineField({
       name: 'layoutVariant',
       title: 'Layout Variant',
@@ -21,6 +17,11 @@ export const featuresBlock = defineType({
         ],
       },
       initialValue: 'icon-list',
+    }),
+    defineField({
+      name: 'design',
+      title: 'Design Options',
+      type: 'blockDesign',
     }),
     defineField({
       name: 'tagline',
@@ -94,9 +95,11 @@ export const featuresBlock = defineType({
             }),
             defineField({
               name: 'icon',
-              title: 'Icon (String Identifier)',
+              title: 'Icon',
               type: 'string',
-              description: 'We use Lucide or Material Symbols (e.g., "surfing").'
+              options: {
+                list: featureIconOptions,
+              },
             }),
           ],
         }),
@@ -124,9 +127,9 @@ export const featuresBlock = defineType({
           type: 'string',
           options: {
             list: [
-              { title: 'Primary (Forest Green)', value: 'primary' },
-              { title: 'Secondary (Pujada Blue)', value: 'secondary' },
-              { title: 'Tertiary (Tangerine)', value: 'tertiary' },
+              { title: 'Primary (Deep Teal)', value: 'primary' },
+              { title: 'Secondary (Ocean Blue)', value: 'secondary' },
+              { title: 'Tertiary (Burnt Orange)', value: 'tertiary' },
               { title: 'Outline (Ghost)', value: 'outline' },
             ],
           },

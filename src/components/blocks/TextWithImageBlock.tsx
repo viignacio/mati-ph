@@ -1,9 +1,14 @@
-import React from 'react'
+'use client'
+
+import { useRef } from 'react'
+import { motion, useInView } from 'motion/react'
 import { urlFor } from '@/sanity/lib/image'
 import Link from 'next/link'
 import { BlockContainer, type BlockDesign } from './BlockContainer'
 import { cn } from '@/lib/utils'
 import { PortableText } from '@/components/portable-text'
+
+const ease = [0.22, 1, 0.36, 1] as const
 
 interface TextWithImageBlockProps {
   data: {
@@ -41,29 +46,40 @@ export function TextWithImageBlock({ data }: TextWithImageBlockProps) {
 
   const isLeft = imagePosition === 'left'
 
+  const ref = useRef<HTMLDivElement>(null)
+  const isInView = useInView(ref, { once: true, margin: '-60px' })
+
   // Attempt to nicely format date if it matches "MON YYYY" pattern
   const dateParts = date ? date.split(' ') : []
   const hasFormattedDate = dateParts.length === 2
 
   return (
     <BlockContainer design={design} className="relative overflow-hidden">
-      
+
       {/* Decorative accent for split-container specifically */}
       {layoutVariant === 'split-container' && (
         <div className="absolute top-0 right-0 w-1/2 h-full bg-[repeating-linear-gradient(45deg,transparent,transparent_5px,rgba(188,48,0,0.2)_5px,rgba(188,48,0,0.2)_10px)] opacity-10 pointer-events-none"></div>
       )}
 
       {/* Main Container */}
-      <div className={cn(
-        "relative z-10 flex flex-col items-center gap-12",
-        "md:flex-row"
-      )}>
-        
+      <div
+        ref={ref}
+        className={cn(
+          "relative z-10 flex flex-col items-center gap-12",
+          "md:flex-row"
+        )}
+      >
+
         {/* Text Content */}
-        <div className={cn(
-          "w-full md:w-1/2 space-y-6",
-          isLeft ? "order-2 md:order-2" : "order-2 md:order-1"
-        )}>
+        <motion.div
+          className={cn(
+            "w-full md:w-1/2 space-y-6",
+            isLeft ? "order-2 md:order-2" : "order-2 md:order-1"
+          )}
+          initial={{ opacity: 0, y: 28 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 28 }}
+          transition={{ duration: 0.6, ease }}
+        >
           {tagline && (
             <span className="text-tertiary font-bold uppercase tracking-[0.2em] mb-4 block">
               {tagline}
@@ -110,34 +126,39 @@ export function TextWithImageBlock({ data }: TextWithImageBlockProps) {
           )}
 
           {cta?.text && cta?.link && (
-            <Link 
-              href={cta.link} 
+            <Link
+              href={cta.link}
               className="inline-block text-on-tertiary bg-tertiary px-8 py-3 rounded-full font-bold shadow-lg shadow-tertiary/20 hover:scale-105 transition-transform"
             >
               {cta.text}
             </Link>
           )}
-        </div>
+        </motion.div>
 
         {/* Image Grid */}
         {images && images.length > 0 && (
-          <div className={cn(
-            "w-full md:w-1/2 grid gap-4",
-            isLeft ? "order-1 md:order-1" : "order-1 md:order-2",
-            images.length === 2 ? "grid-cols-2" : (images.length === 3 ? "grid-cols-3" : "grid-cols-1")
-          )}>
+          <motion.div
+            className={cn(
+              "w-full md:w-1/2 grid gap-4",
+              isLeft ? "order-1 md:order-1" : "order-1 md:order-2",
+              images.length === 2 ? "grid-cols-2" : (images.length === 3 ? "grid-cols-3" : "grid-cols-1")
+            )}
+            initial={{ opacity: 0, y: 28 }}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 28 }}
+            transition={{ duration: 0.6, delay: 0.18, ease }}
+          >
             {images.map((img, i) => (
-              <img 
+              <img
                 key={i}
-                src={urlFor(img).url()} 
+                src={urlFor(img).url()}
                 alt={heading ? `${heading} image ${i+1}` : `Content image ${i+1}`}
                 className={cn(
                   "w-full aspect-[3/4] object-cover rounded-3xl shadow-xl",
-                  images.length > 1 && i % 2 === 0 ? "translate-y-8" : "" // Stagger effect
+                  images.length > 1 && i % 2 === 0 ? "translate-y-8" : ""
                 )}
               />
             ))}
-          </div>
+          </motion.div>
         )}
       </div>
 

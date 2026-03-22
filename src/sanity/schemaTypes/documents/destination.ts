@@ -35,6 +35,11 @@ export const destination = defineType({
       description: 'Used inside the image overlay for Islands grid',
     }),
     defineField({
+      name: 'description',
+      title: 'Description',
+      type: 'richText',
+    }),
+    defineField({
       name: 'category',
       title: 'Category',
       type: 'string',
@@ -56,7 +61,7 @@ export const destination = defineType({
       name: 'mainImage',
       title: 'Main Image',
       type: 'image',
-      options: { 
+      options: {
         hotspot: true,
         metadata: ['lqip', 'palette'],
       },
@@ -82,11 +87,6 @@ export const destination = defineType({
           ],
         }),
       ],
-    }),
-    defineField({
-      name: 'description',
-      title: 'Description',
-      type: 'richText',
     }),
     defineField({
       name: 'location',

@@ -27,6 +27,15 @@ type FeaturesBlockData = {
   }
 }
 
+function getButtonClasses(style?: string) {
+  switch (style) {
+    case 'secondary': return 'bg-secondary text-on-secondary'
+    case 'tertiary':  return 'bg-tertiary text-on-tertiary'
+    case 'outline':   return 'bg-transparent text-on-background border-2 border-outline'
+    default:          return 'bg-primary text-on-primary'
+  }
+}
+
 function FeaturesIconList({ data }: { data: FeaturesBlockData }) {
   return (
     <section className="py-24 bg-surface">
@@ -38,7 +47,7 @@ function FeaturesIconList({ data }: { data: FeaturesBlockData }) {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {data.features?.map((feature: any, index: number) => (
             <div key={feature._key || index} className="p-6 bg-surface-container-low rounded-xl">
-              {feature.icon && <span className="material-symbols-outlined text-3xl mb-4 text-primary block">{feature.icon}</span>}
+              <span className="material-symbols-outlined text-3xl mb-4 text-primary block">{feature.icon || 'warning'}</span>
               <h3 className="text-2xl font-bold font-serif text-on-surface mb-2">{feature.title}</h3>
               {feature.description && <p className="text-on-surface-variant">{feature.description}</p>}
             </div>
@@ -47,7 +56,7 @@ function FeaturesIconList({ data }: { data: FeaturesBlockData }) {
             <div className="col-span-full pt-6">
               <a 
                 href={data.cta.link || '#'}
-                className="bg-primary text-on-primary px-8 py-3 rounded-full font-bold shadow hover:-translate-y-1 transition-all inline-block"
+                className={`${getButtonClasses(data.cta.buttonStyle)} px-8 py-3 rounded-full font-bold shadow hover:-translate-y-1 transition-all inline-block`}
               >
                 {data.cta.text}
               </a>
@@ -104,7 +113,7 @@ function FeaturesWithImage({ data }: { data: FeaturesBlockData }) {
             {data.features?.map((feature: any, index: number) => (
               <div key={feature._key || index} className="flex gap-6">
                 <div className="flex-shrink-0 w-14 h-14 rounded-full bg-secondary-container flex items-center justify-center text-secondary shadow-sm">
-                  <span className="material-symbols-outlined text-3xl">{feature.icon || 'star'}</span>
+                  <span className="material-symbols-outlined text-3xl">{feature.icon || 'warning'}</span>
                 </div>
                 <div>
                   <h4 className="text-xl font-bold mb-2">{feature.title}</h4>
@@ -119,7 +128,7 @@ function FeaturesWithImage({ data }: { data: FeaturesBlockData }) {
               <div className="pt-6">
                 <a 
                   href={data.cta.link || '#'}
-                  className="bg-primary text-on-primary px-10 py-4 rounded-full font-bold text-lg shadow-xl shadow-primary/20 hover:-translate-y-1 transition-all inline-block"
+                  className={`${getButtonClasses(data.cta.buttonStyle)} px-10 py-4 rounded-full font-bold text-lg shadow-xl hover:-translate-y-1 transition-all inline-block`}
                 >
                   {data.cta.text}
                 </a>

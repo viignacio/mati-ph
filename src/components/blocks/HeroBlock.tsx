@@ -1,8 +1,9 @@
-import React from 'react'
+'use client'
+
 import { urlFor } from '@/sanity/lib/image'
 import Link from 'next/link'
+import { motion } from 'motion/react'
 import { BlockContainer, type BlockDesign } from './BlockContainer'
-import { cn } from '@/lib/utils'
 
 interface CTA {
   text?: string
@@ -29,20 +30,30 @@ interface HeroBlockProps {
 }
 
 export function HeroBlock({ data }: HeroBlockProps) {
-  const { 
-    design, 
-    layoutVariant = 'full-screen', 
-    heroType, 
-    heading, 
-    highlightedWord, 
-    subheading, 
-    tagline, 
-    backgroundImage, 
-    cta, 
-    secondaryCta 
+  const {
+    design,
+    layoutVariant = 'full-screen',
+    heroType,
+    animateText,
+    heading,
+    highlightedWord,
+    subheading,
+    tagline,
+    backgroundImage,
+    cta,
+    secondaryCta
   } = data
 
   const bgImageUrl = backgroundImage?.asset ? urlFor(backgroundImage).url() : ''
+
+  const anim = (delay: number) =>
+    animateText
+      ? {
+          initial: { opacity: 0, y: 24 },
+          animate: { opacity: 1, y: 0 },
+          transition: { duration: 0.7, delay, ease: [0.22, 1, 0.36, 1] as const },
+        }
+      : {}
 
   // Process heading to replace highlightedWord with a styled span
   const renderHeading = () => {
@@ -88,37 +99,37 @@ export function HeroBlock({ data }: HeroBlockProps) {
         {/* Foreground Content */}
         <div className="relative z-20 text-center px-6 max-w-5xl">
           {tagline && (
-            <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md px-4 py-1.5 rounded-full border border-white/20 mb-8">
+            <motion.div {...anim(0)} className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md px-4 py-1.5 rounded-full border border-white/20 mb-8">
               <div className="w-2 h-2 rounded-full bg-primary-fixed animate-pulse"></div>
               <span className="text-white text-xs font-bold uppercase tracking-widest">{tagline}</span>
-            </div>
+            </motion.div>
           )}
 
           {heading && (
-            <h1 className="text-white font-headline text-5xl md:text-7xl lg:text-8xl font-black mb-6 leading-[1.1] tracking-[-0.03em]">
+            <motion.h1 {...anim(0.1)} className="text-white font-headline text-5xl md:text-7xl lg:text-8xl font-black mb-6 leading-[1.1] tracking-[-0.03em]">
               {renderHeading()}
-            </h1>
+            </motion.h1>
           )}
 
           {subheading && (
-            <p className="text-white/90 text-lg md:text-xl max-w-2xl mx-auto mb-10 font-medium">
+            <motion.p {...anim(0.25)} className="text-white/90 text-lg md:text-xl max-w-2xl mx-auto mb-10 font-medium">
               {subheading}
-            </p>
+            </motion.p>
           )}
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <motion.div {...anim(0.4)} className="flex flex-col sm:flex-row items-center justify-center gap-4">
             {cta?.text && cta?.link && (
               <Link href={cta.link} className="w-full sm:w-auto px-10 py-4 rounded-full bg-gradient-to-r from-primary to-primary-container text-on-primary font-bold text-lg shadow-xl shadow-primary/20 hover:scale-105 transition-all">
                 {cta.text}
               </Link>
             )}
-            
+
             {secondaryCta?.text && secondaryCta?.link && (
               <Link href={secondaryCta.link} className="w-full sm:w-auto px-10 py-4 rounded-full bg-white/60 backdrop-blur-md text-on-background font-bold text-lg hover:bg-surface-container-highest transition-all border border-outline-variant/20">
                 {secondaryCta.text}
               </Link>
             )}
-          </div>
+          </motion.div>
         </div>
 
         {/* Scroll Indicator */}
@@ -137,15 +148,15 @@ export function HeroBlock({ data }: HeroBlockProps) {
     <BlockContainer design={design} className="flex min-h-[50vh] items-center">
       <div className="max-w-3xl space-y-6">
         {tagline && (
-          <span className="text-tertiary font-bold uppercase tracking-[0.2em]">{tagline}</span>
+          <motion.span {...anim(0)} className="text-tertiary font-bold uppercase tracking-[0.2em]">{tagline}</motion.span>
         )}
-        <h1 className="text-5xl md:text-6xl font-headline font-black text-on-background tracking-tight">
+        <motion.h1 {...anim(0.1)} className="text-5xl md:text-6xl font-headline font-black text-on-background tracking-tight">
           {renderHeading()}
-        </h1>
+        </motion.h1>
         {subheading && (
-          <p className="text-xl text-on-surface-variant font-medium leading-relaxed">
+          <motion.p {...anim(0.25)} className="text-xl text-on-surface-variant font-medium leading-relaxed">
             {subheading}
-          </p>
+          </motion.p>
         )}
       </div>
     </BlockContainer>

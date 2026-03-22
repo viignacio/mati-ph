@@ -27,9 +27,9 @@ export const callToActionBlock = defineType({
       type: 'string',
       options: {
         list: [
-          { title: 'Primary (Forest Green)', value: 'primary' },
-          { title: 'Secondary (Pujada Blue)', value: 'secondary' },
-          { title: 'Tertiary (Tangerine)', value: 'tertiary' },
+          { title: 'Primary (Deep Teal)', value: 'primary' },
+          { title: 'Secondary (Ocean Blue)', value: 'secondary' },
+          { title: 'Tertiary (Burnt Orange)', value: 'tertiary' },
           { title: 'Outline (Ghost)', value: 'outline' },
         ],
       },

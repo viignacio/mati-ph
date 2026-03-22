@@ -6,11 +6,6 @@ export const textWithImageBlock = defineType({
   type: 'object',
   fields: [
     defineField({
-      name: 'design',
-      title: 'Design Options',
-      type: 'blockDesign',
-    }),
-    defineField({
       name: 'layoutVariant',
       title: 'Layout Variant',
       type: 'string',
@@ -21,6 +16,11 @@ export const textWithImageBlock = defineType({
         ],
       },
       initialValue: 'standard-split',
+    }),
+    defineField({
+      name: 'design',
+      title: 'Design Options',
+      type: 'blockDesign',
     }),
     defineField({
       name: 'tagline',

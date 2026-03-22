@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "material-symbols/outlined.css";
 
 @theme {
   /* ─── Color Palette: The Tropical Curator (from Stitch) ─── */

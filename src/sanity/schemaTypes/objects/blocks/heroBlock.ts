@@ -6,6 +6,18 @@ export const heroBlock = defineType({
   type: 'object',
   fields: [
     defineField({
+      name: 'layoutVariant',
+      title: 'Layout Variant',
+      type: 'string',
+      options: {
+        list: [
+          { title: 'Full Screen', value: 'full-screen' },
+          { title: 'Split Content', value: 'split-content' },
+        ],
+      },
+      initialValue: 'full-screen',
+    }),
+    defineField({
       name: 'heroType',
       title: 'Hero Type',
       type: 'string',
@@ -23,18 +35,6 @@ export const heroBlock = defineType({
       name: 'design',
       title: 'Design Options',
       type: 'blockDesign',
-    }),
-    defineField({
-      name: 'layoutVariant',
-      title: 'Layout Variant',
-      type: 'string',
-      options: {
-        list: [
-          { title: 'Full Screen', value: 'full-screen' },
-          { title: 'Split Content', value: 'split-content' },
-        ],
-      },
-      initialValue: 'full-screen',
     }),
     defineField({
       name: 'animateText',
@@ -110,9 +110,9 @@ export const heroBlock = defineType({
           type: 'string',
           options: {
             list: [
-              { title: 'Primary (Forest Green)', value: 'primary' },
-              { title: 'Secondary (Pujada Blue)', value: 'secondary' },
-              { title: 'Tertiary (Tangerine)', value: 'tertiary' },
+              { title: 'Primary (Deep Teal)', value: 'primary' },
+              { title: 'Secondary (Ocean Blue)', value: 'secondary' },
+              { title: 'Tertiary (Burnt Orange)', value: 'tertiary' },
               { title: 'Outline (Ghost)', value: 'outline' },
             ],
           },
@@ -142,9 +142,9 @@ export const heroBlock = defineType({
           type: 'string',
           options: {
             list: [
-              { title: 'Primary (Forest Green)', value: 'primary' },
-              { title: 'Secondary (Pujada Blue)', value: 'secondary' },
-              { title: 'Tertiary (Tangerine)', value: 'tertiary' },
+              { title: 'Primary (Deep Teal)', value: 'primary' },
+              { title: 'Secondary (Ocean Blue)', value: 'secondary' },
+              { title: 'Tertiary (Burnt Orange)', value: 'tertiary' },
               { title: 'Outline (Ghost)', value: 'outline' },
             ],
           },

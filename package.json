@@ -14,6 +14,7 @@
     "@sanity/vision": "^5.17.1",
     "clsx": "^2.1.1",
     "lucide-react": "^0.577.0",
+    "material-symbols": "^0.42.3",
     "motion": "^12.38.0",
     "next": "16.2.1",
     "next-sanity": "^11.6.12",

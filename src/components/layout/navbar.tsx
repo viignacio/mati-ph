@@ -18,7 +18,7 @@ export function Navbar({ data }: { data?: any }) {
   return (
     <>
       <header className="fixed top-0 left-0 w-full z-50 px-6 py-4 transition-all duration-300">
-        <div className="max-w-screen-2xl mx-auto flex items-center justify-between bg-surface/70 backdrop-blur-xl border border-outline-variant/20 px-8 py-5 rounded-full shadow-lg shadow-on-background/5">
+        <div className="max-w-screen-2xl mx-auto flex items-center justify-between bg-white/80 backdrop-blur-2xl border border-black/8 px-8 py-3 rounded-full shadow-lg shadow-black/5">
 
           {/* Left cluster: Logo + Nav */}
           <div className="flex items-center gap-10">
@@ -26,7 +26,7 @@ export function Navbar({ data }: { data?: any }) {
             {/* Logo */}
             <Link
               href="/"
-              className="flex items-center gap-3 text-on-background"
+              className="flex items-center gap-3 text-neutral-900"
             >
               {logoUrl ? (
                 <img src={logoUrl} alt="Logo" className="h-8 w-auto object-contain" />
@@ -41,7 +41,7 @@ export function Navbar({ data }: { data?: any }) {
                 <Link
                   key={link.url}
                   href={link.url}
-                  className="text-on-surface-variant hover:text-primary transition-colors text-base font-semibold"
+                  className="text-neutral-700 hover:text-primary transition-colors text-base font-semibold"
                 >
                   {link.text}
                 </Link>
@@ -53,14 +53,14 @@ export function Navbar({ data }: { data?: any }) {
           {/* Right Action + Hamburger */}
           <div className="flex items-center gap-6">
             {searchEnabled && (
-              <div className="hidden md:flex items-center bg-surface-container rounded-full px-4 py-4 border border-outline-variant/15">
+              <div className="hidden md:flex items-center bg-surface-container rounded-full px-4 h-12 border border-outline-variant/15">
                 <span className="material-symbols-outlined text-outline" style={{ fontSize: 18 }}>search</span>
-                <input className="bg-transparent border-none focus:ring-0 text-sm outline-none placeholder:text-on-surface-variant/60 w-32 lg:w-40 text-on-surface p-0 m-0 ml-2 h-5 leading-none" placeholder="Search..." />
+                <input className="bg-transparent border-none focus:ring-0 text-sm outline-none placeholder:text-on-surface-variant/60 w-32 lg:w-40 text-on-surface ml-2" placeholder="Search..." />
               </div>
             )}
 
             {cta && (
-              <Link href={cta.url} className="hidden md:flex items-center justify-center bg-gradient-to-br from-primary to-primary-container text-on-primary px-6 py-3 rounded-full font-bold text-sm shadow-md shadow-primary/20 hover:scale-105 transition-transform">
+              <Link href={cta.url} className="hidden md:flex items-center justify-center bg-gradient-to-br from-primary to-primary-container text-on-primary px-6 py-2 rounded-full font-bold text-sm shadow-md shadow-primary/20 hover:scale-105 transition-transform">
                 {cta.text}
               </Link>
             )}

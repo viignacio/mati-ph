@@ -13,8 +13,8 @@
 | 11 | Write design doc for destination image update | done |
 | 12 | Transition to implementation / write-plan | done |
 | 13 | Execute implementation plan (All tasks completed) | done |
-| 14 | Update destination schema | todo |
-| 15 | Implement HeroBlockUI Full-Screen Variant | todo |
-| 16 | Implement FeaturesBlockUI Image Variant | todo |
-| 17 | Implement GridBlockUI Islands Variant | todo |
-| 18 | Implement LogisticsBlockUI Layout | todo |
+| 14 | Update destination schema | done |
+| 15 | Implement HeroBlockUI Full-Screen Variant | done |
+| 16 | Implement FeaturesBlockUI Image Variant | done |
+| 17 | Implement GridBlockUI Islands Variant | done |
+| 18 | Implement LogisticsBlockUI Layout | done |
