@@ -1,8 +1,22 @@
-import React from 'react'
+'use client'
+
+import { useRef } from 'react'
+import { motion, useInView } from 'motion/react'
 import { urlFor } from '@/sanity/lib/image'
 import Link from 'next/link'
 import { BlockContainer, type BlockDesign } from './BlockContainer'
 import { cn } from '@/lib/utils'
+
+const ease = [0.22, 1, 0.36, 1] as const
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 32 },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, delay: i * 0.08, ease },
+  }),
+}
 
 interface GridBlockProps {
   data: {
@@ -38,11 +52,19 @@ export function GridBlock({ data }: GridBlockProps) {
 
   const isMasonry = layoutVariant === 'asymmetric-masonry'
 
+  const ref = useRef<HTMLDivElement>(null)
+  const isInView = useInView(ref, { once: true, margin: '-60px' })
+
   return (
     <BlockContainer design={design}>
       {/* Header Area */}
       {(tagline || heading || description || cta) && (
-        <div className="flex flex-col md:flex-row items-end justify-between mb-16 gap-8">
+        <motion.div
+          className="flex flex-col md:flex-row items-end justify-between mb-16 gap-8"
+          initial={{ opacity: 0, y: 24 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
+          transition={{ duration: 0.6, ease }}
+        >
           <div className="max-w-2xl">
             {tagline ? (
               <span className="text-tertiary font-bold tracking-widest text-sm mb-4 block uppercase">
@@ -88,14 +110,17 @@ export function GridBlock({ data }: GridBlockProps) {
               <span className="material-symbols-outlined">arrow_forward</span>
             </Link>
           )}
-        </div>
+        </motion.div>
       )}
 
       {/* Grid Area */}
-      <div className={cn(
-        "grid gap-12",
-        isMasonry ? "grid-cols-1 md:grid-cols-12" : "grid-cols-1 md:grid-cols-3"
-      )}>
+      <div
+        ref={ref}
+        className={cn(
+          "grid gap-12",
+          isMasonry ? "grid-cols-1 md:grid-cols-12" : "grid-cols-1 md:grid-cols-3"
+        )}
+      >
         {manualItems?.map((item, index) => {
           // Resolve Item Data
           const doc = item.reference
@@ -156,7 +181,14 @@ export function GridBlock({ data }: GridBlockProps) {
           const isStaggered = data.staggered && (index % 3 === 1)
 
           return (
-            <div key={item._key || index} className={cn("block transition-all duration-500", spanClass, isStaggered && "md:mt-12")}>
+            <motion.div
+              key={item._key || index}
+              className={cn("block transition-all duration-500", spanClass, isStaggered && "md:mt-12")}
+              custom={index}
+              variants={cardVariants}
+              initial="hidden"
+              animate={isInView ? "visible" : "hidden"}
+            >
               <div
                 className={cn(
                   "group relative overflow-hidden rounded-3xl block w-full",
@@ -224,7 +256,7 @@ export function GridBlock({ data }: GridBlockProps) {
                   </p>
                 </div>
               )}
-            </div>
+            </motion.div>
           )
         })}
       </div>

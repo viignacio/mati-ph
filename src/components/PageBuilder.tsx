@@ -1,4 +1,3 @@
-import React from 'react'
 import { HeroBlock } from './blocks/HeroBlock'
 import { TextWithImageBlock } from './blocks/TextWithImageBlock'
 import { CarouselBlockUI } from './blocks/CarouselBlockUI'
@@ -33,7 +32,7 @@ export function PageBuilder({ blocks, dictionary }: PageBuilderProps) {
           case 'carouselBlock':
             return <ScrollReveal key={key}><CarouselBlockUI data={block} dictionary={dictionary} /></ScrollReveal>
           case 'gridBlock':
-            return <ScrollReveal key={key}><GridBlock data={block} /></ScrollReveal>
+            return <GridBlock key={key} data={block} />
           case 'callToActionBlock':
             return <ScrollReveal key={key}><CallToActionBlockUI data={block} dictionary={dictionary} /></ScrollReveal>
           case 'featuresBlock':

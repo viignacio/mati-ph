@@ -18,7 +18,7 @@ export function Navbar({ data }: { data?: any }) {
   return (
     <>
       <header className="fixed top-0 left-0 w-full z-50 px-6 py-4 transition-all duration-300">
-        <div className="max-w-screen-2xl mx-auto flex items-center justify-between bg-white/80 backdrop-blur-2xl border border-black/8 px-8 py-3 rounded-full shadow-lg shadow-black/5">
+        <div className="max-w-screen-2xl mx-auto flex items-center justify-between bg-amber-50/85 backdrop-blur-2xl border border-amber-200/50 px-8 py-3 rounded-full shadow-lg shadow-amber-900/5">
 
           {/* Left cluster: Logo + Nav */}
           <div className="flex items-center gap-10">
@@ -41,7 +41,7 @@ export function Navbar({ data }: { data?: any }) {
                 <Link
                   key={link.url}
                   href={link.url}
-                  className="text-neutral-700 hover:text-primary transition-colors text-base font-semibold"
+                  className="text-stone-700 hover:text-primary transition-colors text-base font-semibold"
                 >
                   {link.text}
                 </Link>
