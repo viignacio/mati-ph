@@ -4,8 +4,8 @@ import { cn } from '@/lib/utils'
 export type BlockDesign = {
   backgroundColor?: 'surface' | 'surface-container-low' | 'surface-container-highest' | 'primary-gradient' | 'transparent'
   containerStyle?: 'full-bleed' | 'rounded-container'
-  topPadding?: 'none' | 'standard' | 'large'
-  bottomPadding?: 'none' | 'standard' | 'large'
+  topPadding?: 'none' | 'standard' | 'large' | 'larger'
+  bottomPadding?: 'none' | 'standard' | 'large' | 'larger'
 }
 
 interface BlockContainerProps {
@@ -35,12 +35,14 @@ export function BlockContainer({ design, id, className, containerWidth = '75%', 
     'none': 'pt-0',
     'standard': 'pt-20',
     'large': 'pt-24',
+    'larger': 'pt-32',
   }[design?.topPadding || 'none']
 
   const pbClasses = {
     'none': 'pb-0',
     'standard': 'pb-20',
     'large': 'pb-24',
+    'larger': 'pb-32',
   }[design?.bottomPadding || 'none']
 
   // Resolve Container Style

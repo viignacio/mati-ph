@@ -42,6 +42,7 @@ export const blockDesign = defineType({
         list: [
           { title: 'Standard (80px)', value: 'standard' },
           { title: 'Large (96px)', value: 'large' },
+          { title: 'Larger (128px)', value: 'larger' },
           { title: 'None (0px)', value: 'none' },
         ],
       },
@@ -55,6 +56,7 @@ export const blockDesign = defineType({
         list: [
           { title: 'Standard (80px)', value: 'standard' },
           { title: 'Large (96px)', value: 'large' },
+          { title: 'Larger (128px)', value: 'larger' },
           { title: 'None (0px)', value: 'none' },
         ],
       },
