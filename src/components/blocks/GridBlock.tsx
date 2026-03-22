@@ -41,26 +41,48 @@ export function GridBlock({ data }: GridBlockProps) {
     <BlockContainer design={design}>
       {/* Header Area */}
       {(tagline || heading || description || cta) && (
-        <div className="flex flex-col lg:flex-row items-end justify-between mb-16 gap-8">
-          <div className="max-w-2xl">
+        <div className={cn(
+          "mb-16 gap-8",
+          layoutVariant === 'asymmetric-masonry' 
+            ? "text-center max-w-2xl mx-auto" 
+            : "flex flex-col md:flex-row items-end justify-between"
+        )}>
+          <div className={layoutVariant === 'asymmetric-masonry' ? "" : "max-w-2xl"}>
             {tagline ? (
-              <span className="text-tertiary font-bold tracking-widest text-sm mb-4 block uppercase">
+              <span className={cn(
+                "text-tertiary font-bold tracking-widest text-sm mb-4 block uppercase",
+                layoutVariant === 'asymmetric-masonry' && "justify-center"
+              )}>
                 {tagline}
               </span>
             ) : (
-              heading && <div className="h-1 w-20 bg-tertiary mb-6"></div>
+              heading && layoutVariant !== 'asymmetric-masonry' && <div className="h-1 w-20 bg-tertiary mb-6"></div>
             )}
             {heading && (
-              <h2 className="text-4xl md:text-6xl font-headline font-black tracking-tight mb-6">
+              <h2 className={cn(
+                "font-headline font-black tracking-tight",
+                layoutVariant === 'asymmetric-masonry' 
+                  ? "text-5xl md:text-6xl text-on-surface leading-tight mb-6" 
+                  : "text-4xl md:text-6xl mb-6"
+              )}>
                 {heading}
               </h2>
             )}
-            {description && (
-              <p className="text-lg text-on-surface-variant font-medium">
+            
+            {/* If asymmetric masonry, description is under heading */}
+            {layoutVariant === 'asymmetric-masonry' && description && (
+              <p className="text-lg text-on-surface-variant font-medium mt-4">
                 {description}
               </p>
             )}
           </div>
+
+          {/* If NOT asymmetric masonry, description is flex-end right side */}
+          {layoutVariant !== 'asymmetric-masonry' && description && (
+            <p className="text-on-surface-variant max-w-sm mb-2 font-medium">
+              {description}
+            </p>
+          )}
 
           {cta?.text && cta?.link && (
             <Link
@@ -68,7 +90,6 @@ export function GridBlock({ data }: GridBlockProps) {
               className="text-tertiary font-bold text-lg border-b-2 border-tertiary/30 pb-1 hover:border-tertiary transition-all inline-flex items-center gap-2"
             >
               {cta.text}
-              {/* Optional: could use a span with material-symbols-outlined for arrow_forward here instead of standard text */}
               <span className="material-symbols-outlined">arrow_forward</span>
             </Link>
           )}
@@ -124,7 +145,7 @@ export function GridBlock({ data }: GridBlockProps) {
           const finalHref = settings.ctaLink || docHref
 
           // CSS Mappings
-          const spanClass = isMasonry || layoutVariant === 'masonry-captions'
+          const spanClass = isMasonry
             ? (colSpan === 2 ? 'md:col-span-8' : 'md:col-span-4')
             : 'md:col-span-1'
 
@@ -167,7 +188,7 @@ export function GridBlock({ data }: GridBlockProps) {
                 <div className="absolute bottom-6 md:bottom-10 left-6 md:left-10 right-6 md:right-10 text-white flex flex-col items-start z-30 pointer-events-none">
 
                   {badgeText && (
-                    <span className="text-primary-container text-xs font-bold uppercase tracking-widest mb-2 block">
+                    <span className="text-primary-fixed font-bold text-xs uppercase tracking-widest mb-2 block">
                       {badgeText}
                     </span>
                   )}
@@ -176,8 +197,8 @@ export function GridBlock({ data }: GridBlockProps) {
                     {title}
                   </h3>
 
-                  {/* ONLY show shortDescription inside the overlay */}
-                  {shortDesc && (
+                  {/* ONLY show shortDescription inside the overlay if not masonry-captions */}
+                  {layoutVariant !== 'masonry-captions' && shortDesc && (
                     <p className="text-white/80 text-sm md:text-base max-w-md line-clamp-2 md:line-clamp-3 mb-6 transition-opacity duration-300">
                       {shortDesc}
                     </p>
