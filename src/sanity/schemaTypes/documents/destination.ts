@@ -28,6 +28,13 @@ export const destination = defineType({
       validation: (rule) => rule.max(80).warning('Keep it punchy'),
     }),
     defineField({
+      name: 'shortDescription',
+      title: 'Short Description',
+      type: 'text',
+      rows: 2,
+      description: 'Used inside the image overlay for Islands grid',
+    }),
+    defineField({
       name: 'category',
       title: 'Category',
       type: 'string',
