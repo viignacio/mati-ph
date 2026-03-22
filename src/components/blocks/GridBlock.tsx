@@ -63,7 +63,7 @@ export function GridBlock({ data }: GridBlockProps) {
                 "font-headline font-black tracking-tight",
                 layoutVariant === 'asymmetric-masonry' 
                   ? "text-5xl md:text-6xl text-on-surface leading-tight mb-6" 
-                  : "text-4xl md:text-6xl mb-6"
+                  : "text-4xl md:text-6xl"
               )}>
                 {heading}
               </h2>
