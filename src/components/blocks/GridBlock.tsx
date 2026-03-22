@@ -42,28 +42,22 @@ export function GridBlock({ data }: GridBlockProps) {
     <BlockContainer design={design}>
       {/* Header Area */}
       {(tagline || heading || description || cta) && (
-        <div className={cn(
-          "mb-16 gap-8",
-          layoutVariant === 'asymmetric-masonry' 
-            ? "text-center max-w-2xl mx-auto" 
-            : "flex flex-col md:flex-row items-end justify-between"
-        )}>
-          <div className={layoutVariant === 'asymmetric-masonry' ? "" : "max-w-2xl"}>
+        <div className="flex flex-col md:flex-row items-end justify-between mb-16 gap-8">
+          <div className="max-w-2xl">
             {tagline ? (
-              <span className={cn(
-                "text-tertiary font-bold tracking-widest text-sm mb-4 block uppercase",
-                layoutVariant === 'asymmetric-masonry' && "justify-center"
-              )}>
+              <span className="text-tertiary font-bold tracking-widest text-sm mb-4 block uppercase">
                 {tagline}
               </span>
             ) : (
-              heading && layoutVariant !== 'asymmetric-masonry' && <div className="h-1 w-20 bg-tertiary mb-6"></div>
+              heading && <div className="h-1 w-20 bg-tertiary mb-6"></div>
             )}
+            
             {heading && (
               <h2 className={cn(
                 "font-headline font-black tracking-tight",
+                layoutVariant === 'asymmetric-masonry' && description ? "mb-6" : "",
                 layoutVariant === 'asymmetric-masonry' 
-                  ? "text-5xl md:text-6xl text-on-surface leading-tight mb-6" 
+                  ? "text-5xl md:text-6xl text-on-surface leading-tight" 
                   : "text-4xl md:text-6xl"
               )}>
                 {heading}
@@ -72,7 +66,7 @@ export function GridBlock({ data }: GridBlockProps) {
             
             {/* If asymmetric masonry, description is under heading */}
             {layoutVariant === 'asymmetric-masonry' && description && (
-              <p className="text-lg text-on-surface-variant font-medium mt-4">
+              <p className="text-lg text-on-surface-variant font-medium">
                 {description}
               </p>
             )}
@@ -88,7 +82,7 @@ export function GridBlock({ data }: GridBlockProps) {
           {cta?.text && cta?.link && (
             <Link
               href={cta.link}
-              className="text-tertiary font-bold text-lg border-b-2 border-tertiary/30 pb-1 hover:border-tertiary transition-all inline-flex items-center gap-2"
+              className="text-tertiary font-bold text-lg border-b-2 border-tertiary/30 pb-1 hover:border-tertiary transition-all inline-flex items-center gap-2 mb-2 md:mb-0"
             >
               {cta.text}
               <span className="material-symbols-outlined">arrow_forward</span>
