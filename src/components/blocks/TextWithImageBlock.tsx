@@ -1,12 +1,13 @@
 'use client'
 
-import { useRef } from 'react'
-import { motion, useInView } from 'motion/react'
+import Image from 'next/image'
+import { motion } from 'motion/react'
 import { urlFor } from '@/sanity/lib/image'
 import Link from 'next/link'
 import { BlockContainer, type BlockDesign } from './BlockContainer'
 import { cn } from '@/lib/utils'
 import { PortableText } from '@/components/portable-text'
+import { useScrollReveal } from '@/hooks/useScrollReveal'
 
 const ease = [0.22, 1, 0.36, 1] as const
 
@@ -46,8 +47,7 @@ export function TextWithImageBlock({ data }: TextWithImageBlockProps) {
 
   const isLeft = imagePosition === 'left'
 
-  const ref = useRef<HTMLDivElement>(null)
-  const isInView = useInView(ref, { once: true, margin: '-60px' })
+  const { ref, isInView } = useScrollReveal()
 
   // Attempt to nicely format date if it matches "MON YYYY" pattern
   const dateParts = date ? date.split(' ') : []
@@ -148,15 +148,21 @@ export function TextWithImageBlock({ data }: TextWithImageBlockProps) {
             transition={{ duration: 0.6, delay: 0.18, ease }}
           >
             {images.map((img, i) => (
-              <img
+              <div
                 key={i}
-                src={urlFor(img).url()}
-                alt={heading ? `${heading} image ${i+1}` : `Content image ${i+1}`}
                 className={cn(
-                  "w-full aspect-[3/4] object-cover rounded-3xl shadow-xl",
+                  "relative w-full aspect-[3/4]",
                   images.length > 1 && i % 2 === 0 ? "translate-y-8" : ""
                 )}
-              />
+              >
+                <Image
+                  src={urlFor(img).url()}
+                  alt={heading ? `${heading} image ${i + 1}` : `Content image ${i + 1}`}
+                  fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
+                  className="object-cover rounded-3xl shadow-xl"
+                />
+              </div>
             ))}
           </motion.div>
         )}
