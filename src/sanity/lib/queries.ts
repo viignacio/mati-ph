@@ -23,6 +23,8 @@ const destinationCardFields = /* groq */ `
   name,
   "slug": slug.current,
   tagline,
+  shortDescription,
+  description,
   category,
   mainImage{${imageFields}}
 `
@@ -330,6 +332,7 @@ export const PAGE_BY_SLUG_QUERY = defineQuery(/* groq */ `
             name,
             title,
             tagline,
+            shortDescription,
             description,
             "slug": slug.current,
             mainImage{${imageFields}}
