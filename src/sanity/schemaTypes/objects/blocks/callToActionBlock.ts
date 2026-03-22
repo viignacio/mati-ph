@@ -22,18 +22,23 @@ export const callToActionBlock = defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
-      name: 'buttonStyle',
+      name: 'buttonVariant',
       title: 'Button Style',
       type: 'string',
       options: {
         list: [
-          { title: 'Primary (Deep Teal)', value: 'primary' },
-          { title: 'Secondary (Ocean Blue)', value: 'secondary' },
-          { title: 'Tertiary (Burnt Orange)', value: 'tertiary' },
-          { title: 'Outline (Ghost)', value: 'outline' },
+          { title: 'Filled', value: 'filled' },
+          { title: 'Outline', value: 'outline' },
+          { title: 'Ghost', value: 'ghost' },
         ],
       },
-      initialValue: 'primary',
+      initialValue: 'filled',
+    }),
+    defineField({
+      name: 'buttonColor',
+      title: 'Button Color',
+      type: 'reference',
+      to: [{ type: 'color' }],
     }),
     defineField({
       name: 'buttonLink',

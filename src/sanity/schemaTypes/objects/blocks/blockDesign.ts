@@ -6,20 +6,18 @@ export const blockDesign = defineType({
   type: 'object',
   fields: [
     defineField({
-      name: 'backgroundColor',
+      name: 'backgroundColorRef',
       title: 'Background Color',
-      type: 'string',
-      description: 'Defines the tonal layering color of this block.',
-      options: {
-        list: [
-          { title: 'Surface (Standard)', value: 'surface' },
-          { title: 'Surface Container Low', value: 'surface-container-low' },
-          { title: 'Surface Container Highest', value: 'surface-container-highest' },
-          { title: 'Primary Gradient', value: 'primary-gradient' },
-          { title: 'Transparent', value: 'transparent' },
-        ],
-      },
-      initialValue: 'surface',
+      type: 'reference',
+      to: [{ type: 'color' }],
+      description: 'Select a color from the global palette.',
+    }),
+    defineField({
+      name: 'accentColorRef',
+      title: 'Accent Color',
+      type: 'reference',
+      to: [{ type: 'color' }],
+      description: 'Used for decorative elements like icons, borders, and highlights.',
     }),
     defineField({
       name: 'containerStyle',

@@ -3,9 +3,9 @@
 import { useRef } from 'react'
 import { motion, useInView } from 'motion/react'
 import { urlFor } from '@/sanity/lib/image'
-import Link from 'next/link'
-import { BlockContainer, type BlockDesign } from './BlockContainer'
+import { BlockContainer, type BlockDesign, type ColorRef } from './BlockContainer'
 import { cn } from '@/lib/utils'
+import { CtaButton } from '@/components/ui/cta-button'
 
 const ease = [0.22, 1, 0.36, 1] as const
 
@@ -42,23 +42,16 @@ interface FeaturesBlockProps {
     cta?: {
       text?: string
       link?: string
-      buttonStyle?: 'primary' | 'secondary' | 'tertiary' | 'outline'
+      buttonVariant?: 'filled' | 'outline'
+      buttonColor?: ColorRef
     }
   }
 }
 
-function getButtonClasses(style?: string) {
-  switch (style) {
-    case 'secondary': return 'bg-secondary text-on-secondary shadow-secondary/20'
-    case 'tertiary':  return 'bg-tertiary text-on-tertiary shadow-tertiary/20'
-    case 'outline':   return 'bg-transparent text-on-background border-2 border-outline shadow-none'
-    default:          return 'bg-primary text-on-primary shadow-primary/20'
-  }
-}
 
 export function FeaturesBlock({ data }: FeaturesBlockProps) {
   const {
-    design = { backgroundColor: 'surface-container-low' },
+    design,
     layoutVariant = 'icon-list',
     tagline,
     heading,
@@ -101,7 +94,7 @@ export function FeaturesBlock({ data }: FeaturesBlockProps) {
             <div className="aspect-[4/5] rounded-3xl overflow-hidden relative shadow-2xl z-10 bg-surface-container-low">
               <img src={imgUrl} alt={heading || 'Feature image'} className="w-full h-full object-cover" />
               {imageTag && (
-                <div className="absolute top-6 left-6 bg-secondary text-white px-6 py-2 rounded-full font-bold text-xs uppercase tracking-widest z-10">
+                <div className="absolute top-6 left-6 bg-secondary text-on-secondary px-6 py-2 rounded-full font-bold text-xs uppercase tracking-widest z-10">
                   {imageTag}
                 </div>
               )}
@@ -152,12 +145,14 @@ export function FeaturesBlock({ data }: FeaturesBlockProps) {
 
             {cta?.text && cta?.link && (
               <motion.div variants={itemVariants} className="pt-6">
-                <Link
+                <CtaButton
+                  text={cta.text}
                   href={cta.link}
-                  className={`inline-block ${getButtonClasses(cta.buttonStyle)} px-10 py-4 rounded-full font-bold text-lg shadow-xl hover:-translate-y-1 transition-all`}
-                >
-                  {cta.text}
-                </Link>
+                  variant={cta.buttonVariant ?? 'filled'}
+                  color={cta.buttonColor}
+                  size="lg"
+                  className="hover:-translate-y-1"
+                />
               </motion.div>
             )}
           </div>

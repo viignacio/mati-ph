@@ -1,4 +1,5 @@
 import React from 'react'
+import { CtaButton } from '@/components/ui/cta-button'
 
 type CarouselBlockProps = {
   data: any
@@ -37,6 +38,18 @@ export function CarouselBlockUI({ data, dictionary }: CarouselBlockProps) {
             <p className="text-gray-400 italic">No items selected.</p>
           )}
         </div>
+
+        {data.cta?.text && data.cta?.link && (
+          <div className="mt-10 flex justify-center">
+            <CtaButton
+              text={data.cta.text}
+              href={data.cta.link}
+              variant={data.cta.buttonVariant ?? 'filled'}
+              color={data.cta.buttonColor}
+              defaultColor="primary"
+            />
+          </div>
+        )}
       </div>
     </section>
   )

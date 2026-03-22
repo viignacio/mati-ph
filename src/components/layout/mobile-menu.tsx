@@ -1,26 +1,30 @@
 "use client";
 
 import { useEffect } from "react";
-import { X } from "lucide-react";
+import { X, Search } from "lucide-react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 
-const NAV_LINKS = [
-  { label: "Destinations", href: "/destinations" },
-  { label: "Activities", href: "/activities" },
-  { label: "Culture", href: "/culture" },
-  { label: "Food & Dining", href: "/food" },
-  { label: "Travel Guide", href: "/travel-guide" },
-  { label: "About Mati", href: "/about" },
-];
+interface NavLink {
+  text: string;
+  url: string;
+}
+
+interface Cta {
+  text: string;
+  url: string;
+}
 
 interface MobileMenuProps {
   isOpen: boolean;
   onClose: () => void;
   logoUrl?: string;
+  navLinks?: NavLink[];
+  searchEnabled?: boolean;
+  cta?: Cta;
 }
 
-export function MobileMenu({ isOpen, onClose, logoUrl }: MobileMenuProps) {
+export function MobileMenu({ isOpen, onClose, logoUrl, navLinks = [], searchEnabled = false, cta }: MobileMenuProps) {
   // Lock body scroll when open
   useEffect(() => {
     if (isOpen) {
@@ -85,36 +89,50 @@ export function MobileMenu({ isOpen, onClose, logoUrl }: MobileMenuProps) {
           </button>
         </div>
 
+        {/* Search */}
+        {searchEnabled && (
+          <div className="px-6 pt-5">
+            <div className="flex items-center bg-surface-container rounded-full px-4 h-12 border border-outline-variant/15 gap-2">
+              <Search size={16} className="text-outline shrink-0" />
+              <input
+                className="bg-transparent border-none focus:ring-0 text-sm outline-none placeholder:text-on-surface-variant/60 w-full text-on-surface"
+                placeholder="Search..."
+              />
+            </div>
+          </div>
+        )}
+
         {/* Nav links */}
         <nav className="flex-1 flex flex-col gap-1 px-4 py-6">
-          {NAV_LINKS.map((link, i) => (
+          {navLinks.map((link, i) => (
             <Link
-              key={link.href}
-              href={link.href}
+              key={link.url}
+              href={link.url}
               onClick={onClose}
               className={cn(
                 "font-sans text-lg font-medium text-on-surface px-4 py-3 rounded-2xl",
                 "hover:bg-surface-highest hover:text-primary transition-colors duration-150",
-                // Stagger entrance via CSS animation delay
                 isOpen && "animate-fade-in"
               )}
               style={{ animationDelay: `${i * 40}ms` }}
             >
-              {link.label}
+              {link.text}
             </Link>
           ))}
         </nav>
 
         {/* CTA footer */}
-        <div className="px-6 pb-8 pt-4 border-t border-outline-variant/15">
-          <Link
-            href="/travel-guide"
-            onClick={onClose}
-            className="flex h-14 w-full items-center justify-center rounded-full font-sans font-semibold text-on-primary cta-gradient shadow-ambient-md transition-all duration-200 active:scale-[0.97]"
-          >
-            Plan Your Trip
-          </Link>
-        </div>
+        {cta && (
+          <div className="px-6 pb-8 pt-4 border-t border-outline-variant/15">
+            <Link
+              href={cta.url}
+              onClick={onClose}
+              className="flex h-14 w-full items-center justify-center rounded-full font-sans font-semibold text-on-primary cta-gradient shadow-ambient-md transition-all duration-200 active:scale-[0.97]"
+            >
+              {cta.text}
+            </Link>
+          </div>
+        )}
       </div>
     </>
   );

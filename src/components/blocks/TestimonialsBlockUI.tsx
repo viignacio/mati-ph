@@ -1,4 +1,5 @@
 import React from 'react'
+import { CtaButton } from '@/components/ui/cta-button'
 
 export function TestimonialsBlockUI({ data, dictionary }: any) {
   return (
@@ -17,6 +18,18 @@ export function TestimonialsBlockUI({ data, dictionary }: any) {
             </div>
           ))}
         </div>
+
+        {data.cta?.text && data.cta?.link && (
+          <div className="mt-12 flex justify-center">
+            <CtaButton
+              text={data.cta.text}
+              href={data.cta.link}
+              variant={data.cta.buttonVariant ?? 'filled'}
+              color={data.cta.buttonColor}
+              defaultColor="primary"
+            />
+          </div>
+        )}
       </div>
     </section>
   )

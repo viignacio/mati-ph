@@ -2,65 +2,67 @@
 @import "material-symbols/outlined.css";
 
 @theme {
-  /* ─── Color Palette: The Tropical Curator (from Stitch) ─── */
+  /* ─── Brand Colors ─── */
+  /* Primary = Turquoise #40E0D0 | Secondary = Ocean Blue #0077BE */
+  /* Tertiary = Orange Red #FF4500 | Neutral = Beige #F5F5DC        */
 
-  --color-background: #fefee5;
-  --color-on-background: #373928;
-  --color-surface: #fefee5;
-  --color-surface-dim: #e3e5c3;
-  --color-surface-bright: #fefee5;
+  --color-background: #F5F5DC;
+  --color-on-background: #38382A;
+  --color-surface: #F5F5DC;
+  --color-surface-dim: #D8D8C0;
+  --color-surface-bright: #FDFDF5;
   --color-surface-container-lowest: #ffffff;
-  --color-surface-container-low: #fbfbe0;
-  --color-surface-container: #f5f6d9;
-  --color-surface-container-high: #eff0d1;
-  --color-surface-container-highest: #e9eaca;
-  --color-surface-variant: #e9eaca;
-  --color-surface-tint: #007168;
-  --color-on-surface: #373928;
-  --color-on-surface-variant: #646652;
+  --color-surface-container-low: #F8F8E8;
+  --color-surface-container: #F2F2DE;
+  --color-surface-container-high: #EBEBD8;
+  --color-surface-container-highest: #E5E5D2;
+  --color-surface-variant: #E5E5D2;
+  --color-surface-tint: #40E0D0;
+  --color-on-surface: #38382A;
+  --color-on-surface-variant: #66664E;
 
-  --color-primary: #007168;
-  --color-primary-dim: #00645b;
-  --color-on-primary: #ffffff;
-  --color-primary-container: #56f1e0;
-  --color-on-primary-container: #00574f;
-  --color-primary-fixed: #56f1e0;
-  --color-primary-fixed-dim: #43e2d2;
-  --color-on-primary-fixed: #00423c;
-  --color-on-primary-fixed-variant: #006159;
-  --color-inverse-primary: #56f1e0;
+  --color-primary: #40E0D0;
+  --color-primary-dim: #2DCBBF;
+  --color-on-primary: #003430;
+  --color-primary-container: #B3F5EF;
+  --color-on-primary-container: #001F1C;
+  --color-primary-fixed: #B3F5EF;
+  --color-primary-fixed-dim: #89EDE4;
+  --color-on-primary-fixed: #001F1C;
+  --color-on-primary-fixed-variant: #005D57;
+  --color-inverse-primary: #007168;
 
-  --color-secondary: #0068a8;
-  --color-secondary-dim: #005c94;
+  --color-secondary: #0077BE;
+  --color-secondary-dim: #006AAA;
   --color-on-secondary: #ffffff;
-  --color-secondary-container: #b0d5ff;
-  --color-on-secondary-container: #004a79;
-  --color-secondary-fixed: #b0d5ff;
-  --color-secondary-fixed-dim: #94c8ff;
-  --color-on-secondary-fixed: #00375b;
-  --color-on-secondary-fixed-variant: #005488;
+  --color-secondary-container: #C0E5FF;
+  --color-on-secondary-container: #003F6E;
+  --color-secondary-fixed: #C0E5FF;
+  --color-secondary-fixed-dim: #9FD5FF;
+  --color-on-secondary-fixed: #003F6E;
+  --color-on-secondary-fixed-variant: #005E95;
 
-  --color-tertiary: #bc3000;
-  --color-tertiary-dim: #a62a00;
+  --color-tertiary: #FF4500;
+  --color-tertiary-dim: #E03D00;
   --color-on-tertiary: #ffffff;
-  --color-tertiary-container: #ff9476;
-  --color-on-tertiary-container: #601400;
-  --color-tertiary-fixed: #ff9476;
-  --color-tertiary-fixed-dim: #ff7d58;
-  --color-on-tertiary-fixed: #350700;
-  --color-on-tertiary-fixed-variant: #701900;
+  --color-tertiary-container: #FFBBA0;
+  --color-on-tertiary-container: #5C1500;
+  --color-tertiary-fixed: #FFBBA0;
+  --color-tertiary-fixed-dim: #FF9A73;
+  --color-on-tertiary-fixed: #5C1500;
+  --color-on-tertiary-fixed-variant: #841F00;
 
-  --color-outline: #81826d;
-  --color-outline-variant: #babba4;
-  
-  --color-error: #c0262d;
-  --color-error-dim: #9f0519;
+  --color-outline: #88886E;
+  --color-outline-variant: #BBBBAA;
+
+  --color-error: #BA1A1A;
+  --color-error-dim: #8C0012;
   --color-on-error: #ffffff;
-  --color-error-container: #fb5151;
-  --color-on-error-container: #570008;
+  --color-error-container: #FFDAD6;
+  --color-on-error-container: #410002;
 
-  --color-inverse-surface: #0e0f03;
-  --color-inverse-on-surface: #9e9e88;
+  --color-inverse-surface: #313125;
+  --color-inverse-on-surface: #F2F2DE;
 
   /* ─── Typography ─── */
   --font-headline: var(--font-noto-serif);
@@ -90,29 +92,53 @@ body {
   background-image: linear-gradient(135deg, var(--color-primary-dim), var(--color-primary-fixed-dim));
 }
 
+@utility cta-gradient-secondary {
+  background-image: linear-gradient(135deg, var(--color-secondary), var(--color-secondary-container));
+}
+
+@utility cta-gradient-secondary-hover {
+  background-image: linear-gradient(135deg, var(--color-secondary-dim), var(--color-secondary-fixed-dim));
+}
+
+@utility cta-gradient-tertiary {
+  background-image: linear-gradient(135deg, var(--color-tertiary), var(--color-tertiary-container));
+}
+
+@utility cta-gradient-tertiary-hover {
+  background-image: linear-gradient(135deg, var(--color-tertiary-dim), var(--color-tertiary-fixed-dim));
+}
+
+@utility cta-gradient-neutral {
+  background-image: linear-gradient(135deg, var(--color-surface-container-highest), var(--color-surface-container-lowest));
+}
+
+@utility cta-gradient-neutral-hover {
+  background-image: linear-gradient(135deg, var(--color-surface-container-high), var(--color-surface-container-lowest));
+}
+
 @utility mandaya-accent {
-  background-image: repeating-linear-gradient(45deg, transparent, transparent 5px, rgba(188, 48, 0, 0.1) 5px, rgba(188, 48, 0, 0.1) 10px);
+  background-image: repeating-linear-gradient(45deg, transparent, transparent 8px, rgba(255, 69, 0, 0.1) 8px, rgba(255, 69, 0, 0.1) 16px);
 }
 
 /* Glassmorphism — floating navigation */
 @utility glass-nav {
-  background: rgba(254, 254, 229, 0.82);
+  background: rgba(245, 245, 220, 0.82);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
 }
 
 /* Ambient shadow — using on-surface tint, never pure black */
 @utility shadow-ambient {
-  box-shadow: 0 20px 40px rgba(55, 57, 40, 0.06);
+  box-shadow: 0 20px 40px rgba(56, 56, 42, 0.06);
 }
 
 @utility shadow-ambient-md {
-  box-shadow: 0 8px 24px rgba(55, 57, 40, 0.08);
+  box-shadow: 0 8px 24px rgba(56, 56, 42, 0.08);
 }
 
 /* Ghost border fallback — felt, not seen */
 @utility border-ghost {
-  border: 1px solid color-mix(in srgb, #babba4 15%, transparent);
+  border: 1px solid color-mix(in srgb, #BBBBAA 15%, transparent);
 }
 
 /* Section spacing — white space as luxury */

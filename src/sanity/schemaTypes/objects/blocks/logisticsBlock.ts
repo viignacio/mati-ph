@@ -21,6 +21,34 @@ export const logisticsBlock = defineType({
       type: 'string',
     }),
     defineField({
+      name: 'cta',
+      title: 'Call to Action',
+      type: 'object',
+      fields: [
+        defineField({ name: 'text', title: 'Button Text', type: 'string' }),
+        defineField({ name: 'link', title: 'Button Link', type: 'string' }),
+        defineField({
+          name: 'buttonVariant',
+          title: 'Button Style',
+          type: 'string',
+          options: {
+            list: [
+              { title: 'Filled', value: 'filled' },
+              { title: 'Outline', value: 'outline' },
+              { title: 'Ghost', value: 'ghost' },
+            ],
+          },
+          initialValue: 'filled',
+        }),
+        defineField({
+          name: 'buttonColor',
+          title: 'Button Color',
+          type: 'reference',
+          to: [{ type: 'color' }],
+        }),
+      ],
+    }),
+    defineField({
       name: 'cards',
       title: 'Logistics Cards',
       type: 'array',
@@ -44,9 +72,8 @@ export const logisticsBlock = defineType({
             }),
             defineField({
               name: 'icon',
-              title: 'Icon (Material Symbol)',
-              type: 'string',
-              description: 'e.g. "directions_bus", "directions_car"',
+              title: 'Icon',
+              type: 'iconPicker',
             }),
             defineField({
               name: 'title',

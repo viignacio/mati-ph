@@ -6,6 +6,7 @@ import { CallToActionBlockUI } from './blocks/CallToActionBlockUI'
 import { FeaturesBlock } from './blocks/FeaturesBlock'
 import { TestimonialsBlockUI } from './blocks/TestimonialsBlockUI'
 import { LogisticsBlockUI } from './blocks/LogisticsBlockUI'
+import { HighlightsBlock } from './blocks/HighlightsBlock'
 import { ScrollReveal } from './sections/scroll-reveal'
 // Old UI imports dropped
 
@@ -41,6 +42,8 @@ export function PageBuilder({ blocks, dictionary }: PageBuilderProps) {
             return <ScrollReveal key={key}><TestimonialsBlockUI data={block} dictionary={dictionary} /></ScrollReveal>
           case 'logisticsBlock':
             return <ScrollReveal key={key}><LogisticsBlockUI data={block} /></ScrollReveal>
+          case 'highlightsBlock':
+            return <HighlightsBlock key={key} data={block} />
           default:
             console.warn(`Unknown block type: ${block._type}`)
             return null

@@ -6,6 +6,7 @@ import { locationPoint } from './objects/locationPoint'
 import { priceRange } from './objects/priceRange'
 import { richText } from './objects/richText'
 import { navigationItem } from './objects/navigationItem'
+import { iconPicker } from './objects/iconPicker'
 
 // Blocks
 import { blockDesign } from './objects/blocks/blockDesign'
@@ -17,9 +18,11 @@ import { callToActionBlock } from './objects/blocks/callToActionBlock'
 import { featuresBlock } from './objects/blocks/featuresBlock'
 import { testimonialsBlock } from './objects/blocks/testimonialsBlock'
 import { logisticsBlock } from './objects/blocks/logisticsBlock'
+import { highlightsBlock } from './objects/blocks/highlightsBlock'
 import { pageBuilder } from './objects/pageBuilder'
 
 // Documents
+import { color } from './documents/color'
 import { destination } from './documents/destination'
 import { activity } from './documents/activity'
 import { festival } from './documents/festival'
@@ -41,6 +44,9 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     richText,
     navigationItem,
     
+    // Objects (custom types)
+    iconPicker,
+
     // Blocks
     blockDesign,
     heroBlock,
@@ -51,9 +57,11 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     featuresBlock,
     testimonialsBlock,
     logisticsBlock,
+    highlightsBlock,
     pageBuilder,
 
     // Documents
+    color,
     destination,
     activity,
     festival,

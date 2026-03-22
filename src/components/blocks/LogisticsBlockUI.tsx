@@ -1,6 +1,7 @@
 import React from 'react'
 import Image from 'next/image'
 import { cn } from '@/lib/utils'
+import { CtaButton } from '@/components/ui/cta-button'
 
 type LogisticsBlockProps = {
   data: any
@@ -99,6 +100,18 @@ export function LogisticsBlockUI({ data }: LogisticsBlockProps) {
             )
           })}
         </div>
+
+        {data.cta?.text && data.cta?.link && (
+          <div className="mt-16 flex justify-center">
+            <CtaButton
+              text={data.cta.text}
+              href={data.cta.link}
+              variant={data.cta.buttonVariant ?? 'filled'}
+              color={data.cta.buttonColor}
+              defaultColor="primary"
+            />
+          </div>
+        )}
       </div>
     </section>
   )

@@ -1,15 +1,17 @@
 'use client'
 
 import { urlFor } from '@/sanity/lib/image'
-import Link from 'next/link'
 import { motion } from 'motion/react'
-import { BlockContainer, type BlockDesign } from './BlockContainer'
+import { BlockContainer, type BlockDesign, type ColorRef } from './BlockContainer'
 import { cn } from '@/lib/utils'
+import { colorVar } from '@/lib/color'
+import { CtaButton } from '@/components/ui/cta-button'
 
 interface CTA {
   text?: string
   link?: string
-  buttonStyle?: 'primary' | 'secondary' | 'tertiary' | 'outline'
+  buttonVariant?: 'filled' | 'outline'
+  buttonColor?: ColorRef
 }
 
 interface HeroBlockProps {
@@ -22,7 +24,7 @@ interface HeroBlockProps {
     animateText?: boolean
     heading?: string
     highlightedWord?: string
-    highlightColor?: 'primary' | 'secondary' | 'tertiary' | 'neutral'
+    highlightColor?: ColorRef
     contentAlignment?: 'left' | 'right'
     quotation?: string
     quotationPosition?: 'top' | 'center' | 'bottom'
@@ -45,7 +47,7 @@ export function HeroBlock({ data }: HeroBlockProps) {
     animateText,
     heading,
     highlightedWord,
-    highlightColor = 'primary',
+    highlightColor,
     contentAlignment = 'left',
     quotation,
     quotationPosition = 'bottom',
@@ -77,24 +79,17 @@ export function HeroBlock({ data }: HeroBlockProps) {
     }
 
     const parts = heading.split(new RegExp(`(${highlightedWord})`, 'gi'))
-    
-    // Determine color class based on highlightColor
-    const getColorClass = () => {
-      switch (highlightColor) {
-        case 'secondary': return 'text-secondary font-bold italic'
-        case 'tertiary': return 'text-tertiary font-bold italic'
-        case 'neutral': return 'text-on-surface-variant font-bold italic'
-        case 'primary':
-        default: return 'text-primary-container italic'
-      }
-    }
-    
+
     return (
       <>
         {parts.map((part, i) => {
           if (part.toLowerCase() === highlightedWord.toLowerCase()) {
             return (
-              <span key={i} className={`${getColorClass()} delay-150 duration-700`}>
+              <span
+                key={i}
+                className="font-bold italic delay-150 duration-700"
+                style={{ color: colorVar(highlightColor) }}
+              >
                 {part}
               </span>
             )
@@ -105,7 +100,7 @@ export function HeroBlock({ data }: HeroBlockProps) {
     )
   }
 
-  // We diverge from standard BlockContainer slightly if full-screen to allow edge-to-edge absolute images
+  // Full-screen variant — edge-to-edge with background image/video
   if (layoutVariant === 'full-screen') {
     return (
       <section className="relative h-[100dvh] min-h-[600px] w-full overflow-hidden flex items-center justify-center">
@@ -113,9 +108,9 @@ export function HeroBlock({ data }: HeroBlockProps) {
         <div className="absolute inset-0 z-0">
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent z-10"></div>
           {heroType === 'image' && bgImageUrl && (
-            <img 
+            <img
               src={bgImageUrl}
-              alt={heading || 'Hero background'} 
+              alt={heading || 'Hero background'}
               className="w-full h-full object-cover"
             />
           )}
@@ -144,15 +139,24 @@ export function HeroBlock({ data }: HeroBlockProps) {
 
           <motion.div {...anim(0.4)} className="flex flex-col sm:flex-row items-center justify-center gap-4">
             {cta?.text && cta?.link && (
-              <Link href={cta.link} className="w-full sm:w-auto px-10 py-4 rounded-full bg-gradient-to-r from-primary to-primary-container text-on-primary font-bold text-lg shadow-xl shadow-primary/20 hover:scale-105 transition-all">
-                {cta.text}
-              </Link>
+              <CtaButton
+                text={cta.text}
+                href={cta.link}
+                variant={cta.buttonVariant ?? 'filled'}
+                color={cta.buttonColor}
+                size="lg"
+                className="w-full sm:w-auto hover:scale-105"
+              />
             )}
-
             {secondaryCta?.text && secondaryCta?.link && (
-              <Link href={secondaryCta.link} className="w-full sm:w-auto px-10 py-4 rounded-full bg-white/60 backdrop-blur-md text-on-background font-bold text-lg hover:bg-surface-container-highest transition-all border border-outline-variant/20">
-                {secondaryCta.text}
-              </Link>
+              <CtaButton
+                text={secondaryCta.text}
+                href={secondaryCta.link}
+                variant={secondaryCta.buttonVariant ?? 'outline'}
+                color={secondaryCta.buttonColor}
+                size="lg"
+                className="hover:opacity-80"
+              />
             )}
           </motion.div>
         </div>
@@ -168,20 +172,20 @@ export function HeroBlock({ data }: HeroBlockProps) {
     )
   }
 
-  // Split-content variant mapping (e.g., standard page headers)
+  // Split-content variant
   return (
-    <BlockContainer design={design} className="flex min-h-[50vh] items-center">
+    <BlockContainer design={design} className="flex min-h-[100dvh] items-center">
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center w-full">
         <div className={cn(
           "lg:col-span-5 space-y-8 z-10",
           contentAlignment === 'right' ? "lg:order-2" : "lg:order-1"
         )}>
           {tagline && (
-            <motion.span {...anim(0)} className="text-tertiary font-bold uppercase tracking-[0.2em] block">
+            <motion.span {...anim(0)} className="font-bold uppercase tracking-[0.2em] block" style={{ color: colorVar(highlightColor) ?? 'var(--color-tertiary)' }}>
               {tagline}
             </motion.span>
           )}
-          
+
           {heading && (
             <motion.h1 {...anim(0.1)} className="text-5xl md:text-7xl font-headline font-black text-on-background tracking-tight leading-tight">
               {renderHeading()}
@@ -196,35 +200,27 @@ export function HeroBlock({ data }: HeroBlockProps) {
 
           <motion.div {...anim(0.4)} className="flex flex-wrap items-center gap-6">
             {cta?.text && cta?.link && (
-              <Link 
-                href={cta.link} 
-                className={cn(
-                  "px-8 py-4 rounded-full font-bold transition-all shadow-lg",
-                  cta.buttonStyle === 'secondary' ? "bg-secondary text-white shadow-secondary/20" :
-                  cta.buttonStyle === 'tertiary' ? "bg-tertiary text-white shadow-tertiary/20" :
-                  cta.buttonStyle === 'outline' ? "border-2 border-primary text-primary shadow-none" :
-                  "bg-gradient-to-br from-primary to-primary-container text-on-primary shadow-primary/20"
-                )}
-              >
-                {cta.text}
-              </Link>
+              <CtaButton
+                text={cta.text}
+                href={cta.link}
+                variant={cta.buttonVariant ?? 'filled'}
+                color={cta.buttonColor}
+              />
             )}
-
             {secondaryCta?.text && secondaryCta?.link && (
-              <Link 
-                href={secondaryCta.link} 
-                className={cn(
-                  "font-bold flex items-center gap-2 group transition-colors",
-                  secondaryCta.buttonStyle === 'primary' ? "text-primary" :
-                  secondaryCta.buttonStyle === 'secondary' ? "text-secondary" :
-                  "text-tertiary"
-                )}
-              >
-                {secondaryCta.text}
-                <span className="material-symbols-outlined group-hover:translate-x-1 transition-transform">
-                  {secondaryCta.text.toLowerCase().includes('watch') || secondaryCta.text.toLowerCase().includes('story') ? 'play_circle' : 'arrow_forward'}
-                </span>
-              </Link>
+              <CtaButton
+                text={secondaryCta.text}
+                href={secondaryCta.link}
+                variant="ghost"
+                color={secondaryCta.buttonColor}
+                defaultColor="tertiary"
+                icon={
+                  secondaryCta.text.toLowerCase().includes('watch') ||
+                  secondaryCta.text.toLowerCase().includes('story')
+                    ? 'play_circle'
+                    : 'arrow_forward'
+                }
+              />
             )}
           </motion.div>
         </div>
@@ -238,12 +234,12 @@ export function HeroBlock({ data }: HeroBlockProps) {
             imageAspectRatio === 'square' ? "aspect-square h-auto" :
             imageAspectRatio === 'portrait' ? "aspect-[3/4] h-auto" :
             imageAspectRatio === '4:3' ? "aspect-[4/3] h-auto" :
-            "h-[500px] md:h-[650px]" // fallback to original height behavior
+            "h-[500px] md:h-[650px]"
           )}>
             {bgImageUrl ? (
-              <img 
-                src={bgImageUrl} 
-                alt={heading || 'Hero image'} 
+              <img
+                src={bgImageUrl}
+                alt={heading || 'Hero image'}
                 className="w-full h-full object-cover"
               />
             ) : (
@@ -255,38 +251,27 @@ export function HeroBlock({ data }: HeroBlockProps) {
           </div>
 
           {quotation && (
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, scale: 0.9, x: contentAlignment === 'right' ? 20 : -20 }}
               whileInView={{ opacity: 1, scale: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8, delay: 0.5 }}
               className={cn(
                 "absolute z-20 flex flex-col bg-tertiary-container rounded-[2rem] md:rounded-[3rem] p-5 md:p-8 shadow-2xl border border-white/20 backdrop-blur-sm",
-                
-                // --- Container Position (Relative to Image) ---
                 quotationPosition === 'top' ? "-top-6 md:-top-10" :
                 quotationPosition === 'center' ? "top-1/2 -translate-y-1/2" :
-                "-bottom-6 md:-bottom-10", 
-                
-                // Alignment side
+                "-bottom-6 md:-bottom-10",
                 contentAlignment === 'right' ? "-right-4 md:-right-10" : "-left-4 md:-left-10",
-
-                // --- Internal Text Alignment ---
                 quotationPosition === 'top' ? "justify-start" :
                 quotationPosition === 'center' ? "justify-center" :
                 "justify-end",
-
-                // --- Responsive Dimensions ---
-                // Always Landscape on mobile to avoid blocking too much image height
-                // Respect Aspect Ratio settings only on Desktop (md+)
-                quotationAspectRatio === 'portrait' ? "w-64 md:w-64 h-[160px] md:h-[400px]" : 
-                quotationAspectRatio === 'square' ? "w-64 md:w-80 h-[160px] md:h-80" : 
-                "w-64 md:w-96 min-h-[120px] md:min-h-[200px]" // landscape
+                quotationAspectRatio === 'portrait' ? "w-64 md:w-64 h-[160px] md:h-[400px]" :
+                quotationAspectRatio === 'square' ? "w-64 md:w-80 h-[160px] md:h-80" :
+                "w-64 md:w-96 min-h-[120px] md:min-h-[200px]"
               )}
             >
               <p className={cn(
                 "font-headline italic text-on-tertiary-container leading-snug",
-                // Responsive text size: smaller on mobile landscape, larger on desktop
                 quotationAspectRatio === 'portrait' ? "text-base md:text-xl" : "text-base md:text-2xl"
               )}>
                 "{quotation}"

@@ -4,11 +4,17 @@ export const gridBlock = defineType({
   name: 'gridBlock',
   title: 'Grid Block',
   type: 'object',
+  groups: [
+    { name: 'design', title: 'Design' },
+    { name: 'content', title: 'Content' },
+    { name: 'grid', title: 'Grid Items' },
+  ],
   fields: [
     defineField({
       name: 'layoutVariant',
       title: 'Layout Variant',
       type: 'string',
+      group: 'design',
       options: {
         list: [
           { title: 'Standard Grid', value: 'standard-grid' },
@@ -23,11 +29,13 @@ export const gridBlock = defineType({
       name: 'design',
       title: 'Design Options',
       type: 'blockDesign',
+      group: 'design',
     }),
     defineField({
       name: 'cardStyle',
       title: 'Card Style',
       type: 'string',
+      group: 'design',
       options: {
         list: [
           { title: 'Elevated (Layered)', value: 'elevated' },
@@ -41,30 +49,77 @@ export const gridBlock = defineType({
       name: 'staggered',
       title: 'Staggered Layout',
       type: 'boolean',
+      group: 'design',
       description: 'Offset middle items in a 3-column grid (Islands style).',
       initialValue: false,
     }),
+    // Content Group
     defineField({
       name: 'tagline',
       title: 'Tagline',
       type: 'string',
+      group: 'content',
     }),
     defineField({
       name: 'heading',
       title: 'Heading',
       type: 'string',
+      group: 'content',
     }),
     defineField({
-      name: 'description',
-      title: 'Description',
+      name: 'subheading',
+      title: 'Subheading',
       type: 'text',
+      group: 'content',
       rows: 3,
     }),
     defineField({
+      name: 'cta',
+      title: 'Block Call to Action (Optional)',
+      type: 'object',
+      group: 'content',
+      description: 'Optional link to View All content',
+      fields: [
+        defineField({
+          name: 'text',
+          title: 'Button Text',
+          type: 'string',
+        }),
+        defineField({
+          name: 'link',
+          title: 'Button Link',
+          type: 'string',
+        }),
+        defineField({
+          name: 'buttonVariant',
+          title: 'Button Style',
+          type: 'string',
+          options: {
+            list: [
+              { title: 'Filled', value: 'filled' },
+              { title: 'Outline', value: 'outline' },
+              { title: 'Ghost', value: 'ghost' },
+            ],
+          },
+          initialValue: 'ghost',
+        }),
+        defineField({
+          name: 'buttonColor',
+          title: 'Button Color',
+          type: 'reference',
+          to: [{ type: 'color' }],
+        }),
+      ],
+    }),
+
+    // --- Standard Grid Items (Manual References) ---
+    defineField({
       name: 'manualItems',
-      title: 'Manual Items',
+      title: 'Manual Items (Content References)',
       type: 'array',
-      description: 'Select specific items to display in this grid, with optional layout overrides per item.',
+      group: 'grid',
+      description: 'Select specific items to display in this grid. NOT used in Bento Grid.',
+      hidden: ({ parent }) => parent?.layoutVariant === 'bento-grid',
       of: [
         defineField({
           name: 'gridItem',
@@ -80,7 +135,20 @@ export const gridBlock = defineType({
                 { type: 'foodSpot' },
                 { type: 'travelGuide' },
               ],
-              validation: (Rule) => Rule.required(),
+              validation: (Rule) => Rule.custom((value, context) => {
+                const { document, path } = context
+                
+                // If we're inside a bento grid, validation is not required
+                // We resolve this by checking the block's layoutVariant in the document content
+                const blocks = (document as any)?.content || []
+                const blockKey = path?.[1] ? (path[1] as any)?._key : null
+                const currentBlock = blocks.find((b: any) => b._key === blockKey)
+                
+                const layout = currentBlock?.layoutVariant || (document as any)?.layoutVariant
+                
+                if (layout === 'bento-grid') return true
+                return value ? true : 'Required'
+              }),
             }),
             defineField({
               name: 'itemSettings',
@@ -149,21 +217,67 @@ export const gridBlock = defineType({
         }),
       ],
     }),
+
+    // --- Bento Image Grid Items ---
     defineField({
-      name: 'cta',
-      title: 'Block Call to Action (Optional)',
-      type: 'object',
-      description: 'Optional link to View All content',
-      fields: [
+      name: 'imageGrid',
+      title: 'Bento Image Grid',
+      type: 'array',
+      group: 'grid',
+      description: 'Used only for the Bento Grid variant.',
+      hidden: ({ parent }) => parent?.layoutVariant !== 'bento-grid',
+      of: [
         defineField({
-          name: 'text',
-          title: 'Button Text',
-          type: 'string',
-        }),
-        defineField({
-          name: 'link',
-          title: 'Button Link',
-          type: 'string',
+          name: 'bentoItem',
+          type: 'object',
+          fields: [
+            defineField({ name: 'image', type: 'image', options: { hotspot: true } }),
+            defineField({ name: 'itemTagline', title: 'Item Tagline', type: 'string' }),
+            defineField({ name: 'itemHeading', title: 'Item Heading', type: 'string' }),
+            defineField({ name: 'itemSubheading', title: 'Item Subheading', type: 'string' }),
+            defineField({ 
+              name: 'enableHover', 
+              title: 'Enable Special Hover Effect', 
+              type: 'boolean',
+              description: 'When enabled, shows a colored overlay with centered text box on hover.',
+              initialValue: false 
+            }),
+            defineField({
+              name: 'hoverColor',
+              title: 'Hover Overlay Color',
+              type: 'reference',
+              to: [{ type: 'color' }],
+              hidden: ({ parent }) => !parent?.enableHover,
+            }),
+            defineField({
+              name: 'hoverText',
+              title: 'Hover Box Text',
+              type: 'string',
+              hidden: ({ parent }) => !parent?.enableHover,
+            }),
+            defineField({
+              name: 'colSpan',
+              title: 'Column Span',
+              type: 'number',
+              options: { list: [1, 2, 3, 4] },
+              initialValue: 1,
+            }),
+            defineField({
+              name: 'rowSpan',
+              title: 'Row Span',
+              type: 'number',
+              options: { list: [1, 2] },
+              initialValue: 1,
+            }),
+            defineField({ name: 'ctaLink', title: 'Link (Optional)', type: 'string' }),
+          ],
+          preview: {
+            select: {
+              title: 'itemHeading',
+              subtitle: 'itemTagline',
+              media: 'image',
+            },
+          },
         }),
       ],
     }),
@@ -172,12 +286,13 @@ export const gridBlock = defineType({
     select: {
       title: 'heading',
       media: 'manualItems.0.reference.mainImage',
+      mediaBento: 'imageGrid.0.image',
     },
-    prepare({ title, media }) {
+    prepare({ title, media, mediaBento }) {
       return {
         title: title || 'Grid Block',
         subtitle: 'Grid Block',
-        media,
+        media: media || mediaBento,
       }
     },
   },

@@ -1,8 +1,15 @@
 import React from 'react'
 import { cn } from '@/lib/utils'
 
+export type ColorRef = {
+  value: { current: string }
+  hex?: string
+  title?: string
+}
+
 export type BlockDesign = {
-  backgroundColor?: 'surface' | 'surface-container-low' | 'surface-container-highest' | 'primary-gradient' | 'transparent'
+  backgroundColorRef?: ColorRef
+  accentColorRef?: ColorRef
   containerStyle?: 'full-bleed' | 'rounded-container'
   topPadding?: 'none' | 'standard' | 'large' | 'larger'
   bottomPadding?: 'none' | 'standard' | 'large' | 'larger'
@@ -16,19 +23,33 @@ interface BlockContainerProps {
   children: React.ReactNode
 }
 
+// Static lookup for known surface tokens — maps to Tailwind classes
+const KNOWN_BG_CLASSES: Record<string, string> = {
+  'surface': 'bg-surface',
+  'surface-container-low': 'bg-surface-container-low',
+  'surface-container-highest': 'bg-surface-container-highest',
+  'surface-warm': 'bg-surface-container-highest',  // pattern handled via mandaya-accent
+  'primary-gradient': 'cta-gradient',
+  'secondary-gradient': 'cta-gradient-secondary',
+  'tertiary-gradient': 'cta-gradient-tertiary',
+  'neutral-gradient': 'cta-gradient-neutral',
+  'transparent': 'bg-transparent',
+}
+
 /**
  * Global wrapper for Composable Blocks.
  * Automatically resolves Sanity blockDesign fields into Tailwind classes based on "The Tropical Curator" rules.
  */
 export function BlockContainer({ design, id, className, containerWidth = '75%', children }: BlockContainerProps) {
-  // Resolve Background Color (Layering Rule)
-  const bgClasses = {
-    'surface': 'bg-surface',
-    'surface-container-low': 'bg-surface-container-low',
-    'surface-container-highest': 'bg-surface-container-highest',
-    'primary-gradient': 'bg-gradient-to-br from-primary to-primary-container',
-    'transparent': 'bg-transparent',
-  }[design?.backgroundColor || 'transparent']
+  const colorValue = design?.backgroundColorRef?.value?.current
+  const colorHex = design?.backgroundColorRef?.hex
+
+  const isWarm = colorValue === 'surface-warm'
+  const bgClass = colorValue ? KNOWN_BG_CLASSES[colorValue] : undefined
+  // Custom colors not in the static map fall back to a CSS var inline style
+  const bgStyle = colorValue && !bgClass && !isWarm
+    ? { backgroundColor: `var(--color-${colorValue}, ${colorHex ?? 'transparent'})` }
+    : undefined
 
   // Resolve Padding
   const ptClasses = {
@@ -45,17 +66,20 @@ export function BlockContainer({ design, id, className, containerWidth = '75%', 
     'larger': 'pb-32',
   }[design?.bottomPadding || 'none']
 
-  // Resolve Container Style
-  // A rounded container has a max width, horizontal padding, and is centered with rounded corners.
   const isRounded = design?.containerStyle === 'rounded-container'
-  
-  // If it's a rounded-container, the outer section acts as a wrapper, and the background is applied to an inner div.
-  // If full-bleed, the background is on the section.
-  
+
   if (isRounded) {
+    // surface-warm: mandaya pattern on outer section, solid bg on inner rounded div
+    // custom colors: bgStyle applied to inner div only
     return (
-      <section id={id} className={cn("w-full py-0", ptClasses, pbClasses)}>
-        <div className={cn("mx-auto rounded-3xl overflow-hidden p-8 md:p-16 lg:p-24", bgClasses, className)} style={{ width: containerWidth }}>
+      <section
+        id={id}
+        className={cn("w-full py-0", ptClasses, pbClasses, isWarm && "mandaya-accent")}
+      >
+        <div
+          className={cn("mx-auto rounded-3xl overflow-hidden p-8 md:p-16 lg:p-24", bgClass, className)}
+          style={{ width: containerWidth, ...(bgStyle ?? {}) }}
+        >
           {children}
         </div>
       </section>
@@ -64,17 +88,12 @@ export function BlockContainer({ design, id, className, containerWidth = '75%', 
 
   // Full Bleed (Edge to Edge)
   return (
-    <section 
-      id={id} 
-      className={cn(
-        "w-full",
-        bgClasses,
-        ptClasses,
-        pbClasses,
-        className
-      )}
+    <section
+      id={id}
+      className={cn("w-full", bgClass, isWarm && "mandaya-accent", ptClasses, pbClasses, className)}
+      style={bgStyle}
     >
-      <div className="mx-auto" style={{ width: containerWidth }}>
+      <div className="mx-auto h-full" style={{ width: containerWidth }}>
         {children}
       </div>
     </section>

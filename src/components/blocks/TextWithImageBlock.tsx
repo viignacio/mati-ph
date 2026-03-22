@@ -3,9 +3,9 @@
 import Image from 'next/image'
 import { motion } from 'motion/react'
 import { urlFor } from '@/sanity/lib/image'
-import Link from 'next/link'
 import { BlockContainer, type BlockDesign } from './BlockContainer'
 import { cn } from '@/lib/utils'
+import { CtaButton } from '@/components/ui/cta-button'
 import { PortableText } from '@/components/portable-text'
 import { useScrollReveal } from '@/hooks/useScrollReveal'
 
@@ -25,6 +25,8 @@ interface TextWithImageBlockProps {
     cta?: {
       text?: string
       link?: string
+      buttonVariant?: 'filled' | 'outline' | 'ghost'
+      buttonColor?: any
     }
     images?: any[]
     imagePosition?: 'left' | 'right'
@@ -126,12 +128,14 @@ export function TextWithImageBlock({ data }: TextWithImageBlockProps) {
           )}
 
           {cta?.text && cta?.link && (
-            <Link
+            <CtaButton
+              text={cta.text}
               href={cta.link}
-              className="inline-block text-on-tertiary bg-tertiary px-8 py-3 rounded-full font-bold shadow-lg shadow-tertiary/20 hover:scale-105 transition-transform"
-            >
-              {cta.text}
-            </Link>
+              variant={cta.buttonVariant ?? 'filled'}
+              color={cta.buttonColor}
+              defaultColor="tertiary"
+              className="hover:scale-105 shadow-tertiary/20"
+            />
           )}
         </motion.div>
 

@@ -295,8 +295,28 @@ export const PAGE_BY_SLUG_QUERY = defineQuery(/* groq */ `
     },
     content[] {
       ...,
+      // Dereference backgroundColorRef for all blocks that use blockDesign
+      defined(design) => {
+        design {
+          ...,
+          backgroundColorRef->{ value, hex, title }
+        }
+      },
       _type == "heroBlock" => {
         ...,
+        design {
+          ...,
+          backgroundColorRef->{ value, hex, title }
+        },
+        highlightColor->{ value, hex, title },
+        cta {
+          ...,
+          buttonColor->{ value, hex, title }
+        },
+        secondaryCta {
+          ...,
+          buttonColor->{ value, hex, title }
+        },
         heroType == "slides" => {
           "slides": *[_type == "heroSlide"] | order(order asc) {
             _id,
@@ -311,6 +331,14 @@ export const PAGE_BY_SLUG_QUERY = defineQuery(/* groq */ `
       },
       _type == "carouselBlock" => {
         ...,
+        design {
+          ...,
+          backgroundColorRef->{ value, hex, title }
+        },
+        cta {
+          ...,
+          buttonColor->{ value, hex, title }
+        },
         items[]-> {
           _id,
           name,
@@ -324,6 +352,14 @@ export const PAGE_BY_SLUG_QUERY = defineQuery(/* groq */ `
       },
       _type == "gridBlock" => {
         ...,
+        design {
+          ...,
+          backgroundColorRef->{ value, hex, title }
+        },
+        cta {
+          ...,
+          buttonColor->{ value, hex, title }
+        },
         manualItems[]{
           ...,
           reference->{
@@ -337,10 +373,38 @@ export const PAGE_BY_SLUG_QUERY = defineQuery(/* groq */ `
             "slug": slug.current,
             mainImage{${imageFields}}
           }
+        },
+        imageGrid[]{
+          ...,
+          hoverColor->{ value, hex, title }
+        }
+      },
+      _type == "highlightsBlock" => {
+        ...,
+        design {
+          ...,
+          backgroundColorRef->{ value, hex, title }
+        },
+        accentColor->{ value, hex, title },
+        cta {
+          ...,
+          buttonColor->{ value, hex, title }
+        },
+        highlights[]{
+          ...,
+          iconColor->{ value, hex, title }
         }
       },
       _type == "logisticsBlock" => {
         ...,
+        design {
+          ...,
+          backgroundColorRef->{ value, hex, title }
+        },
+        cta {
+          ...,
+          buttonColor->{ value, hex, title }
+        },
         cards[]{
           ...,
           backgroundImage{${imageFields}}
@@ -348,7 +412,41 @@ export const PAGE_BY_SLUG_QUERY = defineQuery(/* groq */ `
       },
       _type == "featuresBlock" => {
         ...,
-        mainImage{${imageFields}}
+        design {
+          ...,
+          backgroundColorRef->{ value, hex, title }
+        },
+        mainImage{${imageFields}},
+        cta {
+          ...,
+          buttonColor->{ value, hex, title }
+        }
+      },
+      _type == "textWithImageBlock" => {
+        ...,
+        design {
+          ...,
+          backgroundColorRef->{ value, hex, title }
+        },
+        cta {
+          ...,
+          buttonColor->{ value, hex, title }
+        }
+      },
+      _type == "testimonialsBlock" => {
+        ...,
+        design {
+          ...,
+          backgroundColorRef->{ value, hex, title }
+        },
+        cta {
+          ...,
+          buttonColor->{ value, hex, title }
+        }
+      },
+      _type == "callToActionBlock" => {
+        ...,
+        buttonColor->{ value, hex, title }
       }
     }
   }

@@ -1,5 +1,4 @@
 import { defineField, defineType } from 'sanity'
-import { featureIconOptions } from '../../../lib/featureIconOptions'
 
 export const featuresBlock = defineType({
   name: 'featuresBlock',
@@ -96,10 +95,7 @@ export const featuresBlock = defineType({
             defineField({
               name: 'icon',
               title: 'Icon',
-              type: 'string',
-              options: {
-                list: featureIconOptions,
-              },
+              type: 'iconPicker',
             }),
           ],
         }),
@@ -122,18 +118,23 @@ export const featuresBlock = defineType({
           type: 'string',
         }),
         defineField({
-          name: 'buttonStyle',
+          name: 'buttonVariant',
           title: 'Button Style',
           type: 'string',
           options: {
             list: [
-              { title: 'Primary (Deep Teal)', value: 'primary' },
-              { title: 'Secondary (Ocean Blue)', value: 'secondary' },
-              { title: 'Tertiary (Burnt Orange)', value: 'tertiary' },
-              { title: 'Outline (Ghost)', value: 'outline' },
+              { title: 'Filled', value: 'filled' },
+              { title: 'Outline', value: 'outline' },
+              { title: 'Ghost', value: 'ghost' },
             ],
           },
-          initialValue: 'primary',
+          initialValue: 'filled',
+        }),
+        defineField({
+          name: 'buttonColor',
+          title: 'Button Color',
+          type: 'reference',
+          to: [{ type: 'color' }],
         }),
       ],
     }),

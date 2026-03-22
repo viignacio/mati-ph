@@ -1,4 +1,5 @@
 import React from 'react'
+import { CtaButton } from '@/components/ui/cta-button'
 
 type CallToActionBlockProps = {
   data: any
@@ -10,11 +11,11 @@ export function CallToActionBlockUI({ data, dictionary }: CallToActionBlockProps
     <section className="relative py-32 px-6 flex items-center justify-center text-center overflow-hidden">
       {/* Background with a primary gradient overlay */}
       <div className="absolute inset-0 bg-gradient-to-br from-primary via-primary/80 to-tertiary z-0"></div>
-      
+
       {/* If data.backgroundImage exists, render it with opacity */}
       {data.backgroundImage && (
-        <div className="absolute inset-0 mix-blend-overlay opacity-50 z-0 bg-gray-800">
-           {/* Placeholder for actual SanityImage element */}
+        <div className="absolute inset-0 mix-blend-overlay opacity-50 z-0 bg-surface-inverse">
+          {/* Placeholder for actual SanityImage element */}
         </div>
       )}
 
@@ -27,14 +28,16 @@ export function CallToActionBlockUI({ data, dictionary }: CallToActionBlockProps
         <h2 className="font-playfair text-5xl md:text-6xl text-white font-bold mb-8 drop-shadow-lg leading-tight">
           {data.heading}
         </h2>
-        
+
         {data.buttonText && data.buttonLink && (
-          <a
+          <CtaButton
+            text={data.buttonText}
             href={data.buttonLink}
-            className="px-10 py-5 bg-white text-primary hover:bg-surface hover:scale-105 transition-all duration-300 font-bold text-lg rounded-full shadow-xl"
-          >
-            {data.buttonText}
-          </a>
+            color={data.buttonColor}
+            defaultColor="surface-container-lowest"
+            size="lg"
+            className="hover:scale-105 hover:-translate-y-0 duration-300 shadow-xl"
+          />
         )}
       </div>
     </section>

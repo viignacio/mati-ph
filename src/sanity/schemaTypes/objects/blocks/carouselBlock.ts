@@ -54,6 +54,25 @@ export const carouselBlock = defineType({
           title: 'Button Link',
           type: 'string',
         }),
+        defineField({
+          name: 'buttonVariant',
+          title: 'Button Style',
+          type: 'string',
+          options: {
+            list: [
+              { title: 'Filled', value: 'filled' },
+              { title: 'Outline', value: 'outline' },
+              { title: 'Ghost', value: 'ghost' },
+            ],
+          },
+          initialValue: 'filled',
+        }),
+        defineField({
+          name: 'buttonColor',
+          title: 'Button Color',
+          type: 'reference',
+          to: [{ type: 'color' }],
+        }),
       ],
     }),
   ],

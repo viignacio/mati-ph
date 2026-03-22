@@ -13,5 +13,6 @@ export const pageBuilder = defineType({
     { type: 'featuresBlock' },
     { type: 'testimonialsBlock' },
     { type: 'logisticsBlock' },
+    { type: 'highlightsBlock' },
   ],
 })

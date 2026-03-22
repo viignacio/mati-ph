@@ -53,9 +53,9 @@ export function Navbar({ data }: { data?: any }) {
           {/* Right Action */}
           <div className="flex items-center gap-6">
             {searchEnabled && (
-              <div className="hidden md:flex items-center bg-surface-container rounded-full px-4 h-12 border border-outline-variant/15">
+              <div suppressHydrationWarning className="hidden md:flex items-center bg-surface-container rounded-full px-4 h-12 border border-outline-variant/15">
                 <span className="material-symbols-outlined text-outline" style={{ fontSize: 18 }}>search</span>
-                <input className="bg-transparent border-none focus:ring-0 text-sm outline-none placeholder:text-on-surface-variant/60 w-32 lg:w-40 text-on-surface ml-2" placeholder="Search..." />
+                <input suppressHydrationWarning className="bg-transparent border-none focus:ring-0 text-sm outline-none placeholder:text-on-surface-variant/60 w-32 lg:w-40 text-on-surface ml-2" placeholder="Search..." />
               </div>
             )}
 
@@ -80,7 +80,7 @@ export function Navbar({ data }: { data?: any }) {
         </div>
       </header>
 
-      <MobileMenu isOpen={mobileOpen} onClose={() => setMobileOpen(false)} logoUrl={logoUrl} />
+      <MobileMenu isOpen={mobileOpen} onClose={() => setMobileOpen(false)} logoUrl={logoUrl} navLinks={navLinks} searchEnabled={searchEnabled} cta={cta} />
     </>
   );
 }
