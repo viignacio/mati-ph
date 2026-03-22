@@ -1,4 +1,5 @@
 import React from 'react'
+import Image from 'next/image'
 import { Hero } from '@/components/sections/hero'
 
 // ─── Types ────────────────────────────────────────────────────────────────────
@@ -20,6 +21,7 @@ type HeroSlide = {
 
 type HeroBlockData = {
   heroType?: 'image' | 'video' | 'slides'
+  layoutVariant?: 'full-screen' | 'split-content'
   heading?: string
   subheading?: string
   tagline?: string
@@ -43,6 +45,52 @@ type HeroBlockProps = {
 }
 
 // ─── Sub-renderers ────────────────────────────────────────────────────────────
+
+function HeroFullScreenImageBg({ data }: { data: HeroBlockData }) {
+  const imgUrl = data.backgroundImage?.asset?.url
+
+  return (
+    <section className="relative w-full h-[80vh] min-h-[600px] flex items-center justify-center overflow-hidden">
+      <div className="absolute inset-0 z-0">
+        {imgUrl && (
+          <Image 
+            src={imgUrl} 
+            alt={data.heading || 'Hero background'} 
+            fill 
+            className="object-cover" 
+            priority
+          />
+        )}
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-surface/90"></div>
+      </div>
+      <div className="relative z-10 text-center max-w-4xl px-6 flex flex-col items-center">
+        {data.tagline && (
+          <span className="text-secondary font-caveat text-2xl tracking-wide mb-4">{data.tagline}</span>
+        )}
+        {data.heading && (
+          <h1 className="font-serif text-6xl md:text-8xl text-on-surface leading-tight tracking-tight mb-4 drop-shadow-sm">
+            {data.heading}
+          </h1>
+        )}
+        {data.subheading && (
+          <p className="font-body text-xl md:text-2xl text-on-surface-variant max-w-2xl mx-auto font-medium">
+            {data.subheading}
+          </p>
+        )}
+        {data.cta?.text && (
+          <div className="mt-8">
+            <a
+              href={data.cta.link || '#'}
+              className="bg-primary text-on-primary px-10 py-4 rounded-full font-bold text-lg shadow-xl shadow-primary/20 hover:-translate-y-1 transition-all inline-block"
+            >
+              {data.cta.text}
+            </a>
+          </div>
+        )}
+      </div>
+    </section>
+  )
+}
 
 function HeroImageBg({ data }: { data: HeroBlockData }) {
   const imgUrl = data.backgroundImage?.asset?.url
@@ -131,5 +179,9 @@ export function HeroBlockUI({ data }: HeroBlockProps) {
   }
 
   // Default: 'image'
-  return <HeroImageBg data={data} />
+  if (data.layoutVariant === 'split-content') {
+    return <HeroImageBg data={data} />
+  }
+
+  return <HeroFullScreenImageBg data={data} />
 }
