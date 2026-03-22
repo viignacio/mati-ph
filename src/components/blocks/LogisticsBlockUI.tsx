@@ -41,7 +41,7 @@ export function LogisticsBlockUI({ data }: LogisticsBlockProps) {
                         fill 
                         className="object-cover transition-transform duration-700 group-hover:scale-110" 
                       />
-                      <div className="absolute inset-0 bg-gradient-to-br from-on-background/95 via-on-background/80 to-on-background/40"></div>
+                      <div className="absolute inset-0 bg-gradient-to-br from-on-background/100 via-on-background/95 to-on-background/80 transition-opacity duration-300 group-hover:opacity-90"></div>
                     </div>
                   )}
 
