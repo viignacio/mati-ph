@@ -11,6 +11,7 @@ interface GridBlockProps {
     design?: BlockDesign
     layoutVariant?: 'standard-grid' | 'asymmetric-masonry' | 'masonry-captions' | 'bento-grid'
     cardStyle?: 'elevated' | 'flat'
+    staggered?: boolean
     tagline?: string
     heading?: string
     description?: string
@@ -157,9 +158,11 @@ export function GridBlock({ data }: GridBlockProps) {
           }[aspectRatio]
 
           const isElevated = cardStyle === 'elevated'
+          
+          const isStaggered = data.staggered && (index % 3 === 1)
 
           return (
-            <div key={item._key || index} className={cn("block", spanClass)}>
+            <div key={item._key || index} className={cn("block transition-all duration-500", spanClass, isStaggered && "md:mt-12")}>
               <div
                 className={cn(
                   "group relative overflow-hidden rounded-3xl block w-full",
