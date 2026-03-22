@@ -99,7 +99,7 @@ export function GridBlock({ data }: GridBlockProps) {
 
       {/* Grid Area */}
       <div className={cn(
-        "grid gap-6",
+        "grid gap-10",
         isMasonry ? "grid-cols-1 md:grid-cols-12" : "grid-cols-1 md:grid-cols-3"
       )}>
         {manualItems?.map((item, index) => {
