@@ -6,11 +6,6 @@ export const gridBlock = defineType({
   type: 'object',
   fields: [
     defineField({
-      name: 'design',
-      title: 'Design Options',
-      type: 'blockDesign',
-    }),
-    defineField({
       name: 'layoutVariant',
       title: 'Layout Variant',
       type: 'string',
@@ -23,6 +18,11 @@ export const gridBlock = defineType({
         ],
       },
       initialValue: 'standard-grid',
+    }),
+    defineField({
+      name: 'design',
+      title: 'Design Options',
+      type: 'blockDesign',
     }),
     defineField({
       name: 'cardStyle',
@@ -43,6 +43,11 @@ export const gridBlock = defineType({
       type: 'boolean',
       description: 'Offset middle items in a 3-column grid (Islands style).',
       initialValue: false,
+    }),
+    defineField({
+      name: 'tagline',
+      title: 'Tagline',
+      type: 'string',
     }),
     defineField({
       name: 'heading',

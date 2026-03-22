@@ -11,6 +11,7 @@ interface GridBlockProps {
     design?: BlockDesign
     layoutVariant?: 'standard-grid' | 'asymmetric-masonry' | 'masonry-captions' | 'bento-grid'
     cardStyle?: 'elevated' | 'flat'
+    tagline?: string
     heading?: string
     description?: string
     manualItems?: Array<{
@@ -32,16 +33,21 @@ interface GridBlockProps {
 }
 
 export function GridBlock({ data }: GridBlockProps) {
-  const { design, layoutVariant = 'standard-grid', cardStyle = 'elevated', heading, description, manualItems, cta } = data
+  const { design, layoutVariant = 'standard-grid', cardStyle = 'elevated', tagline, heading, description, manualItems, cta } = data
 
   const isMasonry = layoutVariant === 'asymmetric-masonry'
 
   return (
     <BlockContainer design={design}>
       {/* Header Area */}
-      {(heading || description || cta) && (
+      {(tagline || heading || description || cta) && (
         <div className="flex flex-col lg:flex-row items-end justify-between mb-16 gap-8">
           <div className="max-w-2xl">
+            {tagline && (
+              <span className="text-tertiary font-bold tracking-widest text-sm mb-4 block uppercase">
+                {tagline}
+              </span>
+            )}
             {heading && (
               <>
                 <div className="h-1 w-20 bg-tertiary mb-6"></div>
