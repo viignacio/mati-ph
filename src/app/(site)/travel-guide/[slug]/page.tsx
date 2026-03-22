@@ -9,6 +9,8 @@ import { urlFor } from '@/sanity/lib/image'
 import { Container } from '@/components/ui/container'
 import { Badge } from '@/components/ui/badge'
 import { PortableText } from '@/components/portable-text'
+import { JsonLd } from '@/components/json-ld'
+import { siteUrl } from '@/lib/utils'
 
 const CATEGORY_LABELS: Record<string, string> = {
   'getting-there': 'Getting There',
@@ -61,8 +63,41 @@ export default async function TravelGuidePage({
     ? urlFor(data.mainImage).width(1600).height(700).auto('format').url()
     : null
 
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'Article',
+        headline: data.title,
+        url: `${siteUrl}/travel-guide/${data.slug}`,
+        ...(data.mainImage
+          ? { image: urlFor(data.mainImage).width(1200).height(630).url() }
+          : {}),
+        author: {
+          '@type': 'Organization',
+          name: 'Mati City Tourism',
+          url: siteUrl,
+        },
+        publisher: {
+          '@type': 'Organization',
+          name: 'Mati City Tourism',
+          url: siteUrl,
+        },
+      },
+      {
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Home', item: siteUrl },
+          { '@type': 'ListItem', position: 2, name: 'Travel Guide', item: `${siteUrl}/travel-guide` },
+          { '@type': 'ListItem', position: 3, name: data.title, item: `${siteUrl}/travel-guide/${data.slug}` },
+        ],
+      },
+    ],
+  }
+
   return (
     <>
+      <JsonLd data={jsonLd} />
       {/* Hero */}
       <div className={`relative overflow-hidden ${heroSrc ? 'h-[45vh] min-h-[300px]' : 'pt-32 pb-16 bg-surface-dim'}`}>
         {heroSrc ? (

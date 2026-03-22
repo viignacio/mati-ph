@@ -358,6 +358,14 @@ export const PAGE_SLUGS_QUERY = defineQuery(/* groq */ `
   *[_type == "page" && defined(slug.current)]{ "slug": slug.current }
 `)
 
+export const FESTIVAL_SLUGS_QUERY = defineQuery(/* groq */ `
+  *[_type == "festival" && defined(slug.current)]{ "slug": slug.current }
+`)
+
+export const FOOD_SPOT_SLUGS_QUERY = defineQuery(/* groq */ `
+  *[_type == "foodSpot" && defined(slug.current)]{ "slug": slug.current }
+`)
+
 // ─── Dictionary ───────────────────────────────────────────────────────────────
 
 export const DICTIONARY_QUERY = defineQuery(/* groq */ `

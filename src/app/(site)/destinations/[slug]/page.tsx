@@ -1,7 +1,6 @@
 import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
 import Image from 'next/image'
-import Link from 'next/link'
 import { sanityFetch } from '@/sanity/lib/live'
 import { client } from '@/sanity/lib/client'
 import { DESTINATION_BY_SLUG_QUERY, DESTINATION_SLUGS_QUERY } from '@/sanity/lib/queries'
@@ -11,6 +10,7 @@ import { Badge } from '@/components/ui/badge'
 import { Card } from '@/components/ui/card'
 import { PortableText } from '@/components/portable-text'
 import { JsonLd } from '@/components/json-ld'
+import { siteUrl } from '@/lib/utils'
 
 export async function generateStaticParams() {
   const data = await client.fetch(DESTINATION_SLUGS_QUERY)
@@ -58,13 +58,40 @@ export default async function DestinationPage({
 
   const jsonLd = {
     '@context': 'https://schema.org',
-    '@type': 'TouristAttraction',
-    name: data.name,
-    description: data.tagline ?? undefined,
-    url: `https://mati.ph/destinations/${data.slug}`,
-    ...(data.location?.lat && data.location?.lng
-      ? { geo: { '@type': 'GeoCoordinates', latitude: data.location.lat, longitude: data.location.lng } }
-      : {}),
+    '@graph': [
+      {
+        '@type': 'TouristAttraction',
+        name: data.name,
+        description: data.tagline ?? undefined,
+        url: `${siteUrl}/destinations/${data.slug}`,
+        ...(data.mainImage
+          ? { image: urlFor(data.mainImage).width(1200).height(630).url() }
+          : {}),
+        ...(data.location?.lat && data.location?.lng
+          ? {
+              geo: {
+                '@type': 'GeoCoordinates',
+                latitude: data.location.lat,
+                longitude: data.location.lng,
+              },
+            }
+          : {}),
+        containedInPlace: {
+          '@type': 'City',
+          name: 'Mati City',
+          addressRegion: 'Davao Oriental',
+          addressCountry: 'PH',
+        },
+      },
+      {
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Home', item: siteUrl },
+          { '@type': 'ListItem', position: 2, name: 'Destinations', item: `${siteUrl}/destinations` },
+          { '@type': 'ListItem', position: 3, name: data.name, item: `https://mati.ph/destinations/${data.slug}` },
+        ],
+      },
+    ],
   }
 
   return (
@@ -139,7 +166,7 @@ export default async function DestinationPage({
               {data.howToGetThere && (
                 <div className="bg-surface-low rounded-3xl p-6 shadow-ambient md:col-span-2">
                   <h3 className="font-serif text-xl font-semibold text-on-surface mb-3">How to Get There</h3>
-                  <p className="font-sans text-sm text-on-surface-variant whitespace-pre-line">{data.howToGetThere}</p>
+                  <PortableText value={data.howToGetThere} />
                 </div>
               )}
             </div>

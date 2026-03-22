@@ -10,6 +10,7 @@ import { Container } from '@/components/ui/container'
 import { Badge, type BadgeVariant } from '@/components/ui/badge'
 import { PortableText } from '@/components/portable-text'
 import { JsonLd } from '@/components/json-ld'
+import { siteUrl } from '@/lib/utils'
 
 export async function generateStaticParams() {
   const data = await client.fetch(ACTIVITY_SLUGS_QUERY)
@@ -62,9 +63,31 @@ export default async function ActivityPage({
 
   const jsonLd = {
     '@context': 'https://schema.org',
-    '@type': 'TouristAttraction',
-    name: data.name,
-    url: `https://mati.ph/activities/${data.slug}`,
+    '@graph': [
+      {
+        '@type': 'TouristAttraction',
+        name: data.name,
+        url: `${siteUrl}/activities/${data.slug}`,
+        image: urlFor(data.mainImage).width(1200).height(630).url(),
+        ...(data.destination
+          ? {
+              containedInPlace: {
+                '@type': 'TouristAttraction',
+                name: data.destination.name,
+                url: `${siteUrl}/destinations/${data.destination.slug}`,
+              },
+            }
+          : {}),
+      },
+      {
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Home', item: siteUrl },
+          { '@type': 'ListItem', position: 2, name: 'Activities', item: `${siteUrl}/activities` },
+          { '@type': 'ListItem', position: 3, name: data.name, item: `${siteUrl}/activities/${data.slug}` },
+        ],
+      },
+    ],
   }
 
   return (
