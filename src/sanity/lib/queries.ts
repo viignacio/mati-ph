@@ -338,6 +338,17 @@ export const PAGE_BY_SLUG_QUERY = defineQuery(/* groq */ `
             mainImage{${imageFields}}
           }
         }
+      },
+      _type == "logisticsBlock" => {
+        ...,
+        cards[]{
+          ...,
+          backgroundImage{${imageFields}}
+        }
+      },
+      _type == "featuresBlock" => {
+        ...,
+        mainImage{${imageFields}}
       }
     }
   }
