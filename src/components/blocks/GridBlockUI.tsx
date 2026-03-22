@@ -42,6 +42,7 @@ function AsymmetricMasonryGrid({ data }: GridBlockProps) {
                       alt={ref.name || 'Grid item'} 
                       fill 
                       className="object-cover transition-transform duration-700 group-hover:scale-110" 
+                      sizes="(max-width: 768px) 100vw, 33vw"
                     />
                   )}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
@@ -102,7 +103,13 @@ function StandardGrid({ data, dictionary }: GridBlockProps) {
               <article key={ref._id || i} className="group cursor-pointer bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300">
                 <div className="aspect-[4/3] bg-gray-200 overflow-hidden relative">
                   {imgUrl ? (
-                    <Image src={imgUrl} alt={ref.name} fill className="object-cover" />
+                    <Image 
+                      src={imgUrl} 
+                      alt={ref.name} 
+                      fill 
+                      className="object-cover" 
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    />
                   ) : (
                     <span className="absolute inset-0 flex items-center justify-center text-gray-400">Image</span>
                   )}

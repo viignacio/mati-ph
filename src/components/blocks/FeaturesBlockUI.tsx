@@ -85,6 +85,7 @@ function FeaturesWithImage({ data }: { data: FeaturesBlockData }) {
                 alt={data.heading || 'Feature image'} 
                 fill 
                 className="object-cover" 
+                sizes="(max-width: 1024px) 100vw, 50vw"
               />
             )}
             {data.imageTag && (
