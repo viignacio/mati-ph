@@ -95,12 +95,22 @@ function HeroFullScreenImageBg({ data }: { data: HeroBlockData }) {
 
 function HeroImageBg({ data }: { data: HeroBlockData }) {
   const imgUrl = data.backgroundImage?.asset?.url
+
   return (
-    <section
-      className="relative w-full h-[80vh] min-h-[600px] flex items-center justify-center bg-gray-900 text-white text-center"
-      style={imgUrl ? { backgroundImage: `url(${imgUrl})`, backgroundSize: 'cover', backgroundPosition: 'center' } : undefined}
-    >
-      <div className="absolute inset-0 bg-black/40 z-0" />
+    <section className="relative w-full h-[80vh] min-h-[600px] flex items-center justify-center bg-gray-900 text-white text-center overflow-hidden">
+      <div className="absolute inset-0 z-0">
+        {imgUrl && (
+          <Image 
+            src={imgUrl} 
+            alt={data.heading || 'Hero background'} 
+            fill 
+            priority 
+            className="object-cover opacity-60" 
+            sizes="100vw"
+          />
+        )}
+        <div className="absolute inset-0 bg-black/40" />
+      </div>
       <div className="relative z-10 p-6 max-w-4xl mx-auto flex flex-col items-center gap-6">
         {data.tagline && (
           <span className="text-secondary font-caveat text-2xl tracking-wide">{data.tagline}</span>
@@ -138,6 +148,7 @@ function HeroVideoBg({ data }: { data: HeroBlockData }) {
           muted
           loop
           playsInline
+          poster={data.backgroundImage?.asset?.url}
         />
       )}
       <div className="absolute inset-0 bg-black/50 z-0" />
