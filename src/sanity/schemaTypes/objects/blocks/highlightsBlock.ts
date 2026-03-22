@@ -107,6 +107,12 @@ export const highlightsBlock = defineType({
           type: 'reference',
           to: [{ type: 'color' }],
         }),
+        defineField({
+          name: 'icon',
+          title: 'Button Icon',
+          type: 'iconPicker',
+          description: 'Optional trailing icon (Material Symbol).',
+        }),
       ],
     }),
     defineField({

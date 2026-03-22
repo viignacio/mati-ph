@@ -46,6 +46,12 @@ export const logisticsBlock = defineType({
           type: 'reference',
           to: [{ type: 'color' }],
         }),
+        defineField({
+          name: 'icon',
+          title: 'Button Icon',
+          type: 'iconPicker',
+          description: 'Optional trailing icon (Material Symbol).',
+        }),
       ],
     }),
     defineField({
@@ -97,6 +103,20 @@ export const logisticsBlock = defineType({
                 ],
               },
               initialValue: 'light',
+            }),
+            defineField({
+              name: 'overlayStrength',
+              title: 'Overlay Strength',
+              type: 'string',
+              options: {
+                list: [
+                  { title: 'Light (25%)', value: 'light' },
+                  { title: 'Dark (50%)', value: 'dark' },
+                  { title: 'Darker (80%)', value: 'darker' },
+                ],
+              },
+              initialValue: 'dark',
+              hidden: ({ parent }) => parent?.theme !== 'dark' || !parent?.backgroundImage,
             }),
             defineField({
               name: 'backgroundImage',

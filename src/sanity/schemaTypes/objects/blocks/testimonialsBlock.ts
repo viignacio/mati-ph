@@ -30,35 +30,6 @@ export const testimonialsBlock = defineType({
       initialValue: false,
     }),
     defineField({
-      name: 'cta',
-      title: 'Call to Action',
-      type: 'object',
-      group: 'content',
-      fields: [
-        defineField({ name: 'text', title: 'Button Text', type: 'string' }),
-        defineField({ name: 'link', title: 'Button Link', type: 'string' }),
-        defineField({
-          name: 'buttonVariant',
-          title: 'Button Style',
-          type: 'string',
-          options: {
-            list: [
-              { title: 'Filled', value: 'filled' },
-              { title: 'Outline', value: 'outline' },
-              { title: 'Ghost', value: 'ghost' },
-            ],
-          },
-          initialValue: 'filled',
-        }),
-        defineField({
-          name: 'buttonColor',
-          title: 'Button Color',
-          type: 'reference',
-          to: [{ type: 'color' }],
-        }),
-      ],
-    }),
-    defineField({
       name: 'testimonials',
       title: 'Testimonials',
       type: 'array',
@@ -93,6 +64,13 @@ export const testimonialsBlock = defineType({
               options: { hotspot: true },
             }),
             defineField({
+              name: 'avatarColor',
+              title: 'Placeholder Color',
+              type: 'reference',
+              to: [{ type: 'color' }],
+              description: 'Fallback circle color when no avatar image is set.',
+            }),
+            defineField({
               name: 'quoteIcon',
               title: 'Quote Icon',
               type: 'string',
@@ -107,6 +85,41 @@ export const testimonialsBlock = defineType({
               media: 'authorAvatar',
             },
           },
+        }),
+      ],
+    }),
+    defineField({
+      name: 'cta',
+      title: 'Call to Action',
+      type: 'object',
+      group: 'content',
+      fields: [
+        defineField({ name: 'text', title: 'Button Text', type: 'string' }),
+        defineField({ name: 'link', title: 'Button Link', type: 'string' }),
+        defineField({
+          name: 'buttonVariant',
+          title: 'Button Variant',
+          type: 'string',
+          options: {
+            list: [
+              { title: 'Filled', value: 'filled' },
+              { title: 'Outline', value: 'outline' },
+              { title: 'Ghost', value: 'ghost' },
+            ],
+          },
+          initialValue: 'filled',
+        }),
+        defineField({
+          name: 'buttonColor',
+          title: 'Button Color',
+          type: 'reference',
+          to: [{ type: 'color' }],
+        }),
+        defineField({
+          name: 'icon',
+          title: 'Button Icon',
+          type: 'iconPicker',
+          description: 'Optional trailing icon (Material Symbol).',
         }),
       ],
     }),

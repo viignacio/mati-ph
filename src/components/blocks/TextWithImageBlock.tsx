@@ -27,6 +27,7 @@ interface TextWithImageBlockProps {
       link?: string
       buttonVariant?: 'filled' | 'outline' | 'ghost'
       buttonColor?: any
+      icon?: string
     }
     images?: any[]
     imagePosition?: 'left' | 'right'
@@ -133,6 +134,7 @@ export function TextWithImageBlock({ data }: TextWithImageBlockProps) {
               href={cta.link}
               variant={cta.buttonVariant ?? 'filled'}
               color={cta.buttonColor}
+              icon={cta.icon}
               defaultColor="tertiary"
               className="hover:scale-105 shadow-tertiary/20"
             />

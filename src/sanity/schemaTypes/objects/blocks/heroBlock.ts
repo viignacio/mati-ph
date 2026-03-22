@@ -87,15 +87,6 @@ export const heroBlock = defineType({
       hidden: ({ parent }) => parent?.heroType === 'slides',
     }),
     defineField({
-      name: 'highlightColor',
-      title: 'Highlight Color',
-      type: 'reference',
-      to: [{ type: 'color' }],
-      group: 'content',
-      description: 'Color for the highlighted word in the heading.',
-      hidden: ({ parent }) => parent?.heroType === 'slides',
-    }),
-    defineField({
       name: 'subheading',
       title: 'Subheading',
       type: 'string',
@@ -138,6 +129,12 @@ export const heroBlock = defineType({
           type: 'reference',
           to: [{ type: 'color' }],
         }),
+        defineField({
+          name: 'icon',
+          title: 'Button Icon',
+          type: 'iconPicker',
+          description: 'Optional trailing icon (Material Symbol).',
+        }),
       ],
     }),
     defineField({
@@ -175,6 +172,12 @@ export const heroBlock = defineType({
           title: 'Button Color',
           type: 'reference',
           to: [{ type: 'color' }],
+        }),
+        defineField({
+          name: 'icon',
+          title: 'Button Icon',
+          type: 'iconPicker',
+          description: 'Optional trailing icon (Material Symbol).',
         }),
       ],
     }),
@@ -216,7 +219,7 @@ export const heroBlock = defineType({
     }),
     defineField({
       name: 'quotationPosition',
-      title: 'Decorative Quotation Position',
+      title: 'Decorative Quotation Text Position',
       type: 'string',
       group: 'image',
       options: {

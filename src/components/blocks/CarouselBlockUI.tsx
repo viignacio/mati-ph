@@ -46,6 +46,7 @@ export function CarouselBlockUI({ data, dictionary }: CarouselBlockProps) {
               href={data.cta.link}
               variant={data.cta.buttonVariant ?? 'filled'}
               color={data.cta.buttonColor}
+              icon={data.cta.icon}
               defaultColor="primary"
             />
           </div>

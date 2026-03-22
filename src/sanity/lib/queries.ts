@@ -295,18 +295,20 @@ export const PAGE_BY_SLUG_QUERY = defineQuery(/* groq */ `
     },
     content[] {
       ...,
-      // Dereference backgroundColorRef for all blocks that use blockDesign
+      // Dereference color refs for all blocks that use blockDesign
       defined(design) => {
         design {
           ...,
-          backgroundColorRef->{ value, hex, title }
+          backgroundColorRef->{ value, hex, title },
+          accentColorRef->{ value, hex, title }
         }
       },
       _type == "heroBlock" => {
         ...,
         design {
           ...,
-          backgroundColorRef->{ value, hex, title }
+          backgroundColorRef->{ value, hex, title },
+          accentColorRef->{ value, hex, title }
         },
         highlightColor->{ value, hex, title },
         cta {
@@ -333,7 +335,8 @@ export const PAGE_BY_SLUG_QUERY = defineQuery(/* groq */ `
         ...,
         design {
           ...,
-          backgroundColorRef->{ value, hex, title }
+          backgroundColorRef->{ value, hex, title },
+          accentColorRef->{ value, hex, title }
         },
         cta {
           ...,
@@ -354,7 +357,8 @@ export const PAGE_BY_SLUG_QUERY = defineQuery(/* groq */ `
         ...,
         design {
           ...,
-          backgroundColorRef->{ value, hex, title }
+          backgroundColorRef->{ value, hex, title },
+          accentColorRef->{ value, hex, title }
         },
         cta {
           ...,
@@ -383,7 +387,8 @@ export const PAGE_BY_SLUG_QUERY = defineQuery(/* groq */ `
         ...,
         design {
           ...,
-          backgroundColorRef->{ value, hex, title }
+          backgroundColorRef->{ value, hex, title },
+          accentColorRef->{ value, hex, title }
         },
         accentColor->{ value, hex, title },
         cta {
@@ -399,7 +404,8 @@ export const PAGE_BY_SLUG_QUERY = defineQuery(/* groq */ `
         ...,
         design {
           ...,
-          backgroundColorRef->{ value, hex, title }
+          backgroundColorRef->{ value, hex, title },
+          accentColorRef->{ value, hex, title }
         },
         cta {
           ...,
@@ -414,7 +420,8 @@ export const PAGE_BY_SLUG_QUERY = defineQuery(/* groq */ `
         ...,
         design {
           ...,
-          backgroundColorRef->{ value, hex, title }
+          backgroundColorRef->{ value, hex, title },
+          accentColorRef->{ value, hex, title }
         },
         mainImage{${imageFields}},
         cta {
@@ -426,7 +433,8 @@ export const PAGE_BY_SLUG_QUERY = defineQuery(/* groq */ `
         ...,
         design {
           ...,
-          backgroundColorRef->{ value, hex, title }
+          backgroundColorRef->{ value, hex, title },
+          accentColorRef->{ value, hex, title }
         },
         cta {
           ...,
@@ -437,7 +445,12 @@ export const PAGE_BY_SLUG_QUERY = defineQuery(/* groq */ `
         ...,
         design {
           ...,
-          backgroundColorRef->{ value, hex, title }
+          backgroundColorRef->{ value, hex, title },
+          accentColorRef->{ value, hex, title }
+        },
+        testimonials[] {
+          ...,
+          avatarColor->{ value, hex, title }
         },
         cta {
           ...,

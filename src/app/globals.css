@@ -75,6 +75,16 @@
 /* Light mode only — no dark mode */
 :root {
   color-scheme: light;
+
+  /* Dark Accent Colors — defined here (not @theme) so var() resolves at runtime */
+  --color-dark-red: #c45253;
+  --color-on-dark-red: #ffffff;
+  --color-dark-blue: #117CC3;
+  --color-on-dark-blue: #ffffff;
+  --color-dark-neutral: #777964;
+  --color-on-dark-neutral: #ffffff;
+  --color-dark-teal: #00867B;
+  --color-on-dark-teal: #ffffff;
 }
 
 body {

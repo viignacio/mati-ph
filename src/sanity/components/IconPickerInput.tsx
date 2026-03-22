@@ -146,20 +146,6 @@ export function IconPickerInput(props: StringInputProps) {
                         <span className="studio-material-symbol" style={{ fontSize: 22 }}>
                           {icon.value}
                         </span>
-                        <Text
-                          size={0}
-                          style={{
-                            overflow: 'hidden',
-                            textOverflow: 'ellipsis',
-                            whiteSpace: 'nowrap',
-                            width: '100%',
-                            textAlign: 'center',
-                            fontSize: 9,
-                          }}
-                          muted={!isSelected}
-                        >
-                          {icon.title}
-                        </Text>
                       </Flex>
                     </Card>
                   )

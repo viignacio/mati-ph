@@ -44,6 +44,7 @@ interface FeaturesBlockProps {
       link?: string
       buttonVariant?: 'filled' | 'outline'
       buttonColor?: ColorRef
+      icon?: string
     }
   }
 }
@@ -150,6 +151,7 @@ export function FeaturesBlock({ data }: FeaturesBlockProps) {
                   href={cta.link}
                   variant={cta.buttonVariant ?? 'filled'}
                   color={cta.buttonColor}
+                  icon={cta.icon}
                   size="lg"
                   className="hover:-translate-y-1"
                 />

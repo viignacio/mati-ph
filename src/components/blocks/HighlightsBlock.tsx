@@ -12,7 +12,6 @@ interface HighlightsBlockProps {
     _key: string
     _type: 'highlightsBlock'
     design?: BlockDesign
-    accentColor?: ColorRef
     layoutAlignment?: 'left' | 'right'
     icon?: string
     heading?: string
@@ -22,6 +21,7 @@ interface HighlightsBlockProps {
       link?: string
       buttonVariant?: 'filled' | 'outline' | 'ghost'
       buttonColor?: ColorRef
+      icon?: string
     }
     highlights?: Array<{
       _key: string
@@ -44,7 +44,6 @@ interface HighlightsBlockProps {
 export function HighlightsBlock({ data }: HighlightsBlockProps) {
   const {
     design,
-    accentColor,
     layoutAlignment = 'left',
     icon,
     heading,
@@ -55,7 +54,7 @@ export function HighlightsBlock({ data }: HighlightsBlockProps) {
   } = data
 
   const isReversed = layoutAlignment === 'right'
-  const accent = colorVar(accentColor)
+  const accent = colorVar(design?.accentColorRef)
 
   const containerDesign: BlockDesign = {
     ...design,
@@ -221,7 +220,7 @@ export function HighlightsBlock({ data }: HighlightsBlockProps) {
               {icon && (
                 <span
                   className="h-10 w-10 flex items-center justify-center rounded-full"
-                  style={{ backgroundColor: accent ?? 'var(--color-primary)', color: onColorVar(accentColor) }}
+                  style={{ backgroundColor: accent ?? 'var(--color-primary)', color: onColorVar(design?.accentColorRef) }}
                 >
                   <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>
                     {icon}
@@ -271,6 +270,7 @@ export function HighlightsBlock({ data }: HighlightsBlockProps) {
                   href={cta.link}
                   variant={cta.buttonVariant ?? 'filled'}
                   color={cta.buttonColor}
+                  icon={cta.icon}
                   defaultColor="primary"
                 />
               </div>

@@ -109,6 +109,12 @@ export const gridBlock = defineType({
           type: 'reference',
           to: [{ type: 'color' }],
         }),
+        defineField({
+          name: 'icon',
+          title: 'Button Icon',
+          type: 'iconPicker',
+          description: 'Optional trailing icon (Material Symbol).',
+        }),
       ],
     }),
 

@@ -93,8 +93,8 @@ export const ICON_OPTIONS: IconOption[] = [
   { title: 'Basketball', value: 'sports_basketball', category: 'Activities & Sports' },
   { title: 'Baseball', value: 'sports_baseball', category: 'Activities & Sports' },
   { title: 'Volleyball', value: 'sports_volleyball', category: 'Activities & Sports' },
-  { title: 'Fishing', value: 'phishing', category: 'Activities & Sports' },
-  { title: 'Rock Climbing', value: 'climbing', category: 'Activities & Sports' },
+  { title: 'Fishing', value: 'hook', category: 'Activities & Sports' },
+  { title: 'Rock Climbing', value: 'sports_gymnastics', category: 'Activities & Sports' },
   { title: 'Skateboarder', value: 'skateboarding', category: 'Activities & Sports' },
 
   // Culture & Attractions

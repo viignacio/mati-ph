@@ -60,6 +60,7 @@ interface GridBlockProps {
       link?: string
       buttonVariant?: 'filled' | 'outline' | 'ghost'
       buttonColor?: ColorRef
+      icon?: string
     }
   }
 }
@@ -136,7 +137,7 @@ export function GridBlock({ data }: GridBlockProps) {
             variant={cta.buttonVariant ?? 'ghost'}
             color={cta.buttonColor}
             defaultColor="tertiary"
-            icon="arrow_forward"
+            icon={cta.icon ?? 'arrow_forward'}
             className="mb-2 md:mb-0"
           />
         )}

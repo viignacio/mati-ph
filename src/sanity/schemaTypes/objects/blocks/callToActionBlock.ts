@@ -41,6 +41,12 @@ export const callToActionBlock = defineType({
       to: [{ type: 'color' }],
     }),
     defineField({
+      name: 'buttonIcon',
+      title: 'Button Icon',
+      type: 'iconPicker',
+      description: 'Optional trailing icon (Material Symbol).',
+    }),
+    defineField({
       name: 'buttonLink',
       title: 'Button Link',
       type: 'string',

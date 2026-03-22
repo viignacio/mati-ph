@@ -33,7 +33,9 @@ export function CallToActionBlockUI({ data, dictionary }: CallToActionBlockProps
           <CtaButton
             text={data.buttonText}
             href={data.buttonLink}
+            variant={data.buttonVariant ?? 'filled'}
             color={data.buttonColor}
+            icon={data.buttonIcon}
             defaultColor="surface-container-lowest"
             size="lg"
             className="hover:scale-105 hover:-translate-y-0 duration-300 shadow-xl"
