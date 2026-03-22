@@ -1,5 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
+import { PortableText } from 'next-sanity'
 
 type GridBlockProps = {
   data: any
@@ -8,13 +9,14 @@ type GridBlockProps = {
 
 function AsymmetricMasonryGrid({ data }: GridBlockProps) {
   const items = data.manualItems || []
-  
+  const isArchipelago = data.layoutVariant === 'asymmetric-masonry'
+  const isIslands = data.layoutVariant === 'masonry-captions'
+
   return (
     <section className="bg-surface-container-low py-24">
       <div className="max-w-7xl mx-auto px-6">
         <div className="flex flex-col md:flex-row items-end justify-between mb-16 gap-8">
           <div className="max-w-2xl">
-            {/* The grid block schema doesn't have a tagline, so we assume heading contains everything or we skip kicker */}
             <h2 className="font-serif text-5xl md:text-6xl text-on-surface leading-tight">{data.heading}</h2>
           </div>
           {data.description && (
@@ -42,7 +44,7 @@ function AsymmetricMasonryGrid({ data }: GridBlockProps) {
                       className="object-cover transition-transform duration-700 group-hover:scale-110" 
                     />
                   )}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
                   <div className="absolute bottom-8 left-8 right-8">
                     {ref.tagline && (
                       <span className="text-primary-fixed font-bold text-xs uppercase tracking-widest mb-2 block">
@@ -50,15 +52,24 @@ function AsymmetricMasonryGrid({ data }: GridBlockProps) {
                       </span>
                     )}
                     <h3 className="text-white text-3xl font-serif">{ref.name}</h3>
-                    {ref.shortDescription && (
+                    
+                    {/* Archipelago of Wonders: shortDescription inside image */}
+                    {isArchipelago && ref.shortDescription && (
                       <p className="text-white/80 text-sm mt-2">{ref.shortDescription}</p>
                     )}
                   </div>
                 </div>
-                {/* Fallback description below image. Assuming richText is parsed before or it's a simple string */}
-                <p className="text-on-surface-variant leading-relaxed">
-                  {typeof ref.description === 'string' ? ref.description : 'Discover more about this beautiful location in Mati City.'}
-                </p>
+                
+                {/* Pujada Bay Islands: richText description outside image */}
+                {isIslands && ref.description && (
+                  <div className="text-on-surface-variant leading-relaxed">
+                    {typeof ref.description === 'string' ? (
+                      <p>{ref.description}</p>
+                    ) : (
+                      <PortableText value={ref.description} />
+                    )}
+                  </div>
+                )}
               </div>
             )
           })}
@@ -105,9 +116,13 @@ function StandardGrid({ data, dictionary }: GridBlockProps) {
                   <h3 className="font-bold font-serif text-2xl mb-2 group-hover:text-primary transition-colors">
                     {ref.name}
                   </h3>
-                  <p className="text-gray-600 line-clamp-2 mb-4">
-                    {typeof ref.description === 'string' ? ref.description : 'Explore more about this destination.'}
-                  </p>
+                  <div className="text-gray-600 line-clamp-2 mb-4">
+                    {typeof ref.description === 'string' ? (
+                      <p>{ref.description}</p>
+                    ) : (
+                      ref.description ? <PortableText value={ref.description} /> : <p>Explore more about this destination.</p>
+                    )}
+                  </div>
                   <span className="inline-flex items-center text-primary font-semibold group-hover:underline">
                     {readMoreBtn} →
                   </span>
@@ -124,7 +139,7 @@ function StandardGrid({ data, dictionary }: GridBlockProps) {
 }
 
 export function GridBlockUI(props: GridBlockProps) {
-  if (props.data.layoutVariant === 'asymmetric-masonry') {
+  if (['asymmetric-masonry', 'masonry-captions'].includes(props.data.layoutVariant)) {
     return <AsymmetricMasonryGrid {...props} />
   }
 

@@ -18,6 +18,7 @@ export const gridBlock = defineType({
         list: [
           { title: 'Standard Grid', value: 'standard-grid' },
           { title: 'Asymmetric Masonry', value: 'asymmetric-masonry' },
+          { title: 'Masonry with Captions (Islands)', value: 'masonry-captions' },
           { title: 'Bento Grid', value: 'bento-grid' },
         ],
       },
