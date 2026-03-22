@@ -32,6 +32,19 @@ export function LogisticsBlockUI({ data }: LogisticsBlockProps) {
             if (isDark) {
               return (
                 <div key={card._key || index} className="md:col-span-8 bg-on-background text-surface p-10 rounded-[2.5rem] relative overflow-hidden group shadow-xl">
+                  {/* Background Image & Overlay */}
+                  {hasBg && (
+                    <div className="absolute inset-0">
+                      <Image 
+                        src={card.backgroundImage.asset.url} 
+                        alt="Background" 
+                        fill 
+                        className="object-cover transition-transform duration-700 group-hover:scale-110" 
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-br from-on-background/95 via-on-background/80 to-on-background/40"></div>
+                    </div>
+                  )}
+
                   <div className="relative z-10 flex flex-col h-full">
                     <div className="w-16 h-16 rounded-2xl bg-primary-container/20 flex items-center justify-center mb-8">
                       <span className="material-symbols-outlined text-primary-fixed text-4xl">{card.icon || 'directions_car'}</span>
@@ -54,17 +67,6 @@ export function LogisticsBlockUI({ data }: LogisticsBlockProps) {
                       ))}
                     </div>
                   </div>
-
-                  {hasBg && (
-                    <div className="absolute inset-0 opacity-20 group-hover:opacity-30 transition-opacity duration-700">
-                      <Image 
-                        src={card.backgroundImage.asset.url} 
-                        alt="Background" 
-                        fill 
-                        className="object-cover grayscale" 
-                      />
-                    </div>
-                  )}
                 </div>
               )
             }
