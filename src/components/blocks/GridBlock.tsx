@@ -9,7 +9,7 @@ interface GridBlockProps {
     _key: string
     _type: 'gridBlock'
     design?: BlockDesign
-    layoutVariant?: 'standard-grid' | 'asymmetric-masonry' | 'bento-grid'
+    layoutVariant?: 'standard-grid' | 'asymmetric-masonry' | 'masonry-captions' | 'bento-grid'
     cardStyle?: 'elevated' | 'flat'
     heading?: string
     description?: string
@@ -86,13 +86,15 @@ export function GridBlock({ data }: GridBlockProps) {
 
           const title = doc.name || doc.title
           const badgeText = doc.tagline
-
-          let excerpt = ''
+          
+          const shortDesc = doc.shortDescription || ''
+          
+          let fullDescText = ''
           if (typeof doc.description === 'string') {
-            excerpt = doc.description
+            fullDescText = doc.description
           } else if (Array.isArray(doc.description)) {
-            // Simplify portable text to plain string for the card excerpt
-            excerpt = doc.description
+            // Simplify portable text to plain string for the caption
+            fullDescText = doc.description
               .map((block: any) => block._type === 'block' && block.children
                 ? block.children.map((child: any) => child.text).join('')
                 : '')
@@ -117,7 +119,7 @@ export function GridBlock({ data }: GridBlockProps) {
           const finalHref = settings.ctaLink || docHref
 
           // CSS Mappings
-          const spanClass = isMasonry
+          const spanClass = isMasonry || layoutVariant === 'masonry-captions'
             ? (colSpan === 2 ? 'md:col-span-8' : 'md:col-span-4')
             : 'md:col-span-1'
 
@@ -131,64 +133,74 @@ export function GridBlock({ data }: GridBlockProps) {
           const isElevated = cardStyle === 'elevated'
 
           return (
-            <div
-              key={item._key || index}
-              className={cn(
-                "group relative overflow-hidden rounded-3xl block",
-                spanClass,
-                aspectClass,
-                isElevated ? "shadow-sm bg-surface-container-lowest" : ""
-              )}
-            >
-              {/* Image Layer */}
-              {imgUrl && (
-                <>
-                  <img
-                    src={imgUrl}
-                    alt={title}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-90 transition-opacity duration-300 group-hover:opacity-100"></div>
-                </>
-              )}
-
-              {/* Decorative Mandaya Accent for Wide Cards */}
-              {aspectRatio === 'wide' && (
-                <div className="absolute top-0 left-0 w-full h-1 bg-[repeating-linear-gradient(45deg,transparent,transparent_5px,rgba(188,48,0,0.10)_5px,rgba(188,48,0,0.10)_10px)] z-20"></div>
-              )}
-
-              {/* Foreground Content */}
-              <div className="absolute bottom-6 md:bottom-10 left-6 md:left-10 right-6 md:right-10 text-white flex flex-col items-start z-30 pointer-events-none">
-
-                {badgeText && (
-                  <span className="text-primary-container text-xs font-bold uppercase tracking-widest mb-2 block">
-                    {badgeText}
-                  </span>
+            <div key={item._key || index} className={cn("block", spanClass)}>
+              <div
+                className={cn(
+                  "group relative overflow-hidden rounded-3xl block w-full",
+                  aspectClass,
+                  isElevated ? "shadow-sm bg-surface-container-lowest" : ""
+                )}
+              >
+                {/* Image Layer */}
+                {imgUrl && (
+                  <>
+                    <img
+                      src={imgUrl}
+                      alt={title}
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-90 transition-opacity duration-300 group-hover:opacity-100"></div>
+                  </>
                 )}
 
-                <h3 className={cn("font-headline font-bold mb-2", colSpan === 2 ? "text-3xl md:text-4xl" : "text-2xl")}>
-                  {title}
-                </h3>
-
-                {excerpt && (
-                  <p className="text-white/80 text-sm md:text-base max-w-md line-clamp-2 md:line-clamp-3 mb-6 transition-opacity duration-300">
-                    {excerpt}
-                  </p>
+                {/* Decorative Mandaya Accent for Wide Cards */}
+                {aspectRatio === 'wide' && (
+                  <div className="absolute top-0 left-0 w-full h-1 bg-[repeating-linear-gradient(45deg,transparent,transparent_5px,rgba(188,48,0,0.10)_5px,rgba(188,48,0,0.10)_10px)] z-20"></div>
                 )}
 
-                {/* Variant Call To Action */}
-                {settings.ctaType === 'button' && settings.ctaText && (
-                  <Link href={finalHref} className="bg-white/10 backdrop-blur-md border border-white/20 px-6 py-2 rounded-full font-bold text-sm text-white transition-all hover:bg-white hover:text-primary mt-auto pointer-events-auto inline-block">
-                    {settings.ctaText}
-                  </Link>
-                )}
+                {/* Foreground Content inside Image Overlay */}
+                <div className="absolute bottom-6 md:bottom-10 left-6 md:left-10 right-6 md:right-10 text-white flex flex-col items-start z-30 pointer-events-none">
 
-                {(!settings.ctaType || settings.ctaType === 'arrow') && (
-                  <Link href={finalHref} className="material-symbols-outlined mt-auto transition-transform duration-300 transform hover:-translate-y-1 hover:translate-x-1 text-white pointer-events-auto inline-block">
-                    arrow_outward
-                  </Link>
-                )}
+                  {badgeText && (
+                    <span className="text-primary-container text-xs font-bold uppercase tracking-widest mb-2 block">
+                      {badgeText}
+                    </span>
+                  )}
+
+                  <h3 className={cn("font-headline font-bold mb-2", colSpan === 2 ? "text-3xl md:text-4xl" : "text-2xl")}>
+                    {title}
+                  </h3>
+
+                  {/* ONLY show shortDescription inside the overlay */}
+                  {shortDesc && (
+                    <p className="text-white/80 text-sm md:text-base max-w-md line-clamp-2 md:line-clamp-3 mb-6 transition-opacity duration-300">
+                      {shortDesc}
+                    </p>
+                  )}
+
+                  {/* Variant Call To Action */}
+                  {settings.ctaType === 'button' && settings.ctaText && (
+                    <Link href={finalHref} className="bg-white/10 backdrop-blur-md border border-white/20 px-6 py-2 rounded-full font-bold text-sm text-white transition-all hover:bg-white hover:text-primary mt-auto pointer-events-auto inline-block">
+                      {settings.ctaText}
+                    </Link>
+                  )}
+
+                  {(!settings.ctaType || settings.ctaType === 'arrow') && (
+                    <Link href={finalHref} className="material-symbols-outlined mt-auto transition-transform duration-300 transform hover:-translate-y-1 hover:translate-x-1 text-white pointer-events-auto inline-block">
+                      arrow_outward
+                    </Link>
+                  )}
+                </div>
               </div>
+              
+              {/* Optional Caption outside Image Layer */}
+              {layoutVariant === 'masonry-captions' && fullDescText && (
+                <div className="mt-4 px-2">
+                  <p className="text-on-surface-variant leading-relaxed text-sm md:text-base">
+                    {fullDescText}
+                  </p>
+                </div>
+              )}
             </div>
           )
         })}
