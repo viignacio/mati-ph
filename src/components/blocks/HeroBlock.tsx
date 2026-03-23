@@ -34,6 +34,7 @@ interface HeroBlockProps {
     tagline?: string
     backgroundImage?: any
     backgroundVideo?: any
+    videoPoster?: any
     cta?: CTA
     secondaryCta?: CTA
   }
@@ -56,6 +57,7 @@ export function HeroBlock({ data }: HeroBlockProps) {
     tagline,
     backgroundImage,
     backgroundVideo,
+    videoPoster,
     cta,
     secondaryCta
   } = data
@@ -63,6 +65,8 @@ export function HeroBlock({ data }: HeroBlockProps) {
   const accentColor = design?.accentColorRef
   const bgImageUrl = backgroundImage?.asset ? urlFor(backgroundImage).url() : ''
   const bgVideoUrl = backgroundVideo?.asset?.url ?? ''
+  const videoPosterUrl = videoPoster?.asset?.url ?? ''
+  const videoPosterLqip = videoPoster?.asset?.metadata?.lqip ?? ''
 
   const anim = (delay: number) =>
     animateText
@@ -117,14 +121,18 @@ export function HeroBlock({ data }: HeroBlockProps) {
             />
           )}
           {heroType === 'video' && bgVideoUrl && (
-            <video
-              src={bgVideoUrl}
-              autoPlay
-              muted
-              loop
-              playsInline
-              className="w-full h-full object-cover"
-            />
+            <div className="w-full h-full" style={videoPosterLqip ? { backgroundImage: `url(${videoPosterLqip})`, backgroundSize: 'cover', backgroundPosition: 'center' } : undefined}>
+              <video
+                src={bgVideoUrl}
+                autoPlay
+                muted
+                loop
+                playsInline
+                preload="auto"
+                poster={videoPosterUrl || undefined}
+                className="w-full h-full object-cover"
+              />
+            </div>
           )}
         </div>
 
@@ -260,6 +268,8 @@ export function HeroBlock({ data }: HeroBlockProps) {
                 muted
                 loop
                 playsInline
+                preload="auto"
+                poster={videoPosterUrl || undefined}
                 className="w-full h-full object-cover"
               />
             ) : bgImageUrl ? (

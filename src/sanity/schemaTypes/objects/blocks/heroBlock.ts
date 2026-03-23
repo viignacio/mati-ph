@@ -257,6 +257,18 @@ export const heroBlock = defineType({
       },
       hidden: ({ parent }) => parent?.heroType !== 'video',
     }),
+    defineField({
+      name: 'videoPoster',
+      title: 'Video Poster Image',
+      type: 'image',
+      group: 'image',
+      description: 'A still frame from the video shown while it loads. Use a screenshot of the first frame to avoid any visual jump.',
+      options: {
+        hotspot: true,
+        metadata: ['lqip'],
+      },
+      hidden: ({ parent }) => parent?.heroType !== 'video',
+    }),
   ],
   preview: {
     select: {

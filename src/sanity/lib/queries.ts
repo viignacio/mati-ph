@@ -313,6 +313,7 @@ export const PAGE_BY_SLUG_QUERY = defineQuery(/* groq */ `
         highlightColor->{ value, hex, title },
         backgroundImage{${imageFields}},
         backgroundVideo{ asset->{ url } },
+        videoPoster{ asset->{ url, metadata{ lqip } } },
         cta {
           ...,
           buttonColor->{ value, hex, title }

@@ -41,9 +41,10 @@ export function Navbar({ data }: { data?: any }) {
                 <Link
                   key={link.url}
                   href={link.url}
-                  className="text-stone-700 hover:text-primary transition-colors text-base font-semibold"
+                  className="relative text-stone-700 hover:text-primary transition-colors text-base font-semibold group"
                 >
                   {link.text}
+                  <span className="absolute -bottom-0.5 left-1/2 -translate-x-1/2 h-[2px] w-0 bg-primary rounded-full transition-all duration-300 group-hover:w-full" />
                 </Link>
               ))}
             </nav>
