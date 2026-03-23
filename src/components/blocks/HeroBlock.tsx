@@ -166,7 +166,7 @@ export function HeroBlock({ data }: HeroBlockProps) {
                 color={cta.buttonColor}
                 icon={cta.icon}
                 size="lg"
-                className="w-full sm:w-auto hover:scale-105"
+                className="hover:scale-105"
               />
             )}
             {secondaryCta?.text && secondaryCta?.link && (
