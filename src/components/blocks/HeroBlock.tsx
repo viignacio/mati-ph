@@ -55,12 +55,14 @@ export function HeroBlock({ data }: HeroBlockProps) {
     subheading,
     tagline,
     backgroundImage,
+    backgroundVideo,
     cta,
     secondaryCta
   } = data
 
   const accentColor = design?.accentColorRef
   const bgImageUrl = backgroundImage?.asset ? urlFor(backgroundImage).url() : ''
+  const bgVideoUrl = backgroundVideo?.asset?.url ?? ''
 
   const anim = (delay: number) =>
     animateText
@@ -111,6 +113,16 @@ export function HeroBlock({ data }: HeroBlockProps) {
             <img
               src={bgImageUrl}
               alt={heading || 'Hero background'}
+              className="w-full h-full object-cover"
+            />
+          )}
+          {heroType === 'video' && bgVideoUrl && (
+            <video
+              src={bgVideoUrl}
+              autoPlay
+              muted
+              loop
+              playsInline
               className="w-full h-full object-cover"
             />
           )}
@@ -241,7 +253,16 @@ export function HeroBlock({ data }: HeroBlockProps) {
             imageAspectRatio === '4:3' ? "aspect-[4/3] h-auto" :
             "h-[500px] md:h-[650px]"
           )}>
-            {bgImageUrl ? (
+            {heroType === 'video' && bgVideoUrl ? (
+              <video
+                src={bgVideoUrl}
+                autoPlay
+                muted
+                loop
+                playsInline
+                className="w-full h-full object-cover"
+              />
+            ) : bgImageUrl ? (
               <img
                 src={bgImageUrl}
                 alt={heading || 'Hero image'}

@@ -311,6 +311,8 @@ export const PAGE_BY_SLUG_QUERY = defineQuery(/* groq */ `
           accentColorRef->{ value, hex, title }
         },
         highlightColor->{ value, hex, title },
+        backgroundImage{${imageFields}},
+        backgroundVideo{ asset->{ url } },
         cta {
           ...,
           buttonColor->{ value, hex, title }
